@@ -35,7 +35,7 @@ TODO
 + Read the Book (Cheeseman/Daniels)
 + Think about new requirements
 + Create own version of database scheme
-+ Dima + Send a group name to Sebastian (Dima, you do it!)
++ Dima + Send a group name to Sebastian                   -                       DONE
 + Alex + Create mailing list
 + Install Eclipse or other IDE that one can use with EJB, JBoss and stuff
 + Martin + Create github account
