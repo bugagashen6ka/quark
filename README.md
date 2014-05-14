@@ -36,3 +36,9 @@ TODO
 + Think about new requirements
 + Create own version of database scheme
 + Install Eclipse or other IDE that one can use with EJB, JBoss and stuff
+
+Diagrams
+===
+
+To draw diagrams we can use tools like dia (look in your linux distribution repository) and plantuml (for use case or activity diagrams). See http://plantuml.sourceforge.net/index.html.
+
