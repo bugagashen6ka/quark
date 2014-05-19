@@ -72,15 +72,15 @@ Main Success Scenario:
    3. Include Enter type specific appointment information
    4. Include Enter generic appointment information
    5. Researcher is shown conflicts with his schedule (OPT)
-   6. Researches acknowledges appointment creation
-   7. System creates the appointment
-   8. System assigns researcher as the creator for newly created appointment
-   9. Researcher is shown conflicts with all other schedules (OPT)
+   6. Researcher is shown conflicts with all other schedules (OPT)
+   7. Researches acknowledges appointment creation
+   8. System creates the appointment
+   9. System assigns researcher as the creator for newly created appointment
 
 
 Extensions:
 
-   6. Researcher decides to avoid conflicts
+   7. Researcher decides to avoid conflicts
       1. Researcher changes appointment time
       2. Goto 5.
 
