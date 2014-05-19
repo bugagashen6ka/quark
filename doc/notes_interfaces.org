@@ -1,0 +1,164 @@
+* Register
+  #+begin_src plantuml :file ./iregister.png
+  interface IRegister {
+    check_email()
+    check_password()
+    create_user()
+  }
+  #+END_src
+
+* Login
+  #+begin_src plantuml :file ./ilogin.png
+  interface ILogin {
+    login()
+  }
+  #+END_src
+* Logout
+  #+begin_src plantuml :file ./ilogout.png
+  interface ILogout {
+    logout()
+  }
+  #+END_src
+* Create appointment
+  #+begin_src plantuml :file ./icreate_appointment.png
+  interface ICreateAppointment {
+    create_appointment()
+  }
+  #+END_src
+
+* Time management
+  #+begin_src plantuml :file ./itime.png
+  interface ICreateAppointment {
+    create_time_information()
+  }
+  #+END_src
+
+* Delete appointment
+  #+begin_src plantuml :file ./idelete_appointment.png
+  interface IDeleteAppointment {
+    delete()
+  }
+  #+END_src
+* Invite participant
+  #+begin_src plantuml :file ./iinvite.png
+  interface IInvite {
+    invite()
+  }
+  #+END_src
+
+* Search appointment
+  #+begin_src plantuml :file ./isearch_appointment.png
+  interface ISearchAppointment {
+    get_appointment()
+    get_appointment_list()
+  }
+  #+end_src
+
+* Search participant
+  #+begin_src plantuml :file ./isearch_participant.png
+  interface ISearchParticipant {
+    get_participant()
+    get_participant_list()
+  }
+  #+end_src
+
+* Search group
+  #+begin_src plantuml :file ./isearch_group.png
+  interface ISearchGroup {
+    get_group()
+    get_group_list()
+  }
+
+  
+  note as N 
+    Get list of all groups where participant is a member,
+    if participant is specified, return all groups otherwise
+  end note
+
+  N .. ISearchGroup
+
+  #+end_src
+
+* Create group
+  #+begin_src plantuml :file ./icreate_group.png
+  interface ICreateGroup {
+    create()
+  }
+  #+END_src
+
+* Join group
+  #+begin_src plantuml :file ./ijoin_group.png
+  interface IJoinGroup {
+    join()
+  }
+  #+END_src
+
+  #+RESULTS:
+  [[file:./ijoin_group.png]]
+
+* Leave group
+  #+begin_src plantuml :file ./ileave_group.png
+  interface ILeaveGroup {
+    leave()
+  }
+  #+END_src
+
+* Group
+  #+begin_src plantuml :file ./igroup.png
+  interface IGroup {
+    get_name()
+    get_password()
+    get_type()
+
+    set_name()
+    generate_password()
+    set_type()
+  }
+  #+END_src
+
+* Appointment
+  #+begin_src plantuml :file ./igroup.png
+  interface IAppointment {
+    get_name()
+    get_type()
+    get_group()
+    get_location()
+    get_time_information()
+    get_description()
+
+    set_name()
+    set_type()
+    set_group()
+    set_location()
+    set_time_information()
+    set_description()
+  }
+  #+END_src
+
+* Researcher
+  #+begin_src plantuml :file ./igroup.png
+  interface IResearcher {
+    get_name()
+    get_email()
+    get_password()
+    get_research_group()
+    get_project_groups()
+    get_appointments()
+
+    set_name()
+    set_email()
+    set_password()
+    set_research_group()
+    add_project_group()
+    remove_project_group()
+    add_appointment()
+    remove_appointment()    
+  }
+  #+END_src
+
+* Conflicts
+  #+begin_scr plantuml :file ./iconflicts.png
+  interface IConflicts {
+    get_conflicts()
+  }
+  #+end_src

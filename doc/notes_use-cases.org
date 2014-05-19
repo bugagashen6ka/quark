@@ -1,9 +1,4 @@
-
-* Quark project                                                  :quark:cbse:
-
-** TODO Use Case scenarios
-
-*** Register
+* Register
 
 Initiator: Anonymous
 
@@ -29,7 +24,7 @@ Extensions:
       1. System asks user to enter another password
       2. Anonymous enters another password
 
-*** Login
+* Login
 
 Initiator: Anonymous
 
@@ -52,7 +47,7 @@ Extensions:
       1. System asks user to enter another email and password
       2. Anonymous enters another email and password
 
-*** Logout
+* Logout
 
 Initiator: Researcher
 
@@ -64,7 +59,7 @@ Main Success Scenario:
    2. System terminates connection with user
    3. Researcher changes his role to Anonymous
 
-*** Create appointment
+* Create appointment
 
 Initiator: Researcher
 
@@ -89,7 +84,7 @@ Extensions:
       1. Researcher changes appointment time
       2. Goto 5.
 
-*** Enter type-specific appointment information
+* Enter type-specific appointment information
 
 Initiator: Included only
 
@@ -118,7 +113,7 @@ Extensions:
       1. Create field for group selection
       2. Include Create time field
 
-*** Create time field
+* Create time field
 
 Initiator: Included only
 
@@ -136,7 +131,7 @@ Extensions:
    2. Researcher tells that appointment is one-shot
       1. Done
 
-*** Enter generic appointment information
+* Enter generic appointment information
 
 Initiator: Included only
 
@@ -147,7 +142,7 @@ Main success scenario:
    1. Researchers enters location
    2. Researchers enters description
 
-*** Delete appointment
+* Delete appointment
 
 Initiator: Appointment creator
 
@@ -173,7 +168,7 @@ Main success scenario:
    4. Creator acknowledges
    5. System deletes appointments from creator's schedule
 
-*** Invite participant
+* Invite participant
 
 Initiator: Appointment participant
 
@@ -197,7 +192,7 @@ Extensions:
       1. Participant enters another information
       2. System makes another search
 
-*** Create group
+* Create group
 
 Initiator: Participant
 
@@ -217,9 +212,9 @@ Extensions:
    2. Group name of such type already in use
       1. System asks participant to enter another name and type
       2. Participant enters another name and type
-   2. Password does not meet security requirements
+     
 
-*** Join group
+* Join group
 
 Initiator: Participant
 
@@ -239,7 +234,7 @@ Extensions:
    2. User already takes part in research group
       1. Deny joining another research group
 
-*** Leave group
+* Leave group
 
 
 Initiator: Participant
@@ -251,10 +246,10 @@ Main success scenario:
    1. Participant enters group name and type
    2. System removes user from the group
 
-*** Delete group
+* Delete group
 
 Impossible?
 
-*** Change Group password
+* Change Group password
 
 Impossible

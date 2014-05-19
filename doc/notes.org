@@ -1,0 +1,11 @@
+
+* Quark project                                                  :quark:cbse:
+
+** DONE Use Case scenarios
+  CLOSED: [2014-05-19 Mon 11:13]
+
+#+INCLUDE: "./notes_use-cases.org"
+
+** TODO Identify system interfaces and operations
+
+#+INCLUDE: "./notes_interfaces.org"
