@@ -28,7 +28,7 @@
 
 * Time management
   #+begin_src plantuml :file ./itime.png
-  interface ICreateAppointment {
+  interface ITimeMgt {
     create_time_information()
   }
   #+END_src
@@ -45,6 +45,38 @@
     invite()
   }
   #+END_src
+
+* Create group
+  #+begin_src plantuml :file ./icreate_group.png
+  interface ICreateGroup {
+    create()
+  }
+  #+END_src
+
+* Join group
+  #+begin_src plantuml :file ./ijoin_group.png
+  interface IJoinGroup {
+    join()
+  }
+  #+END_src
+
+  #+RESULTS:
+  [[file:./ijoin_group.png]]
+
+* Leave group
+  #+begin_src plantuml :file ./ileave_group.png
+  interface ILeaveGroup {
+    leave()
+  }
+  #+END_src
+
+* Conflicts
+  #+begin_scr plantuml :file ./iconflicts.png
+  interface IConflicts {
+    get_conflicts()
+  }
+  #+end_src
+
 
 * Search appointment
   #+begin_src plantuml :file ./isearch_appointment.png
@@ -79,29 +111,6 @@
 
   #+end_src
 
-* Create group
-  #+begin_src plantuml :file ./icreate_group.png
-  interface ICreateGroup {
-    create()
-  }
-  #+END_src
-
-* Join group
-  #+begin_src plantuml :file ./ijoin_group.png
-  interface IJoinGroup {
-    join()
-  }
-  #+END_src
-
-  #+RESULTS:
-  [[file:./ijoin_group.png]]
-
-* Leave group
-  #+begin_src plantuml :file ./ileave_group.png
-  interface ILeaveGroup {
-    leave()
-  }
-  #+END_src
 
 * Group
   #+begin_src plantuml :file ./igroup.png
@@ -155,10 +164,3 @@
     remove_appointment()    
   }
   #+END_src
-
-* Conflicts
-  #+begin_scr plantuml :file ./iconflicts.png
-  interface IConflicts {
-    get_conflicts()
-  }
-  #+end_src

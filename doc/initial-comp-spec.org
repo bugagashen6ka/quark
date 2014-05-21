@@ -1,0 +1,23 @@
+* Initial component specification
+  #+begin_src plantuml :file ./diagrams/initial-comp-spec.png
+  @startuml
+  ILogin - [Appointment Scheduling System] << comp spec >>
+  ILogout - [Appointment Scheduling System] << comp spec >>
+  IRegister - [Appointment Scheduling System]  << comp spec >>
+  ICreateAppointment - [Appointment Scheduling System] << comp spec >>
+  IDeleteAppointment - [Appointment Scheduling System] << comp spec >>
+  IInviteParticipant - [Appointment Scheduling System] << comp spec >>
+  IJoinGroup - [Appointment Scheduling System] << comp spec >>
+  ICreateGroup - [Appointment Scheduling System] << comp spec >>
+  ILeaveGroup - [Appointment Scheduling System] << comp spec >>
+  IConflict - [Appointment Scheduling System]  << comp spec >>
+  [Appointment Scheduling System] << comp spec >> ..> IGroupMgt
+  [Appointment Scheduling System] << comp spec >> ..> IResearcherMgt
+  [Appointment Scheduling System] << comp spec >> ..> IAppointmentMgt
+  IGroupMgt - [GroupMgt] << comp spec >>
+  IResearcherMgt - [ResearcherMgt] << comp spec >>
+  IAppointmentMgt - [AppointmentMgt] << comp spec >>
+  [AppointmentMgt] << comp spec >> ..> ITimeMgt
+  ITimeMgt - [TimeMgt] << comp spec >>
+  @enduml
+  #+END_src
