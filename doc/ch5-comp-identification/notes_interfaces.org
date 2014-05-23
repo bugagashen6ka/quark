@@ -1,0 +1,128 @@
+* Register
+  #+begin_src plantuml :file ./iregister.png
+  interface IRegister {
+    check_email()
+    create_user()
+  }
+  #+END_src
+
+* Login
+  #+begin_src plantuml :file ./ilogin.png
+  interface ILogin {
+    login()
+  }
+  #+END_src
+* Logout
+  #+begin_src plantuml :file ./ilogout.png
+  interface ILogout {
+    logout()
+  }
+  #+END_src
+* Create appointment
+  #+begin_src plantuml :file ./icreate_appointment.png
+  interface ICreateAppointment {
+    create_appointment()
+  }
+  #+END_src
+
+* Time management
+
+  We do this on the client side by constructing an object that
+  encapsulates time range information.
+
+  #+begin_src plantuml :file ./itime.png
+  interface ITime {
+    create_time_information()
+  }
+  #+END_src
+
+* Delete appointment
+
+  Delete operation deletes appointment entity if the invoker of this
+  command is the creator of the appointment. And appointment is
+  deleted only from ivoker's schedule if he is just participant of the
+  appointment.
+
+  #+begin_src plantuml :file ./idelete_appointment.png
+  interface IDeleteAppointment {
+    delete()
+  }
+  #+END_src
+* Add researcher to an appointment
+  #+begin_src plantuml :file ./iadd_user_to_an_appointment.png
+  interface IAddResearcherToAnAppointment {
+    add()
+  }
+  #+END_src
+
+* Create group
+  #+begin_src plantuml :file ./icreate_group.png
+  interface ICreateGroup {
+    create()
+  }
+  #+END_src
+
+* Join group
+  #+begin_src plantuml :file ./ijoin_group.png
+  interface IJoinGroup {
+    join()
+  }
+  #+END_src
+
+  #+RESULTS:
+  [[file:./ijoin_group.png]]
+
+* Leave group
+  #+begin_src plantuml :file ./ileave_group.png
+  interface ILeaveGroup {
+    leave()
+  }
+  #+END_src
+
+* Conflicts
+  #+begin_scr plantuml :file ./iconflicts.png
+  interface IConflicts {
+    get_conflicts()
+    get_users_with_conflicts()
+  }
+  #+end_src
+
+  
+* Search appointment
+  #+begin_src plantuml :file ./isearch_appointment.png
+  interface ISearchAppointment {
+    get_appointment_list()
+  }
+  #+end_src
+
+* Search participant
+  #+begin_src plantuml :file ./isearch_participant.png
+  interface ISearchParticipant {
+    get_participant_list()
+  }
+  #+end_src
+
+* Search researcher
+  #+begin_src plantuml :file ./isearch_researcher.png
+  interface ISearchResearcher {
+    get_researcher_list()
+  }
+  #+end_src
+
+* Search group
+  #+begin_src plantuml :file ./isearch_group.png
+  interface ISearchGroup {
+    get_group_list()
+  }
+
+  
+  note as N 
+    Get list of all groups where participant is a member,
+    if participant is specified, return all groups otherwise
+  end note
+
+  N .. ISearchGroup
+
+  #+end_src
+
+
