@@ -1,0 +1,38 @@
+Auxiliary Types
+---------------
+
+* Types for referring to objects
+ResearcherId, AppointmentId, GroupId
+
+* Types for communicating categories
+GroupType -> enum {PROJECT_GROUP, RESEARCH_GROUP}
+AppointmentType -> enum {PROJECT_GROUP_MEETING, RESEARCH_GROUP_MEETING, TEACHING_APPOINTMENT, CONFERENCE_APPOINTMENT, GENERIC_APPOINTMENT}
+
+* Types for passing around data
+
+GroupDetails
+  gid
+  name
+  type
+  members (ids)
+  password? (either we include password here or we need a separate getGroupPassword-operation - how else would we display the passwords to the group creators?!)
+
+ResearcherDetails
+  rid
+  emailAddress
+  firstname
+  lastname
+  title
+  phoneNbr
+
+AppointmentDetails
+  aid
+  timeInterval
+  location
+  description
+  participants (ids)
+
+TimeInterval
+  start
+  end
+

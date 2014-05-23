@@ -1,0 +1,54 @@
+* Group Management
+  #+begin_src plantuml :file ./igroup_management.png
+  interface IGroupManagement {
+    getGroupIds(in rid: ResearcherId): GroupId [ ]
+    getGroupDetails(in gid: GroupId): GroupDetails
+    getGroupDetailsForMany(in gids: GroupId [ ]): GroupDetails [ ]
+    leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
+    joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
+    createGroup(in name: String, in type: enum {PROJECT_GROUP, RESEARCH_GROUP}, in password: String): GroupId
+    getMemberIds(in gid: GroupId): ResearcherId [ ]
+  }
+  #+END_src
+
+* Researcher Management
+  #+begin_src plantuml :file ./ireseacher_management.png
+  interface IResearcherManagement {
+    getResearcherIds(in rd: ResearcherDetails): ResearcherId [ ]
+    getResearcherDetails(in rid: ResearcherId): ResearcherDetails
+    getResearcherDetailsForMany(in rids: ResearcherId [ ]): ResearcherDetails [ ]
+    getAppointmentIds(in rid: ReseacherId, in til: TimeInterval): AppointmentId [ ]
+    checkEmail(in emailAdr: String): bool
+    createResearcher(in emailAdr: String, in password: String, in firstname: String, in lastname: String, in title: String, in phoneNbr: String): ResearcherId
+    checkCredentials(in emailAdr: String, in password: String): bool
+  }
+  
+  note as N2
+    getResearcherIds(): In most cases the parameter rd will be a *partially* specified ResearcherDetails-object.
+      Therefore this operation is pretty general and can also be used to retrieve the IDs of
+      all researchers (->see collaboration diagram for check_email)
+    checkEmail(): check if given email address is unique.
+  end note
+  
+  N2 .. IResearcherManagement
+  #+END_src
+
+* Appointment Management
+  #+begin_src plantuml :file ./iappointment_management.png
+  interface IAppointmentManagement {
+    getParticipantIds(in aid: AppointmentId): ResearcherId [ ]
+    getAppointmentDetails(in aid: AppointmentId): AppointmentDetails
+    getAppointmentDetailsForMany(in aid: AppointmentId [ ]): AppointmentDetails [ ]
+    addResearcherToAppointment(in rid: ResearcherId, in aid: AppointmentId): bool
+    deleteAppointment(in aid: AppointmentId, in rid: ResearcherId): bool
+    create_appointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
+  }
+  #+END_src
+
+* Time Management
+  #+begin_src plantuml :file ./itime_management.png
+  interface ITimeManagement {
+    createTimeInformation(in start: java.util.Date, in end: java.util.Date): TimeInterval
+  }
+  #+END_src
+

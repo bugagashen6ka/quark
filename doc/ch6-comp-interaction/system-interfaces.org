@@ -1,0 +1,137 @@
+* Register
+  #+begin_src plantuml :file ./iregister.png
+  interface IRegister {
+    checkEmail(in emailAdr: String): bool
+    createResearcher(in emailAdr: String, in password: String, in firstname: String, in lastname: String, in title: String, in phoneNbr: String): ResearcherId
+  }
+
+  note as N3
+    checkEmail(): check if given email address is unique.
+  end note
+  
+  N3 .. IRegister
+  #+END_src
+
+* Login
+  #+begin_src plantuml :file ./ilogin.png
+  interface ILogin {
+    login(in emailAdr: String, in password: String): bool
+  }
+  #+END_src
+* Logout
+  #+begin_src plantuml :file ./ilogout.png
+  interface ILogout {
+    logout(in rid: ResearcherId): bool
+  }
+  #+END_src
+* Create appointment
+  #+begin_src plantuml :file ./icreate_appointment.png
+  interface ICreateAppointment {
+    createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
+  }
+  #+END_src
+
+* Time management
+
+  We do this on the client side by constructing an object that
+  encapsulates time range information.
+
+  #+begin_src plantuml :file ./itime.png
+  interface ITime {
+    createTimeInformation(in start: java.util.Date, in end: java.util.Date): bool
+  }
+  #+END_src
+
+* Delete appointment
+
+  Delete operation deletes appointment entity if the invoker of this
+  command is the creator of the appointment. And appointment is
+  deleted only from invoker's schedule if he is just participant of the
+  appointment.
+
+  #+begin_src plantuml :file ./idelete_appointment.png
+  interface IDeleteAppointment {
+    deleteAppointment(in aid: AppointmentId, in rid: ResearcherId): bool
+  }
+  #+END_src
+* Add researcher to an appointment
+  #+begin_src plantuml :file ./iadd_user_to_an_appointment.png
+  interface IAddResearcherToAnAppointment {
+    addResearcherToAppointment(in rid: ResearcherId, in aid: AppointmentId): bool
+  }
+  #+END_src
+
+* Create group
+  #+begin_src plantuml :file ./icreate_group.png
+  interface ICreateGroup {
+    createGroup(in name: String, in type: GroupType): GroupId
+  }
+  #+END_src
+
+* Join group
+  #+begin_src plantuml :file ./ijoin_group.png
+  interface IJoinGroup {
+    joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
+  }
+  #+END_src
+
+  #+RESULTS:
+  [[file:./ijoin_group.png]]
+
+* Leave group
+  #+begin_src plantuml :file ./ileave_group.png
+  interface ILeaveGroup {
+    leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
+  }
+  #+END_src
+
+* Conflicts
+  #+begin_scr plantuml :file ./iconflicts.png
+  interface IConflicts {
+    getAppointmentsWithConflicts(in rid: ReseacherId, in til: TimeInterval): AppointmentId [ ][ ]
+    getResearchersWithConflicts(in aid: AppoinmentId, in til: TimeInterval): ResearcherId [ ]
+  }
+  #+end_src
+
+  
+* Search appointment
+  #+begin_src plantuml :file ./isearch_appointment.png
+  interface ISearchAppointment {
+    getAppointmentIds(in rid: ResearcherId, in til: TimeInterval): AppointmentId [ ]
+  }
+  #+end_src
+
+* Search participant
+  #+begin_src plantuml :file ./isearch_participant.png
+  interface ISearchParticipant {
+    getParticipantIds(in aid: AppointmentId): ResearcherId [ ]
+  }
+  #+end_src
+
+* Search researcher
+  #+begin_src plantuml :file ./isearch_researcher.png
+  interface ISearchResearcher {
+    getResearcherIds(in rd: ResearcherDetails): ResearcherId [ ]
+  }
+  
+  note as N2
+    In most cases the parameter rd will be a partially specified ResearcherDetails-object.
+  end note
+  
+  N2 .. ISearchResearcher
+  #+end_src
+
+* Search group
+  #+begin_src plantuml :file ./isearch_group.png
+  interface ISearchGroup {
+    getGroupIds(in rid: ResearcherId): GroupId [ ]
+  }
+
+  note as N1
+    Get list of all groups where researcher referred to by rid is a member,
+    if rid is specified (= not null?), return all groups otherwise.
+  end note
+
+  N1 .. ISearchGroup
+  #+end_src
+
