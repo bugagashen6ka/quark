@@ -2,7 +2,6 @@
   #+begin_src plantuml :file ./iregister.png
   interface IRegister {
     check_email()
-    check_password()
     create_user()
   }
   #+END_src
@@ -27,22 +26,32 @@
   #+END_src
 
 * Time management
+
+  We do this on the client side by constructing an object that
+  encapsulates time range information.
+
   #+begin_src plantuml :file ./itime.png
-  interface ITimeMgt {
+  interface ITime {
     create_time_information()
   }
   #+END_src
 
 * Delete appointment
+
+  Delete operation deletes appointment entity if the invoker of this
+  command is the creator of the appointment. And appointment is
+  deleted only from ivoker's schedule if he is just participant of the
+  appointment.
+
   #+begin_src plantuml :file ./idelete_appointment.png
   interface IDeleteAppointment {
     delete()
   }
   #+END_src
-* Invite participant
-  #+begin_src plantuml :file ./iinvite.png
-  interface IInvite {
-    invite()
+* Add researcher to an appointment
+  #+begin_src plantuml :file ./iadd_user_to_an_appointment.png
+  interface IAddResearcherToAnAppointment {
+    add()
   }
   #+END_src
 
@@ -74,14 +83,14 @@
   #+begin_scr plantuml :file ./iconflicts.png
   interface IConflicts {
     get_conflicts()
+    get_users_with_conflicts()
   }
   #+end_src
 
-
+  
 * Search appointment
   #+begin_src plantuml :file ./isearch_appointment.png
   interface ISearchAppointment {
-    get_appointment()
     get_appointment_list()
   }
   #+end_src
@@ -89,15 +98,20 @@
 * Search participant
   #+begin_src plantuml :file ./isearch_participant.png
   interface ISearchParticipant {
-    get_participant()
     get_participant_list()
+  }
+  #+end_src
+
+* Search researcher
+  #+begin_src plantuml :file ./isearch_researcher.png
+  interface ISearchResearcher {
+    get_researcher_list()
   }
   #+end_src
 
 * Search group
   #+begin_src plantuml :file ./isearch_group.png
   interface ISearchGroup {
-    get_group()
     get_group_list()
   }
 
@@ -112,55 +126,3 @@
   #+end_src
 
 
-* Group
-  #+begin_src plantuml :file ./igroup.png
-  interface IGroup {
-    get_name()
-    get_password()
-    get_type()
-
-    set_name()
-    generate_password()
-    set_type()
-  }
-  #+END_src
-
-* Appointment
-  #+begin_src plantuml :file ./igroup.png
-  interface IAppointment {
-    get_name()
-    get_type()
-    get_group()
-    get_location()
-    get_time_information()
-    get_description()
-
-    set_name()
-    set_type()
-    set_group()
-    set_location()
-    set_time_information()
-    set_description()
-  }
-  #+END_src
-
-* Researcher
-  #+begin_src plantuml :file ./igroup.png
-  interface IResearcher {
-    get_name()
-    get_email()
-    get_password()
-    get_research_group()
-    get_project_groups()
-    get_appointments()
-
-    set_name()
-    set_email()
-    set_password()
-    set_research_group()
-    add_project_group()
-    remove_project_group()
-    add_appointment()
-    remove_appointment()    
-  }
-  #+END_src

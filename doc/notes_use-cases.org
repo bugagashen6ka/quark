@@ -35,9 +35,8 @@ Main Success Scenario:
    1. Anonymous gets to log in page
    2. Anonymous enters credentials (email, password)
    3. System checks credentials for correctness
-   4. System creates new user
-   5. System logs in new user
-   6. Anonymous role is changed to "researcher"
+   4. System logs in new user
+   5. Anonymous role is changed to "researcher"
 
 Extensions:
    3. Anonymous does not enter all the data
@@ -156,6 +155,8 @@ Main success scenario:
    4. Creator acknowledges
    5. System deletes appointments from all schedules
 
+* Leave appointment
+
 Initiator: Appointment participant
 
 Goal: Delete appointment from personal schedule
@@ -168,11 +169,11 @@ Main success scenario:
    4. Creator acknowledges
    5. System deletes appointments from creator's schedule
 
-* Invite participant
+* Add participant to appointment
 
 Initiator: Appointment participant
 
-Goal: Invite other participant to appointment
+Goal: Add other participant to appointment
 
 Main success scenario:
 
@@ -213,7 +214,6 @@ Extensions:
       1. System asks participant to enter another name and type
       2. Participant enters another name and type
      
-
 * Join group
 
 Initiator: Participant
@@ -222,18 +222,16 @@ Goal: Join new project or research group
 
 Main success scenario:
 
-   1. Participant enters group name, type and password
-   2. System checks name, type and password
-   3. System assign participant to new group
+   1. Participant chooses group from list of the groups
+   2. Enters group password and decides to join
+   3. System checks name, type and password
+   4. System assign participant to new group
 
 Extensions:
 
-   1. System does not find matching name, group and password
-      1. Participant is told that no match has been found
-      2. Participant enters another name, group and password
-   2. User already takes part in research group
+   3. User already takes part in research group
       1. Deny joining another research group
-
+         
 * Leave group
 
 
@@ -253,3 +251,53 @@ Impossible?
 * Change Group password
 
 Impossible
+
+* Change appointment
+
+Initiator: Appointment creator
+
+Goal: Change appointment details
+
+Main success scenario:
+
+   1. Creator chooses appointment from the schedule
+   2. Creator changes appointment details (details and location)
+   3. Creator sends new details to the system
+   4. System saves the changes
+
+* View appointment details
+
+Initiator: Appointment participant
+
+Goal: View appointment details
+
+Main success scenario:
+
+   1. Participant chooses appointment from schedule
+   2. Participant passes appointment handler to system
+   3. System finds matching appointment in the list of appointments
+   4. System returns matching appointment with details to the researcher
+
+* View schedule
+
+Initiator: Researcher
+
+Goal: View researcher's schedule
+
+Main success scenario:
+
+   1. Participant tells the system data range
+   2. System finds matching appointments in the list of participant's appointments
+   3. System returns list of matching appointments to the researcher
+
+* View groups
+
+Initiator: Researcher
+
+Goal: View group participant
+
+Main success scenario:
+
+   1. Participant tells the system group search key
+   2. System finds matching groups in the list of all groups
+   3. System returns list of matching groups to the user
