@@ -15,7 +15,7 @@ GroupDetails
   - name
   - type
   - members (ids)
-  - password? (either we include password here or we need a separate getGroupPassword-operation - how else would we display the passwords to the group creators?!)
+    We do not pass password around in open data structures, rather we have a checkPassword method in Group Management interface - it should be more secure when interacting with third party components.
 
 ResearcherDetails
   - rid
