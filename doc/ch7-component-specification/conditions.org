@@ -1,0 +1,31 @@
+
+* leaveGroup
+  PRE: rid is in group members
+  POST: rid is deleted from group members
+
+* joinGroup
+  PRE: rid is not a group member
+  POST: rid becomes member of group
+
+* createGroup
+  PRE: password < 6 symbols
+  POST: group is not created accepted
+
+  PRE: group creator is not member of any  research group and type is RESEARCH_GROUP
+  POST: research group is created.
+
+* checkPassword
+  PRE: gid must exist
+  POST: password check is conducted
+
+* createResearcher
+  PRE: email should be unique
+  POST: user is created.
+
+* createAppointment
+  PRE: researcher id must exist. groupid must exist. 
+  POST: appointment is created.
+
+* createTimeInformation
+  PRE: start<end
+  POST: TimeInterval is returned
