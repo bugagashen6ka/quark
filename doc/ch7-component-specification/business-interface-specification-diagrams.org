@@ -1,0 +1,131 @@
+* General notes:
+  - ResearcherId, AppointmentId, GroupId are all unsigned integers.
+  - GroupType is enum {PROJECT_GROUP, RESEARCH_GROUP}
+  - AppointmentType is enum {PROJECT_GROUP_MEETING, RESEARCH_GROUP_MEETING, TEACHING_APPOINTMENT, CONFERENCE_APPOINTMENT, GENERIC_APPOINTMENT}
+
+* IGroupManagement
+  #+begin_src plantuml :file ./igroup_management.png
+  interface IGroupManagement << interface type >> {
+    getGroupIds(in rid: ResearcherId): GroupId [ ]
+    getGroupDetails(in gid: GroupId): GroupDetails
+    getGroupDetailsForMany(in gids: GroupId [ ]): GroupDetails [ ]
+    leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
+    joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
+    createGroup(in name: String, in type: enum {PROJECT_GROUP, RESEARCH_GROUP}, in password: String): GroupId
+    getMemberIds(in gid: GroupId): ResearcherId [ ]
+    checkPassword(in gid: GroupId, in password: String): bool
+  }
+
+  interface Group << core >> {
+    gid: GroupId
+    Name: String
+    Password: String
+    creator: ResearcherId
+    addMember(in rid: ResearcherId): bool
+    deleteMember(in rid: ResearcherId): bool
+  }
+
+  interface GroupDetails << data type >> {
+    gid: GroupId
+    name: String
+    type: GroupType
+    members: ResearcherId [ ]
+  }
+
+  IGroupManagement *-- "*" Group
+  #+END_src
+
+* IResearcherManagement
+  #+begin_src plantuml :file ./ireseacher_management.png
+  interface IResearcherManagement << interface type >> {
+    getResearcherIds(in rd: ResearcherDetails): ResearcherId [ ]
+    getResearcherDetails(in rid: ResearcherId): ResearcherDetails
+    getResearcherDetailsForMany(in rids: ResearcherId [ ]): ResearcherDetails [ ]
+    getAppointmentIds(in rid: ReseacherId, in til: TimeInterval): AppointmentId [ ]
+    checkEmail(in emailAdr: String): bool
+    createResearcher(in emailAdr: String, in password: String, in firstname: String, in lastname: String, in title: String, in phoneNbr: String): ResearcherId
+    checkCredentials(in emailAdr: String, in password: String): bool
+  }
+  
+  interface Researcher << core >> {
+    rid: ResearcherId
+    emailAddress: String
+    password: String
+    firstname: String
+    lastname: String
+    title: String
+    phoneNbr: String
+    EditDetails(): bool
+  }
+
+  interface ResearcherDetails << data type >> {
+    rid: ResearcherId
+    emailAddress: String
+    firstname: String
+    lastname: String
+    title: String
+    phoneNbr: String
+  }
+
+  interface Appointment << core >> {
+    aid: AppointmentId
+    timeInterval: TimeInfo
+    location: String
+    description: String
+    creator: ResearcherId
+    participants: ResearcherId [ ]
+    ChangeDescription(in newDescription: String): bool
+  }
+
+  IResearcherManagement *-- "*" Researcher
+  Researcher "*" -- "*" Appointment
+  #+END_src
+
+* IAppointmentManagement
+  #+begin_src plantuml :file ./ireseacher_management.png
+  interface IAppointmentManagement << interface type >> {
+    getParticipantIds(in aid: AppointmentId): ResearcherId [ ]
+    getAppointmentDetails(in aid: AppointmentId): AppointmentDetails
+    getAppointmentDetailsForMany(in aid: AppointmentId [ ]): AppointmentDetails [ ]
+    addResearcherToAppointment(in rid: ResearcherId, in aid: AppointmentId): bool
+    deleteAppointment(in aid: AppointmentId, in rid: ResearcherId): bool
+    createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
+  }
+  interface Researcher << core >> {
+    rid: ResearcherId
+    emailAddress: String
+    password: String
+    firstname: String
+    lastname: String
+    title: String
+    phoneNbr: String
+    EditDetails(): bool
+  }
+
+  interface AppointmentDetails << data type >> {
+    aid: AppointmentId
+    timeInterval: TimeInfo
+    location: String
+    description: String
+    participants: ResearcherId [ ]
+  }
+
+  interface Appointment << core >> {
+    aid: AppointmentId
+    timeInterval: TimeInfo
+    location: String
+    description: String
+    creator: ResearcherId
+    participants: ResearcherId [ ]
+    ChangeDescription(in newDescription: String): bool
+  }
+
+  interface TimeInterval << data type >> {
+    start: DateTime
+    end: DateTime
+  }
+
+  IAppointmentManagement *-- "*" Appointment
+  Researcher "*" -- "*" Appointment
+
+  #+END_src
