@@ -1,31 +1,30 @@
+* leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
+  PRE: rid is in group members.
+  POST: rid is deleted from group members.
 
-* leaveGroup
-  PRE: rid is in group members
-  POST: rid is deleted from group members
+* joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
+  PRE: rid is not a group member.
+  POST: rid becomes member of group.
 
-* joinGroup
-  PRE: rid is not a group member
-  POST: rid becomes member of group
+* createGroup(in name: String, in type: GroupType): GroupId
+  PRE: password < 6 symbols.
+  POST: group is not created.
 
-* createGroup
-  PRE: password < 6 symbols
-  POST: group is not created accepted
-
-  PRE: group creator is not member of any  research group and type is RESEARCH_GROUP
+  PRE: group creator is not member of any  research group and type is RESEARCH_GROUP.
   POST: research group is created.
 
-* checkPassword
-  PRE: gid must exist
-  POST: password check is conducted
+*  checkPassword(in gid: GroupId, in password: String): bool
+  PRE: gid must exist.
+  POST: password check is conducted.
 
-* createResearcher
-  PRE: email should be unique
+* createResearcher(in emailAdr: String, in password: String, in firstname: String, in lastname: String, in title: String, in phoneNbr: String): ResearcherId
+  PRE: email should be unique.
   POST: user is created.
 
-* createAppointment
+* createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
   PRE: researcher id must exist. groupid must exist. 
   POST: appointment is created.
 
-* createTimeInformation
-  PRE: start<end
-  POST: TimeInterval is returned
+* createTimeInformation(in start: java.util.Date, in end: java.util.Date): TimeInterval
+  PRE: start < end.
+  POST: TimeInterval is returned.
