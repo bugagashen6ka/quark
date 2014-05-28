@@ -35,6 +35,9 @@
   IGroupManagement *-- "*" Group
   #+END_src
 
+  #+RESULTS:
+  [[file:./igroup_management.png]]
+
 * IResearcherManagement
   #+begin_src plantuml :file ./ireseacher_management.png
   interface IResearcherManagement << interface type >> {
@@ -73,7 +76,6 @@
     location: String
     description: String
     creator: ResearcherId
-    participants: ResearcherId [ ]
     ChangeDescription(in newDescription: String): bool
   }
 
@@ -82,7 +84,7 @@
   #+END_src
 
 * IAppointmentManagement
-  #+begin_src plantuml :file ./ireseacher_management.png
+  #+begin_src plantuml :file ./iappointment_management.png
   interface IAppointmentManagement << interface type >> {
     getParticipantIds(in aid: AppointmentId): ResearcherId [ ]
     getAppointmentDetails(in aid: AppointmentId): AppointmentDetails
@@ -116,7 +118,6 @@
     location: String
     description: String
     creator: ResearcherId
-    participants: ResearcherId [ ]
     ChangeDescription(in newDescription: String): bool
   }
 
@@ -129,3 +130,7 @@
   Researcher "*" -- "*" Appointment
 
   #+END_src
+
+  #+RESULTS:
+  [[file:./iappointment_management.png]]
+
