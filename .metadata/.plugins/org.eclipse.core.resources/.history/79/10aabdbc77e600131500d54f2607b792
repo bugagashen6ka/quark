@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="">
+</ui:composition>
+<h:body>	
+
+<h:form enctype="multipart/form-data">
+<p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star">
+    <f:param name="productId" value="10" />
+</p:button>
+ 
+<p:button outcome="productDetail" value="With Icon" icon="ui-icon-star">
+    <f:param name="productId" value="20" />
+</p:button>
+ 
+<p:button outcome="productDetail" icon="ui-icon-star" title="Icon Only">
+    <f:param name="productId" value="30" />
+</p:button>
+ 
+<p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star" disabled="true">
+    <f:param name="productId" value="40" />
+</p:button>
+
+</h:form>
+aoeu
+
+
+</h:body>
+</html>

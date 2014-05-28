@@ -1,0 +1,9 @@
+* Business interfaces with operation signatures
+
+
+#+BEGIN_SRC plantuml :file ./ISearchAppointments.png
+#+END_SRC
+
+#+RESULTS:
+[[file:/tmp/aaa.png]]
+

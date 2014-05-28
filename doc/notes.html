@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>notes</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="notes"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-05-19T13:15+0200"/>
+<meta name="author" content="Maksym Planeta"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">notes</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Quark project</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Use Case scenarios</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 Register</a></li>
+<li><a href="#sec-1-1-2">1.1.2 Login</a></li>
+<li><a href="#sec-1-1-3">1.1.3 Logout</a></li>
+<li><a href="#sec-1-1-4">1.1.4 Create appointment</a></li>
+<li><a href="#sec-1-1-5">1.1.5 Enter type-specific appointment information</a></li>
+<li><a href="#sec-1-1-6">1.1.6 Create time field</a></li>
+<li><a href="#sec-1-1-7">1.1.7 Enter generic appointment information</a></li>
+<li><a href="#sec-1-1-8">1.1.8 Delete appointment</a></li>
+<li><a href="#sec-1-1-9">1.1.9 Invite participant</a></li>
+<li><a href="#sec-1-1-10">1.1.10 Create group</a></li>
+<li><a href="#sec-1-1-11">1.1.11 Join group</a></li>
+<li><a href="#sec-1-1-12">1.1.12 Leave group</a></li>
+<li><a href="#sec-1-1-13">1.1.13 Delete group</a></li>
+<li><a href="#sec-1-1-14">1.1.14 Change Group password</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2 Identify system interfaces and operations</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1 Register</a></li>
+<li><a href="#sec-1-2-2">1.2.2 Login</a></li>
+<li><a href="#sec-1-2-3">1.2.3 Logout</a></li>
+<li><a href="#sec-1-2-4">1.2.4 Create appointment</a></li>
+<li><a href="#sec-1-2-5">1.2.5 Delete appointment</a></li>
+<li><a href="#sec-1-2-6">1.2.6 Invite participant</a></li>
+<li><a href="#sec-1-2-7">1.2.7 Create group</a></li>
+<li><a href="#sec-1-2-8">1.2.8 Join group</a></li>
+<li><a href="#sec-1-2-9">1.2.9 Leave group</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Quark project &nbsp;&nbsp;&nbsp;<span class="tag"><span class="quark">quark</span>&nbsp;<span class="cbse">cbse</span></span></h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> <span class="done DONE">DONE</span> Use Case scenarios</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>   <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2014-05-19 Mon 11:13</span></span><br/>
+</p>
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Register</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+<p>
+Initiator: Anonymous
+</p>
+<p>
+Goal: Create new user
+</p>
+<p>
+Main Success Scenario:
+</p>
+<ol>
+<li>Anonymous gets to sign in page
+</li>
+<li>Anonymous enters credentials (name, email, password)
+</li>
+<li>System checks credentials for correctness
+</li>
+<li>System creates new user
+</li>
+<li>System logs in new user
+</li>
+<li>Anonymous role is changed to "researcher"
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p><ol>
+<li>Anonymous does not enter all the data
+<ol>
+<li>System asks user to enter all the data
+</li>
+<li>Anonymous enters all the data
+</li>
+</ol>
+
+</li>
+<li>Email already in use
+<ol>
+<li>System asks user to enter another email
+</li>
+<li>Anonymous enters another email
+</li>
+</ol>
+
+</li>
+<li>Password does not meet security requirements 
+<ol>
+<li>System asks user to enter another password
+</li>
+<li>Anonymous enters another password
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Login</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+
+<p>
+Initiator: Anonymous
+</p>
+<p>
+Goal: Log in
+</p>
+<p>
+Main Success Scenario:
+</p>
+<ol>
+<li>Anonymous gets to log in page
+</li>
+<li>Anonymous enters credentials (email, password)
+</li>
+<li>System checks credentials for correctness
+</li>
+<li>System creates new user
+</li>
+<li>System logs in new user
+</li>
+<li>Anonymous role is changed to "researcher"
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p><ol>
+<li>Anonymous does not enter all the data
+<ol>
+<li>System asks user to enter all the data
+</li>
+<li>Anonymous enters all the data
+</li>
+</ol>
+
+</li>
+<li>Email and password combination is not known to the system
+<ol>
+<li>System asks user to enter another email and password
+</li>
+<li>Anonymous enters another email and password
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Logout</h4>
+<div class="outline-text-4" id="text-1-1-3">
+
+
+<p>
+Initiator: Researcher
+</p>
+<p>
+Goal: Log out
+</p>
+<p>
+Main Success Scenario:
+</p>
+<ol>
+<li>Researcher asks system to log him out
+</li>
+<li>System terminates connection with user
+</li>
+<li>Researcher changes his role to Anonymous
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Create appointment</h4>
+<div class="outline-text-4" id="text-1-1-4">
+
+
+<p>
+Initiator: Researcher
+</p>
+<p>
+Goal: Create new appointment
+</p>
+<p>
+Main Success Scenario:
+</p>
+<ol>
+<li>Researcher asks system to create new appointment
+</li>
+<li>Researcher selects appointment type
+</li>
+<li>Include Enter type specific appointment information
+</li>
+<li>Include Enter generic appointment information
+</li>
+<li>Researcher is shown conflicts with his schedule (OPT)
+</li>
+<li>Researches acknowledges appointment creation
+</li>
+<li>System creates the appointment
+</li>
+<li>System assigns researcher as the creator for newly created appointment
+</li>
+<li>Researcher is shown conflicts with all other schedules (OPT)
+</li>
+</ol>
+
+
+
+<p>
+Extensions:
+</p>
+<ol>
+<li>Researcher decides to avoid conflicts
+<ol>
+<li>Researcher changes appointment time
+</li>
+<li>Goto 5.
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Enter type-specific appointment information</h4>
+<div class="outline-text-4" id="text-1-1-5">
+
+
+<p>
+Initiator: Included only
+</p>
+<p>
+Goal: Get type specific information
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>System creates form with type-specific data field
+</li>
+<li>Researcher enters data
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p>
+<ol>
+<li>Appointment type is "Project group meeting"
+<ol>
+<li>Create field for group selection
+</li>
+<li>Include Create time field
+
+</li>
+</ol>
+
+</li>
+<li>Appointment type is "Research group meeting"
+<ol>
+<li>Create field for group selection
+</li>
+<li>Include Create time field
+
+</li>
+</ol>
+
+</li>
+<li>Appointment type is "Teaching appointment"
+<ol>
+<li>Create field for group selection
+</li>
+<li>Include Create time field
+
+</li>
+</ol>
+
+</li>
+<li>Appointment type is "Conference appointment"
+<ol>
+<li>Create field for group selection
+</li>
+<li>Include Create time field
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-6" class="outline-4">
+<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Create time field</h4>
+<div class="outline-text-4" id="text-1-1-6">
+
+
+<p>
+Initiator: Included only
+</p>
+<p>
+Goal: Create time field for requesting date/time information
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Researcher tells when appointment takes place
+</li>
+<li>Researcher tells that appointment is regular
+</li>
+<li>Researcher tells period within which appointment takes place
+</li>
+<li>Researcher tells time range in which appointment takes place
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p>
+<ol>
+<li>Researcher tells that appointment is one-shot
+<ol>
+<li>Done
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-7" class="outline-4">
+<h4 id="sec-1-1-7"><span class="section-number-4">1.1.7</span> Enter generic appointment information</h4>
+<div class="outline-text-4" id="text-1-1-7">
+
+
+<p>
+Initiator: Included only
+</p>
+<p>
+Goal: Get type generic information
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Researchers enters location
+</li>
+<li>Researchers enters description
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-8" class="outline-4">
+<h4 id="sec-1-1-8"><span class="section-number-4">1.1.8</span> Delete appointment</h4>
+<div class="outline-text-4" id="text-1-1-8">
+
+
+<p>
+Initiator: Appointment creator
+</p>
+<p>
+Goal: Delete appointment from all schedules
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Creator finds appointment in his schedule
+</li>
+<li>Creator asks system to delete appointment
+</li>
+<li>System asks for acknowledgment
+</li>
+<li>Creator acknowledges
+</li>
+<li>System deletes appointments from all schedules
+</li>
+</ol>
+
+
+<p>
+Initiator: Appointment participant
+</p>
+<p>
+Goal: Delete appointment from personal schedule
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Creator finds appointment in his schedule
+</li>
+<li>Creator asks system to delete appointment
+</li>
+<li>System asks for acknowledgment
+</li>
+<li>Creator acknowledges
+</li>
+<li>System deletes appointments from creator's schedule
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-9" class="outline-4">
+<h4 id="sec-1-1-9"><span class="section-number-4">1.1.9</span> Invite participant</h4>
+<div class="outline-text-4" id="text-1-1-9">
+
+
+<p>
+Initiator: Appointment participant
+</p>
+<p>
+Goal: Invite other participant to appointment
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Participant finds appointment in his schedule
+</li>
+<li>Participant asks system to invite another participant
+</li>
+<li>System asks for another participant information
+</li>
+<li>Participant enters another participant information (email, other inf is OPT)
+</li>
+<li>System shows list of found participants
+</li>
+<li>Participant chooses one or more (OPT) other participants
+</li>
+<li>System asks for acknowledgment
+</li>
+<li>Participant acknowledges
+</li>
+<li>System invites chosen participants to chosen appointment
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p>
+<ol>
+<li>System does not find any participant that matches entered information
+<ol>
+<li>Participant enters another information
+</li>
+<li>System makes another search
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-10" class="outline-4">
+<h4 id="sec-1-1-10"><span class="section-number-4">1.1.10</span> Create group</h4>
+<div class="outline-text-4" id="text-1-1-10">
+
+
+<p>
+Initiator: Participant
+</p>
+<p>
+Goal: Create project or research group
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Participant chooses group name and type
+</li>
+<li>System checks that group with specified name and is possible to create
+</li>
+<li>System creates group
+</li>
+<li>System generates group password
+</li>
+<li>System assign participant as a group creator
+</li>
+<li>System shows password to group creator
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p>
+<ol>
+<li>Group name of such type already in use
+<ol>
+<li>System asks participant to enter another name and type
+</li>
+<li>Participant enters another name and type
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-11" class="outline-4">
+<h4 id="sec-1-1-11"><span class="section-number-4">1.1.11</span> Join group</h4>
+<div class="outline-text-4" id="text-1-1-11">
+
+
+<p>
+Initiator: Participant
+</p>
+<p>
+Goal: Join new project or research group
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Participant enters group name, type and password
+</li>
+<li>System checks name, type and password
+</li>
+<li>System assign participant to new group
+</li>
+</ol>
+
+
+<p>
+Extensions:
+</p>
+<ol>
+<li>System does not find matching name, group and password
+<ol>
+<li>Participant is told that no match has been found
+</li>
+<li>Participant enters another name, group and password
+</li>
+</ol>
+
+</li>
+<li>User already takes part in research group
+<ol>
+<li>Deny joining another research group
+</li>
+</ol>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-12" class="outline-4">
+<h4 id="sec-1-1-12"><span class="section-number-4">1.1.12</span> Leave group</h4>
+<div class="outline-text-4" id="text-1-1-12">
+
+
+
+<p>
+Initiator: Participant
+</p>
+<p>
+Goal: Leave group
+</p>
+<p>
+Main success scenario:
+</p>
+<ol>
+<li>Participant enters group name and type
+</li>
+<li>System removes user from the group
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-13" class="outline-4">
+<h4 id="sec-1-1-13"><span class="section-number-4">1.1.13</span> Delete group</h4>
+<div class="outline-text-4" id="text-1-1-13">
+
+
+<p>
+Impossible?
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-1-14" class="outline-4">
+<h4 id="sec-1-1-14"><span class="section-number-4">1.1.14</span> Change Group password</h4>
+<div class="outline-text-4" id="text-1-1-14">
+
+
+<p>
+Impossible
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> <span class="todo TODO">TODO</span> Identify system interfaces and operations</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Register</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+
+
+<p>
+    <img src="./iregister.png"  alt="./iregister.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Login</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+
+
+<p>
+    <img src="./ilogin.png"  alt="./ilogin.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Logout</h4>
+<div class="outline-text-4" id="text-1-2-3">
+
+
+
+<p>
+    <img src="./ilogout.png"  alt="./ilogout.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Create appointment</h4>
+<div class="outline-text-4" id="text-1-2-4">
+
+
+
+<p>
+    <img src="./icreate_appointment.png"  alt="./icreate_appointment.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Delete appointment</h4>
+<div class="outline-text-4" id="text-1-2-5">
+
+
+
+<p>
+    <img src="./idelete_appointment.png"  alt="./idelete_appointment.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6"><span class="section-number-4">1.2.6</span> Invite participant</h4>
+<div class="outline-text-4" id="text-1-2-6">
+
+
+
+<p>
+    <img src="./iinvite.png"  alt="./iinvite.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-7" class="outline-4">
+<h4 id="sec-1-2-7"><span class="section-number-4">1.2.7</span> Create group</h4>
+<div class="outline-text-4" id="text-1-2-7">
+
+
+
+<p>
+    <img src="./icreate_group.png"  alt="./icreate_group.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-8" class="outline-4">
+<h4 id="sec-1-2-8"><span class="section-number-4">1.2.8</span> Join group</h4>
+<div class="outline-text-4" id="text-1-2-8">
+
+
+
+<p>
+    <img src="./ijoin_group.png"  alt="./ijoin_group.png" />
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-9" class="outline-4">
+<h4 id="sec-1-2-9"><span class="section-number-4">1.2.9</span> Leave group</h4>
+<div class="outline-text-4" id="text-1-2-9">
+
+
+
+<p>
+    <img src="./ileave_group.png"  alt="./ileave_group.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-05-19T13:15+0200</p>
+<p class="author">Author: Maksym Planeta</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.2 with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
