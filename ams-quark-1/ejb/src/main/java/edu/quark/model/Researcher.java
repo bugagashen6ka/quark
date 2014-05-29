@@ -2,6 +2,8 @@ package edu.quark.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -35,6 +37,13 @@ public class Researcher implements Serializable {
 
 	@Column(name = "phoneNumber", nullable = false)
 	private String phoneNumber;
+
+	@OneToOne(mappedBy = "creator")
+	private Appointment appointment;
+
+	@ManyToMany
+	@JoinTable(name = "Researcher_Appointment", joinColumns = { @JoinColumn(name = "rid", referencedColumnName = "rid") }, inverseJoinColumns = { @JoinColumn(name = "aid", referencedColumnName = "aid") })
+	private Set<Appointment> appointments;
 
 	private static final long serialVersionUID = 1L;
 
@@ -100,6 +109,22 @@ public class Researcher implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 }
