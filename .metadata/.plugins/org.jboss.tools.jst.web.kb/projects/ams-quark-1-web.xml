@@ -5,8 +5,22 @@
  </depends-on-projects>
  <used-by-projects/>
  <paths>
-  <path value="/home/desertfox/.m2/repository/org/jboss/spec/javax/interceptor/jboss-interceptors-api_1.1_spec/1.0.1.Final/jboss-interceptors-api_1.1_spec-1.0.1.Final.jar"/>
-  <path value="/home/desertfox/Univer/Dresden/cbse/quark/ams-quark-1/web/src/main/webapp/WEB-INF/lib/primefaces-5.0.jar">
+  <path value="/home/dmitrii/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar"/>
+  <path value="/home/dmitrii/.m2/repository/org/jboss/spec/javax/faces/jboss-jsf-api_2.1_spec/2.0.9.Final/jboss-jsf-api_2.1_spec-2.0.9.Final.jar"/>
+  <path value="/home/dmitrii/.m2/repository/org/jboss/spec/javax/interceptor/jboss-interceptors-api_1.1_spec/1.0.1.Final/jboss-interceptors-api_1.1_spec-1.0.1.Final.jar"/>
+  <path value="/home/dmitrii/.m2/repository/org/hibernate/hibernate-validator/4.2.0.Final/hibernate-validator-4.2.0.Final.jar"/>
+  <path value="/ams-quark-1-web/src/main/webapp/WEB-INF/faces-config.xml">
+   <libraries>
+    <library class="faces-config">
+     <id class="model-object"
+      path="FileSystems/WEB-INF/faces-config.xml" project="ams-quark-1-web"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="/home/dmitrii/.m2/repository/org/jboss/spec/javax/ws/rs/jboss-jaxrs-api_1.1_spec/1.0.1.Final/jboss-jaxrs-api_1.1_spec-1.0.1.Final.jar"/>
+  <path value="/home/dmitrii/.m2/repository/javax/enterprise/cdi-api/1.0-SP4/cdi-api-1.0-SP4.jar"/>
+  <path value="/home/dmitrii/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar"/>
+  <path value="/home/dmitrii/Cloud/Dropbox/DSE/SS/E5/Component-Based Software Engineering/quark/ams-quark-1/web/src/main/webapp/WEB-INF/lib/primefaces-5.0.jar">
    <libraries>
     <library class="faces-config">
      <id class="model-object"
@@ -22,77 +36,26 @@
     </library>
    </libraries>
   </path>
-  <path value="/home/desertfox/.m2/repository/org/jboss/spec/javax/faces/jboss-jsf-api_2.1_spec/2.0.9.Final/jboss-jsf-api_2.1_spec-2.0.9.Final.jar"/>
-  <path value="/home/desertfox/.m2/repository/javax/enterprise/cdi-api/1.0-SP4/cdi-api-1.0-SP4.jar"/>
-  <path value="/home/desertfox/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-  <path value="/home/desertfox/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar"/>
-  <path value="/home/desertfox/.m2/repository/org/hibernate/hibernate-validator/4.2.0.Final/hibernate-validator-4.2.0.Final.jar"/>
-  <path value="/home/desertfox/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar"/>
-  <path value="/home/desertfox/.m2/repository/org/jboss/spec/javax/ws/rs/jboss-jaxrs-api_1.1_spec/1.0.1.Final/jboss-jaxrs-api_1.1_spec-1.0.1.Final.jar"/>
-  <path value="/ams-quark-1-web/src/main/webapp/WEB-INF/faces-config.xml">
-   <libraries>
-    <library class="faces-config">
-     <id class="model-object"
-      path="FileSystems/WEB-INF/faces-config.xml" project="ams-quark-1-web"/>
-    </library>
-   </libraries>
-  </path>
+  <path value="/home/dmitrii/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
  </paths>
  <validation>
   <core validator-id="jsf-verification"/>
   <core validator-id="jboss.cdi.core"/>
   <core validator-id="jboss.jsf.core"/>
   <el>
-   <linked-el length="25" name="%0" offset="503" path="%1"/>
-   <linked-el length="27" name="%0" offset="627" path="%1"/>
-   <linked-el length="27" name="%2" offset="627" path="%1"/>
-   <linked-el length="25" name="%3" offset="503" path="%1"/>
-   <linked-el length="21" name="%4" offset="3838" path="%5"/>
-   <linked-el length="21" name="%6" offset="3691" path="%5"/>
-   <linked-el length="21" name="%6" offset="3942" path="%7"/>
-   <linked-el length="21" name="%8" offset="4102" path="%7"/>
-   <linked-el length="21" name="%9" offset="4102" path="%7"/>
-   <linked-el length="26" name="%9" offset="5039" path="%7"/>
-   <linked-el length="21" name="%9" offset="3838" path="%5"/>
-   <linked-el length="21" name="%10" offset="3691" path="%5"/>
-   <linked-el length="21" name="%10" offset="3942" path="%7"/>
-   <linked-el length="21" name="%11" offset="3838" path="%5"/>
-   <linked-el length="26" name="%12" offset="5039" path="%7"/>
-   <linked-el length="26" name="%13" offset="5039" path="%7"/>
-   <linked-el length="21" name="%14" offset="4102" path="%7"/>
+   <linked-el length="20" name="%0" offset="468" path="%1"/>
+   <linked-el length="20" name="%0" offset="603" path="%1"/>
+   <linked-el length="20" name="%2" offset="468" path="%1"/>
+   <linked-el length="20" name="%2" offset="603" path="%1"/>
   </el>
  </validation>
  <aliases>
-  <alias path="fileUploadView" value="%0"/>
-  <alias path="version.war" value="%11"/>
-  <alias path="project" value="%10"/>
-  <alias path="fileUploadView.file" value="%3"/>
-  <alias path="fileUploadView.upload" value="%2"/>
-  <alias path="version.surefire.plugin" value="%12"/>
-  <alias path="/ams-quark-1-web/pom.xml" value="%5"/>
-  <alias path="/ams-quark-1-ejb/pom.xml" value="%7"/>
   <alias path="/ams-quark-1-web/src/main/webapp/index.xhtml" value="%1"/>
-  <alias path="version.surefire" value="%13"/>
-  <alias path="version.war.plugin" value="%4"/>
-  <alias path="project.artifactId" value="%6"/>
-  <alias path="version.ejb" value="%8"/>
-  <alias path="version.ejb.plugin" value="%14"/>
-  <alias path="version" value="%9"/>
-  <alias path="%0" value="fileUploadView"/>
-  <alias path="%4" value="version.war.plugin"/>
-  <alias path="%3" value="fileUploadView.file"/>
-  <alias path="%2" value="fileUploadView.upload"/>
+  <alias path="basicView" value="%0"/>
+  <alias path="basicView.text" value="%2"/>
+  <alias path="%0" value="basicView"/>
+  <alias path="%2" value="basicView.text"/>
   <alias path="%1" value="/ams-quark-1-web/src/main/webapp/index.xhtml"/>
-  <alias path="%7" value="/ams-quark-1-ejb/pom.xml"/>
-  <alias path="%8" value="version.ejb"/>
-  <alias path="%5" value="/ams-quark-1-web/pom.xml"/>
-  <alias path="%14" value="version.ejb.plugin"/>
-  <alias path="%6" value="project.artifactId"/>
-  <alias path="%9" value="version"/>
-  <alias path="%13" value="version.surefire"/>
-  <alias path="%12" value="version.surefire.plugin"/>
-  <alias path="%11" value="version.war"/>
-  <alias path="%10" value="project"/>
  </aliases>
  <includes/>
  <uris>

@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet name="resources/css/screen.css" />
+	<title>index</title>
+</h:head>
+<h:body>
+	<h1 style="text-align: center;">Drag and drop BPEL(BPMN) file
+		please</h1>
+	<h:form enctype="multipart/form-data">
+		<p:growl id="messages" showDetail="true" />
+
+		<p:fileUpload value="#{fileUploadController.file}" mode="simple"
+			disabled="true" />
+
+		<p:commandButton value="Submit" ajax="false"
+			actionListener="#{fileUploadController.upload}" disabled="true" />
+	</h:form>
+</h:body>
+</html>

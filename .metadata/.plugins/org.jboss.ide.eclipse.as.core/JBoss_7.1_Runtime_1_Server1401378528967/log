@@ -1,0 +1,85 @@
+!SESSION 2014-05-29 17:43:06.140 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /home/dmitrii/Cloud/Dropbox/DSE/SS/E5/Component-Based Software Engineering/quark -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:48:57.495
+!MESSAGE Module ams-quark-1-ear published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:48:57.516
+!MESSAGE Module ams-quark-1-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:48:57.525
+!MESSAGE Module ams-quark-1-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-05-29 17:48:58.782
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-05-29 17:49:04.548
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:50:02.787
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:51:12.936
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:51:38.837
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:52:11.530
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:52:31.166
+!MESSAGE 3 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:53:56.850
+!MESSAGE 2 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:54:16.378
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:54:18.673
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:56:06.463
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:56:12.762
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:56:18.340
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:57:11.816
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:59:13.029
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:59:22.363
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:59:43.646
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:59:50.419
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 17:59:54.089
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 18:03:12.956
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 18:04:17.100
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 18:04:54.107
+!MESSAGE 1 files modified in module ams-quark-1-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-05-29 18:09:00.977
+!MESSAGE 1 files modified in module ams-quark-1-web
