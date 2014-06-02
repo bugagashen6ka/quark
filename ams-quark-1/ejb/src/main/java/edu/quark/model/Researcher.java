@@ -2,7 +2,6 @@ package edu.quark.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
