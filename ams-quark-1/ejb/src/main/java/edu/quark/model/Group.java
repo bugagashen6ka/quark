@@ -26,7 +26,13 @@ public class Group implements Serializable {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@OneToOne
+	@OneToMany // one group can have many appointments associated with it
+	// Do we need to declare this end of the association? I am not sure we need to display appointments
+	// from the perspective of groups.
+	private Set<Appointment> appointments;
+	
+	@ManyToOne // one researcher can create many groups
+	// @JoinTable needed?
 	@JoinColumn(name = "rid")
 	private Researcher creator;
 

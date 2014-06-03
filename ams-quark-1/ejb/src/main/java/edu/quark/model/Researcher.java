@@ -37,8 +37,12 @@ public class Researcher implements Serializable {
 	@Column(name = "phoneNumber", nullable = false)
 	private String phoneNumber;
 
-	@OneToOne(mappedBy = "creator")
-	private Appointment appointment;
+	@OneToMany(mappedBy = "creator") // one researcher can create many groups
+	// @JoinTable needed?
+	
+	@OneToMany(mappedBy = "creator") // one researcher can create many appointments
+	// @JoinTable needed?
+	private Set<Appointment> createdAppointments;
 
 	@ManyToMany
 	@JoinTable(name = "Researcher_Appointment", joinColumns = { @JoinColumn(name = "rid", referencedColumnName = "rid") }, inverseJoinColumns = { @JoinColumn(name = "aid", referencedColumnName = "aid") })

@@ -37,7 +37,12 @@ public class Appointment implements Serializable {
 	@Column(name = "end")
 	private Date end;
 
-	@OneToOne
+	@ManyToOne // one group can have many appointments
+	// @JoinTable needed?
+	private Group group; // may be null, if appointment is not a group appointment
+	
+	@ManyToOne // one researcher can create many appointments
+	// @JoinTable needed?
 	@JoinColumn(name = "rid")
 	private Researcher creator;
 
