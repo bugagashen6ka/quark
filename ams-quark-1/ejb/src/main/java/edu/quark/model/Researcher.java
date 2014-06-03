@@ -39,6 +39,7 @@ public class Researcher implements Serializable {
 
 	@OneToMany(mappedBy = "creator") // one researcher can create many groups
 	// @JoinTable needed?
+	private Set<Group> createdGroups;
 	
 	@OneToMany(mappedBy = "creator") // one researcher can create many appointments
 	// @JoinTable needed?
