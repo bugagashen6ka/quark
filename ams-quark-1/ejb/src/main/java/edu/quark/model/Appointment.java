@@ -38,7 +38,7 @@ public class Appointment implements Serializable {
 	private Date end;
 
 	@OneToOne
-	@JoinColumn(name = "aid")
+	@JoinColumn(name = "rid")
 	private Researcher creator;
 
 	@ManyToMany(mappedBy = "appointments", cascade = CascadeType.ALL)
