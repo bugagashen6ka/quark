@@ -22,8 +22,8 @@ import org.primefaces.model.ScheduleModel;
 @ManagedBean
 @ViewScoped
 public class ScheduleView implements Serializable {
- 
-    private ScheduleModel eventModel;
+
+	private ScheduleModel eventModel;
      
     private ScheduleModel lazyEventModel;
  
@@ -38,8 +38,8 @@ public class ScheduleView implements Serializable {
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
          
         lazyEventModel = new LazyScheduleModel() {
-             
-            @Override
+
+			@Override
             public void loadEvents(Date start, Date end) {
                 Date random = getRandomDate(start);
                 addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));

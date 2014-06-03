@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Group
- *
+ * 
  */
 @Entity
 @Table(name = "Group")
@@ -26,12 +26,15 @@ public class Group implements Serializable {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@OneToMany // one group can have many appointments associated with it
-	// Do we need to declare this end of the association? I am not sure we need to display appointments
+	@OneToMany
+	// one group can have many appointments associated with it
+	// Do we need to declare this end of the association? I am not sure we need
+	// to display appointments
 	// from the perspective of groups.
 	private Set<Appointment> appointments;
-	
-	@ManyToOne // one researcher can create many groups
+
+	@ManyToOne
+	// one researcher can create many groups
 	// @JoinTable needed?
 	@JoinColumn(name = "rid")
 	private Researcher creator;
@@ -85,5 +88,17 @@ public class Group implements Serializable {
 	public void setMembers(Set<Researcher> members) {
 		this.members = members;
 	}
-   
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

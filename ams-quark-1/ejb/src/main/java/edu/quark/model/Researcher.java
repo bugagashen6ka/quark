@@ -37,11 +37,13 @@ public class Researcher implements Serializable {
 	@Column(name = "phoneNumber", nullable = false)
 	private String phoneNumber;
 
-	@OneToMany(mappedBy = "creator") // one researcher can create many groups
+	@OneToMany(mappedBy = "creator")
+	// one researcher can create many groups
 	// @JoinTable needed?
 	private Set<Group> createdGroups;
-	
-	@OneToMany(mappedBy = "creator") // one researcher can create many appointments
+
+	@OneToMany(mappedBy = "creator")
+	// one researcher can create many appointments
 	// @JoinTable needed?
 	private Set<Appointment> createdAppointments;
 
@@ -115,14 +117,6 @@ public class Researcher implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Appointment getAppointment() {
-		return appointment;
-	}
-
-	public void setAppointment(Appointment appointment) {
-		this.appointment = appointment;
-	}
-
 	public Set<Appointment> getAppointments() {
 		return appointments;
 	}
@@ -131,4 +125,21 @@ public class Researcher implements Serializable {
 		this.appointments = appointments;
 	}
 
+	public Set<Group> getCreatedGroups() {
+		return createdGroups;
+	}
+
+	public void setCreatedGroups(Set<Group> createdGroups) {
+		this.createdGroups = createdGroups;
+	}
+
+	public Set<Appointment> getCreatedAppointments() {
+		return createdAppointments;
+	}
+
+	public void setCreatedAppointments(Set<Appointment> createdAppointments) {
+		this.createdAppointments = createdAppointments;
+	}
+
+	
 }
