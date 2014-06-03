@@ -18,7 +18,7 @@ public class Group implements Serializable {
 	@Id
 	@Column(name = "gid", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private BigInteger gId;
+	private BigInteger gid;
 
 	@Column(name = "name", nullable = false)
 	private String name;
@@ -49,12 +49,12 @@ public class Group implements Serializable {
 		super();
 	}
 
-	public BigInteger getgId() {
-		return gId;
+	public BigInteger getGid() {
+		return gid;
 	}
 
-	public void setgId(BigInteger gId) {
-		this.gId = gId;
+	public void setGid(BigInteger gid) {
+		this.gid = gid;
 	}
 
 	public String getName() {

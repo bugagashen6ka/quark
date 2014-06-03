@@ -19,7 +19,7 @@ public class Appointment implements Serializable {
 	@Id
 	@Column(name = "aid", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private BigInteger aId;
+	private BigInteger aid;
 
 	@Column(name = "description", nullable = false)
 	private String description;
@@ -37,11 +37,14 @@ public class Appointment implements Serializable {
 	@Column(name = "end")
 	private Date end;
 
-	@ManyToOne // one group can have many appointments
+	@ManyToOne
+	// one group can have many appointments
 	// @JoinTable needed?
-	private Group group; // may be null, if appointment is not a group appointment
-	
-	@ManyToOne // one researcher can create many appointments
+	private Group group; // may be null, if appointment is not a group
+							// appointment
+
+	@ManyToOne
+	// one researcher can create many appointments
 	// @JoinTable needed?
 	@JoinColumn(name = "rid")
 	private Researcher creator;
@@ -55,12 +58,12 @@ public class Appointment implements Serializable {
 		super();
 	}
 
-	public BigInteger getaId() {
-		return aId;
+	public BigInteger getAid() {
+		return aid;
 	}
 
-	public void setaId(BigInteger aId) {
-		this.aId = aId;
+	public void setAid(BigInteger aid) {
+		this.aid = aid;
 	}
 
 	public String getDescription() {

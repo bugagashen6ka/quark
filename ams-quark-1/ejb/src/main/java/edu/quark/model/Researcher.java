@@ -17,7 +17,7 @@ public class Researcher implements Serializable {
 	@Id
 	@Column(name = "rid", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private BigInteger rId;
+	private BigInteger rid;
 
 	@Column(name = "email", nullable = false)
 	private String email;
@@ -57,12 +57,12 @@ public class Researcher implements Serializable {
 		super();
 	}
 
-	public BigInteger getrId() {
-		return rId;
+	public BigInteger getRid() {
+		return rid;
 	}
 
-	public void setrId(BigInteger rId) {
-		this.rId = rId;
+	public void setRid(BigInteger rid) {
+		this.rid = rid;
 	}
 
 	public String getEmail() {
@@ -141,5 +141,4 @@ public class Researcher implements Serializable {
 		this.createdAppointments = createdAppointments;
 	}
 
-	
 }
