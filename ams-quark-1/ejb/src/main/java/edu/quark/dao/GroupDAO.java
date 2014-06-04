@@ -43,5 +43,12 @@ public class GroupDAO implements GenericDAO<Group, BigInteger> {
 	public void update(Group transientObject) {
 		em.merge(transientObject);
 	}
+	
+	public List<Group> findAll() {
+        TypedQuery<Group> query = em.createNamedQuery(
+                "Group.findAll", Group.class);
+        List<Group> results = query.getResultList();
+        return results;
+    }
 
 }
