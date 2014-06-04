@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "GroupTable")
 @Inheritance(strategy=InheritanceType.JOINED)
+@NamedQueries({ @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g") })
 public class Group implements Serializable {
 
 	@Id

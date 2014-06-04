@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet name="resources/css/screen.css" />
+	<title>group</title>
+</h:head>
+<h:body>
+	<p:dataTable var="group" value="#{groupView.groups}">
+		<p:column headerText="Name">
+			<h:outputText value="#{group.name}" />
+		</p:column>
+
+		<p:column headerText="Password">
+			<h:outputText value="#{group.password}" />
+		</p:column>
+		
+	</p:dataTable>
+
+
+</h:body>
+</html>
