@@ -21,6 +21,7 @@ public class GroupDAO implements GenericDAO<Group, BigInteger> {
 
 	@Override
 	public BigInteger create(Group newInstance) {
+		System.out.println("create dao group " + newInstance.getName() + " | " + newInstance.getPassword());
 		em.persist(newInstance);
 		return newInstance.getGid();
 	}

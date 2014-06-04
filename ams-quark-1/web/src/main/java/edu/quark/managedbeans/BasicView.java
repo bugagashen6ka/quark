@@ -6,6 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.faces.application.FacesMessage;
 
 import edu.quark.dao.GroupDAO;
 import edu.quark.model.Group;
@@ -19,6 +22,7 @@ public class BasicView {
 	private Group group;
 	private Group group2;
 	private String text;
+	private BigInteger id;
 	
 	@PostConstruct
 	public void init(){
@@ -39,6 +43,7 @@ public class BasicView {
 	}
 
 	public void setGroup(Group group) {
+		addMessage(group.getName());
 		this.group = group;
 	}
 
@@ -55,12 +60,30 @@ public class BasicView {
 	}
 
 	public void addGroup() {
-		groupDAO.create(group);
+		System.out.println("add group " + group.getName() + " | " + group.getPassword());
+		id = groupDAO.create(group);
+		System.out.println("add group 7 " + id.toString());
+		System.out.println("add group end");
 	}
-
+	
+	public void showGroup() {
+		addMessage("Welcome to Primefaces!!");
+		System.out.println("show group start");
+		group2 = groupDAO.read(id);
+		System.out.println("show group " + group2.getName());
+		addMessage(group.toString()+ "Try to read group");
+	}
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
 	public void setGroupDAO(GroupDAO groupDAO) {
 		this.groupDAO = groupDAO;
-		group2 = groupDAO.read(BigInteger.ZERO);
 	}
+	
+    public void buttonAction(ActionEvent actionEvent) {
+        addMessage("Welcome to Primefaces!!");
+    }
 
 }

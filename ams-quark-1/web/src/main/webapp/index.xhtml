@@ -58,7 +58,7 @@
 			</h:panelGrid>
 		</p:dialog>
 	</h:form>
-
+	
 	<h:form>
 		<h:panelGrid columns="4" cellpadding="5">
 			<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
@@ -67,22 +67,25 @@
 			<h:outputText id="display" value="#{basicView.text}" />
 		</h:panelGrid>
 	</h:form>
-	
+
 	<h:form id="newGroup">
+		<p:growl id="growl" life="2000" />
+		<p:commandButton value="Ajax Submit" id="ajax" update="growl" actionListener="#{basicView.buttonAction}" styleClass="ui-priority-primary" />
 		<p:panel header="New Group" style="text-align:center; width:30%">
 			<h:panelGrid columns="1" style="text-align:center;width:100%">
-				<p:commandButton update=":newGroup:newGroup"
-					oncomplete="newGroupDialog.show" title="Add New Group"
+				<p:commandButton update=":newGroup:growl,:newGroup:newGroup"
+					oncomplete="PF('newGroupDialog').show()" title="Add New Group"
 					value="Add New Group" />
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="New Group" style="text-align:center; width:30%">
-			<h:panelGrid columns="1" style="text-align:center;width:100%">
-				<p:inputText value="#{basicView.group2.name}"></p:inputText>
+			<h:panelGrid columns="2" style="text-align:center;width:100%">
+				<p:inputText title="snth" id="resultlabel" value="#{basicView.group2.name}"></p:inputText>
+				<p:commandButton value="Submit" update="resultlabel" actionListener="#{basicView.showGroup()}"
+					icon="ui-icon-check" />
 			</h:panelGrid>
 		</p:panel>
-		<p:dialog header="New Group" widgetVar="newGroupDialog"
-			modal="true">
+		<p:dialog header="New Group" widgetVar="newGroupDialog" modal="true">
 			<p:outputPanel id="newGroup" style="text-align:center;"
 				layout="block">
 				<h:panelGrid columns="2" cellpadding="5">
@@ -91,8 +94,8 @@
 					</p:inputText>
 					<p:password id="pswd" value="#{basicView.group.password}"></p:password>
 					<p:commandButton update=":newGroup"
-						actionListener="#{basicView.addGroup()}" title="Add New Group"
-						value="Submit" oncomplete="newGroupDialog.hide()" />
+						actionListener="#{basicView.addGroup}" title="Add New Group"
+						value="Submit" oncomplete="PF('newGroupDialog').hide()" />
 				</h:panelGrid>
 			</p:outputPanel>
 		</p:dialog>
