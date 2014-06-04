@@ -23,6 +23,11 @@ import org.primefaces.model.ScheduleModel;
 @ViewScoped
 public class ScheduleView implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4048631837903318541L;
+
 	private ScheduleModel eventModel;
      
     private ScheduleModel lazyEventModel;
@@ -38,6 +43,11 @@ public class ScheduleView implements Serializable {
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
          
         lazyEventModel = new LazyScheduleModel() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -1508233823680543048L;
 
 			@Override
             public void loadEvents(Date start, Date end) {
