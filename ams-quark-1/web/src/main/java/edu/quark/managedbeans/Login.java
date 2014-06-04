@@ -27,6 +27,12 @@ public class Login {
            user = results.get(0);
         }*/
     }
+    
+    public void register() {
+    	
+    	
+    	
+    }
 
 /*    public bool@Current Credentials credentials;
     @PersistenceContext EntityManager userDatabase;*/

@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pa="http://xmlns.jcp.org/jsf/passthrough">
-	
+
 <h:head>
 	<h:outputStylesheet name="resources/css/screen.css" />
 	<title>index</title>
@@ -14,21 +14,44 @@
 </h:head>
 
 <h:body>
-	<br/><br/><br/>
-	
+	<br />
+	<br />
+	<br />
+
 	<div id="login">
 		<div id="triangle"></div>
 		<h1>Log in</h1>
 		<h:form>
-			<h:inputText id="user" value="#{credentials.username}"/>
+			<h:inputText id="user" value="#{credentials.username}" />
 			<p:watermark for="user" value="Email" />
-			
-			<h:inputSecret id="pass" value="#{credentials.password}"/>
+
+			<h:inputSecret id="pass" value="#{credentials.password}" />
 			<p:watermark for="pass" value="Password" />
-			
-		    <h:commandButton value="Log in" action="#{login.login}" />
+
+			<h:commandButton value="Log in" action="#{login.login}" />
+			<br />
+			<br />
+			<a href="#" data-reveal-id="register">Register new user</a>
 		</h:form>
 	</div>
+
+	<div id="register" class="reveal-modal" data-reveal="sdf" style="width: 300px;">
+	  <h3>Register new user</h3>
+	  <h:form>
+			<h:inputText id="reg_user" value="#{credentials.username}" />
+			<p:watermark for="reg_user" value="Email" />
+
+			<h:inputSecret id="reg_pass" value="#{credentials.password}" />
+			<p:watermark for="reg_pass" value="Password" />
+
+			<h:commandButton value="Register" action="#{login.register}" />
+		</h:form>
+	</div>
+	
+  	<script src="foundation/js/foundation.min.js"></script>
+  	<script>
+	    $(document).foundation();
+  	</script>
 
 </h:body>
 </html>
