@@ -2,6 +2,7 @@ package edu.quark.businesslogic;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
+import edu.quark.model.Group;
 import edu.quark.model.Researcher;
 
 @ApplicationScoped
@@ -87,20 +89,36 @@ public class ResearcherManager implements IResearcherManagement {
 
 	@Override
 	public boolean checkEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		List<Researcher> rs = researcherDAO.findAll();
+		for (Researcher r : rs) {
+			if(r.getEmail()==email) return false;
+		}
+		return true;
 	}
 
 	@Override
 	public BigInteger createResearcher(String email, String password,
 			String firstName, String lastName, String title, String phoneNumber) {
-		// TODO Auto-generated method stub
+		Researcher r = new Researcher();
+		r.setAppointments(new HashSet<Appointment>());
+		r.setCreatedAppointments(new HashSet<Appointment>());
+		r.setCreatedGroups(new HashSet<Group>());
+		r.setEmail(email);
+		r.setFirstName(firstName);
+		r.setLastName(lastName);
+		r.setPassword(password);
+		r.setPhoneNumber(phoneNumber);
+		r.setTitle(title);
+		researcherDAO.create(r);
 		return null;
 	}
 
 	@Override
 	public boolean checkCredentials(String email, String password) {
-		// TODO Auto-generated method stub
+		List<Researcher> rs = researcherDAO.findAll();
+		for (Researcher r : rs) {
+			if(r.getEmail()==email && r.getPassword()==password) return true;
+		}
 		return false;
 	}
 
