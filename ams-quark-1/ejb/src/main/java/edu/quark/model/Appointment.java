@@ -14,6 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Appointment")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Appointment implements Serializable {
 
 	@Id
@@ -40,6 +41,7 @@ public class Appointment implements Serializable {
 	@ManyToOne
 	// one group can have many appointments
 	// @JoinTable needed?
+	@JoinColumn(name = "gid")
 	private Group group; // may be null, if appointment is not a group
 							// appointment
 
