@@ -1,4 +1,4 @@
-package edu.quark.model;
+package edu.quark.datatypes;
 
 import java.util.Date;
 

@@ -6,7 +6,6 @@ import java.util.Set;
 
 import edu.quark.model.Appointment;
 import edu.quark.model.Researcher;
-import edu.quark.model.TimeInfo;
 
 public class AppointmentDetails {
 	
