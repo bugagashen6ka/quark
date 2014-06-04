@@ -26,13 +26,6 @@
 					update="messages" />
 
 			</p:schedule>
-
-			<h3>Locale Support ( Example: Turkish )</h3>
-			<p:schedule id="scheduleLocale" value="#{scheduleView.eventModel}"
-				locale="tr" />
-
-			<h3>Lazy Schedule</h3>
-			<p:schedule value="#{scheduleView.lazyEventModel}" />
 		</h:panelGrid>
 
 		<p:dialog widgetVar="eventDialog" header="Event Details"
@@ -66,30 +59,45 @@
 		</p:dialog>
 	</h:form>
 
-	<script type="text/javascript">
-    PrimeFaces.locales['tr'] = {
-        closeText: 'kapat',
-        prevText: 'geri',
-        nextText: 'ileri',
-        currentText: 'bugün',
-        monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran',
-            'Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
-        monthNamesShort: ['Oca','Şub','Mar','Nis','May','Haz',
-            'Tem','Ağu','Eyl','Eki','Kas','Ara'],
-        dayNames: ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'],
-        dayNamesShort: ['Pz','Pt','Sa','Ça','Pe','Cu','Ct'],
-        dayNamesMin: ['Pz','Pt','Sa','Ça','Pe','Cu','Ct'],
-        weekHeader: 'Hf',
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: '',
-        month: 'Ay',
-        week: 'Hafta',
-        day: 'Gün',
-        allDayText : 'Tüm Gün'
-    };
-</script>
+	<h:form>
+		<h:panelGrid columns="4" cellpadding="5">
+			<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+			<p:inputText id="name" value="#{basicView.text}" />
+			<p:commandButton value="Submit" update="display" icon="ui-icon-check" />
+			<h:outputText id="display" value="#{basicView.text}" />
+		</h:panelGrid>
+	</h:form>
+	
+	<h:form id="newGroup">
+		<p:panel header="New Group" style="text-align:center; width:30%">
+			<h:panelGrid columns="1" style="text-align:center;width:100%">
+				<p:commandButton update=":newGroup:newGroup"
+					oncomplete="newGroupDialog.show" title="Add New Group"
+					value="Add New Group" />
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="New Group" style="text-align:center; width:30%">
+			<h:panelGrid columns="1" style="text-align:center;width:100%">
+				<p:inputText value="#{basicView.group2.name}"></p:inputText>
+			</h:panelGrid>
+		</p:panel>
+		<p:dialog header="New Group" widgetVar="newGroupDialog"
+			modal="true">
+			<p:outputPanel id="newGroup" style="text-align:center;"
+				layout="block">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="group" value="Group: " />
+					<p:inputText id="group" value="#{basicView.group.name}">
+					</p:inputText>
+					<p:password id="pswd" value="#{basicView.group.password}"></p:password>
+					<p:commandButton update=":newGroup"
+						actionListener="#{basicView.addGroup()}" title="Add New Group"
+						value="Submit" oncomplete="newGroupDialog.hide()" />
+				</h:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+
 	<style type="text/css">
 .value {
 	width: 1000px;
