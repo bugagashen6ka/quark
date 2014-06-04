@@ -1,1 +1,0 @@
-INDEX VERSION 1.126+/home/dmitrii/Cloud/Dropbox/DSE/SS/E5/Component-Based Software Engineering/quark/ams-quark-1/.metadata/.plugins/org.eclipse.jdt.core
