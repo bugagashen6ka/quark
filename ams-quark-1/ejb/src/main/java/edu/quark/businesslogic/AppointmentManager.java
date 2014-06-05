@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.businessinterfaces.IAppointmentManagement;
@@ -22,7 +24,8 @@ import edu.quark.model.ResearchGroupMeeting;
 import edu.quark.model.Researcher;
 import edu.quark.model.TeachingAppointment;
 
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class AppointmentManager implements IAppointmentManagement {
 	@EJB
 	AppointmentDAO appointmentDAO;

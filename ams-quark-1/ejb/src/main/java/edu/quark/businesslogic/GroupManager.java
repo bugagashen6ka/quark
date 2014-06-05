@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.businessinterfaces.IGroupManagement;
@@ -20,7 +22,8 @@ import edu.quark.model.ProjectGroup;
 import edu.quark.model.ResearchGroup;
 import edu.quark.model.Researcher;
 
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class GroupManager implements IGroupManagement {
 	@EJB
 	GroupDAO groupDAO;

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.businessinterfaces.IResearcherManagement;
@@ -17,7 +19,8 @@ import edu.quark.model.Appointment;
 import edu.quark.model.Group;
 import edu.quark.model.Researcher;
 
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class ResearcherManager implements IResearcherManagement {
 	@EJB
 	ResearcherDAO researcherDAO;
