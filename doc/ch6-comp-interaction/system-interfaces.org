@@ -64,7 +64,7 @@
 * Create group
   #+begin_src plantuml :file ./icreate_group.png
   interface ICreateGroup {
-    createGroup(in name: String, in type: GroupType): GroupId
+    createGroup(in creator: Researcher, in name: String, in type: GroupType, in password: String): GroupId
   }
   #+END_src
 
