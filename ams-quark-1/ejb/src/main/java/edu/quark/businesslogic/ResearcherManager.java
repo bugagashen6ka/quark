@@ -9,8 +9,6 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
-
 import edu.quark.businessinterfaces.IResearcherManagement;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.ResearcherDetails;

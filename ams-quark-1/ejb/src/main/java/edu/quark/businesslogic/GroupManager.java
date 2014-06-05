@@ -9,8 +9,6 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
-
 import edu.quark.businessinterfaces.IGroupManagement;
 import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
