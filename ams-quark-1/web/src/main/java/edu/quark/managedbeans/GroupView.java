@@ -43,11 +43,13 @@ public class GroupView {
 	private GroupType selectedGroupType;
 	private String password;
 	private GroupType groupType;
+	private Group chosenGroup;
 
 	@PostConstruct
 	public void init() {
 		groups = groupDAO.findAll();
 		newGroup = new Group();
+		chosenGroup = new Group();
 	}
 
 	public GroupDAO getGroupDAO() {
@@ -69,10 +71,12 @@ public class GroupView {
 	public void createGroupMethod() {
 		createGroup.createGroup(credentials.getResearcher(),
 				newGroup.getName(), groupType, newGroup.getPassword());
+		groups = groupDAO.findAll();
 	}
 
-	public void joinGroup() {
-		// joinGroup.join(rid, password);
+	public void joinGroupMethod() {
+		joinGroup.join(credentials.getResearcher().getRid(),
+				chosenGroup.getGid(), chosenGroup.getPassword());
 	}
 
 	public void leaveGroup() {
@@ -173,6 +177,14 @@ public class GroupView {
 
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
+	}
+
+	public Group getChosenGroup() {
+		return chosenGroup;
+	}
+
+	public void setChosenGroup(Group chosenGroup) {
+		this.chosenGroup = chosenGroup;
 	}
 
 }

@@ -27,6 +27,7 @@ public class GroupManager implements IGroupManagement {
 	GroupDAO groupDAO;
 	@EJB
 	ResearcherDAO researcherDAO;
+
 	public GroupManager() {
 	}
 
@@ -36,8 +37,8 @@ public class GroupManager implements IGroupManagement {
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
 			for (Researcher r : g.getMembers()) {
-				if(r.getRid().equals(researcherId)) {
-					retval.add(g.getGid());					
+				if (r.getRid().equals(researcherId)) {
+					retval.add(g.getGid());
 				}
 			}
 		}
@@ -48,7 +49,7 @@ public class GroupManager implements IGroupManagement {
 	public GroupDetails getGroupDetails(BigInteger groupId) {
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
-			if(g.getGid().equals(groupId)) {
+			if (g.getGid().equals(groupId)) {
 				return new GroupDetails(g);
 			}
 		}
@@ -70,14 +71,14 @@ public class GroupManager implements IGroupManagement {
 	@Override
 	public void leaveGroup(BigInteger researcherId, BigInteger groupId) {
 		try {
-		Group g = groupDAO.read(groupId);
-		Set<Researcher> rs = g.getMembers();
-		for (Researcher r : rs) {
-			if(r.getRid().equals(researcherId))
-				rs.remove(r);
+			Group g = groupDAO.read(groupId);
+			Set<Researcher> rs = g.getMembers();
+			for (Researcher r : rs) {
+				if (r.getRid().equals(researcherId))
+					rs.remove(r);
 			}
-		groupDAO.update(g);
-		} catch (Exception e){
+			groupDAO.update(g);
+		} catch (Exception e) {
 			e.printStackTrace();
 			return;
 		}
@@ -87,43 +88,47 @@ public class GroupManager implements IGroupManagement {
 	public boolean joinGroup(BigInteger researcherId, BigInteger groupId,
 			String password) {
 		try {
-			Researcher r=researcherDAO.read(researcherId);
-			if(r==null) return false; 
+			Researcher r = researcherDAO.read(researcherId);
+			if (r == null)
+				return false;
 			Group g = groupDAO.read(groupId);
-			if(g.getClass()==ResearchGroup.class) {
+
+			if (g.getClass() == ResearchGroup.class) {
 				List<BigInteger> gids = this.getGroupIds(r.getRid());
 				List<GroupDetails> gds = this.getGroupDetails(gids);
 				for (GroupDetails gd : gds) {
-					if(gd.getType()==GroupType.RESEARCH_GROUP) {
+					if (gd.getType() == GroupType.RESEARCH_GROUP) {
 						return false; // already member of research group
 					}
 				}
 			}
 
-			if(!g.getPassword().equals(password)) {
+			if (!g.getPassword().equals(password)) {
 				return false;
 			}
-			
+
 			g.getMembers().add(r);
 			groupDAO.update(g);
 			return true;
-			} catch (Exception e){
-				e.printStackTrace();
-				return false;
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public BigInteger createGroup(Researcher creator, String name, GroupType type, String password) {
-		if(password.length()<6) {
+	public BigInteger createGroup(Researcher creator, String name,
+			GroupType type, String password) {
+		if (password.length() < 6) {
 			return null;
 		}
-		if(!this.isNameUnique(name)) return null;
-		if(type==GroupType.RESEARCH_GROUP) {
+		if (!this.isNameUnique(name))
+			return null;
+		if (type == GroupType.RESEARCH_GROUP) {
 			List<BigInteger> gids = this.getGroupIds(creator.getRid());
 			List<GroupDetails> gds = this.getGroupDetails(gids);
 			for (GroupDetails gd : gds) {
-				if(gd.getType()==GroupType.RESEARCH_GROUP) {
+				if (gd.getType() == GroupType.RESEARCH_GROUP) {
 					return null; // already member of research group
 				}
 			}
@@ -160,7 +165,7 @@ public class GroupManager implements IGroupManagement {
 	@Override
 	public List<BigInteger> getMemberIds(BigInteger groupId) {
 		GroupDetails gd = this.getGroupDetails(groupId);
-		if(gd != null) {
+		if (gd != null) {
 			return new ArrayList<BigInteger>(gd.getMembers());
 		}
 		return null;
@@ -174,11 +179,11 @@ public class GroupManager implements IGroupManagement {
 		}
 		return false;
 	}
-	
+
 	public boolean isNameUnique(String name) {
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
-			if(g.getName().equals(name)) {
+			if (g.getName().equals(name)) {
 				return false;
 			}
 		}
