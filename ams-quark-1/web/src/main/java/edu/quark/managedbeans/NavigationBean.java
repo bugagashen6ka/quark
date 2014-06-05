@@ -19,6 +19,11 @@ public class NavigationBean {
 		return "success";
 	}
 
+	public String moveToLogin() {
+		this.page = "/index.xhtml";
+		return "success";
+	}
+
 	public String getPage() {
 		return page;
 	}

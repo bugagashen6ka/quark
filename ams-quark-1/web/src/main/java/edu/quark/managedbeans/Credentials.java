@@ -83,9 +83,10 @@ public class Credentials {
 		return "success";
 	}
 
-	public void logout() {
+	public String logout() {
 		logout.logout(researcher);
 		setResearcher(null);
+		return navigationBean.moveToLogin();
 	}
 
 	public void register() {
