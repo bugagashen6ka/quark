@@ -6,6 +6,7 @@
 
 #+INCLUDE: "./ch4-requirements/notes_use-cases.org"
 
-** TODO Identify system interfaces and operations
+** DONE Identify system interfaces and operations
+   CLOSED: [2014-06-05 Thu 22:51]
 
 #+INCLUDE: "./ch5-comp-identification/notes_interfaces.org"
