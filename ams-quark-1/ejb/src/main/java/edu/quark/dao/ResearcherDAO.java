@@ -33,17 +33,24 @@ public class ResearcherDAO implements GenericDAO<Researcher, BigInteger> {
 		Researcher researcher = em.find(Researcher.class, id);
 		return researcher;
 	}
-	
+
+	@Override
 	public List<Researcher> findAll() {
         TypedQuery<Researcher> query = em.createNamedQuery(
                 "Researcher.findAll", Researcher.class);
         List<Researcher> results = query.getResultList();
         return results;
     }
-	
+
 	@Override
 	public void update(Researcher transientObject) {
 		em.merge(transientObject);
+	}
+
+	@Override
+	public void delete(Researcher persistentObj) {
+		em.remove(persistentObj);
+
 	}
 
 }

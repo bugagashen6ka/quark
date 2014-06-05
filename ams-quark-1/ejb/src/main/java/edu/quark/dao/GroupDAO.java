@@ -20,13 +20,7 @@ public class GroupDAO implements GenericDAO<Group, BigInteger> {
 
 	@PersistenceContext(unitName = "amsEJB")
 	EntityManager em;
-	
-	public List<Group> findAll() {
-        TypedQuery<Group> query = em.createNamedQuery(
-                "Group.findAll", Group.class);
-        List<Group> results = query.getResultList();
-        return results;
-    }
+
 	@Override
 	public BigInteger create(Group newInstance) {
 		em.persist(newInstance);
@@ -44,11 +38,17 @@ public class GroupDAO implements GenericDAO<Group, BigInteger> {
 		em.merge(transientObject);
 	}
 	
+	@Override
 	public List<Group> findAll() {
         TypedQuery<Group> query = em.createNamedQuery(
                 "Group.findAll", Group.class);
         List<Group> results = query.getResultList();
         return results;
     }
+
+	@Override
+	public void delete(Group persistentObj) {
+		em.remove(persistentObj);
+	}
 
 }

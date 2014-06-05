@@ -1,6 +1,8 @@
 package edu.quark.dao;
 
 import java.io.Serializable;
+import java.util.List;
+
 
 public interface GenericDAO<T, PK extends Serializable> {
 
@@ -16,6 +18,10 @@ public interface GenericDAO<T, PK extends Serializable> {
 	/** Save changes made to a persistent object. */
 	void update(T transientObject);
 
-	// /** Remove an object from persistent storage in the database */
-	// void delete(T persistentObject);
+	/** Find all persistent objects of matching type. */
+	List<T> findAll();
+
+	/** Remove an object from persistent storage in the database */
+	void delete(T persistentObj);
+
 }
