@@ -32,12 +32,12 @@ public class ResearcherManager implements IResearcherManagement {
 		List<BigInteger> retval = new ArrayList<BigInteger>(); 
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if((details.getrId()==null || (details.getrId() == r.getRid())) &&
-				(details.getTitle()==null || (details.getTitle() == r.getTitle())) &&
-				(details.getEmailAddress()==null || (details.getEmailAddress() == r.getEmail())) &&
-				(details.getFirstName()==null || (details.getFirstName() == r.getFirstName())) &&
-				(details.getLastName()==null || (details.getLastName() == r.getLastName())) &&
-				(details.getPhoneNbr()==null || (details.getPhoneNbr() == r.getPhoneNumber()))) {
+			if((details.getrId()==null || (details.getrId().equals(r.getRid()))) &&
+				(details.getTitle()==null || (details.getTitle().equals(r.getTitle()))) &&
+				(details.getEmailAddress()==null || (details.getEmailAddress().equals(r.getEmail()))) &&
+				(details.getFirstName()==null || (details.getFirstName().equals(r.getFirstName()))) &&
+				(details.getLastName()==null || (details.getLastName().equals(r.getLastName()))) &&
+				(details.getPhoneNbr()==null || (details.getPhoneNbr().equals(r.getPhoneNumber())))) {
 				retval.add(r.getRid());
 			}
 		}
