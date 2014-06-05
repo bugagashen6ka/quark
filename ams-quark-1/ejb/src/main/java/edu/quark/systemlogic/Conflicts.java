@@ -4,13 +4,15 @@ import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.systeminterfaces.IConflicts;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class Conflicts implements IConflicts {
 
 	@Override

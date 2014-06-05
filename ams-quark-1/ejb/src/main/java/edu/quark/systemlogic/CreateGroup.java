@@ -3,13 +3,15 @@ package edu.quark.systemlogic;
 import java.math.BigInteger;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.datatypes.GroupType;
 import edu.quark.systeminterfaces.ICreateGroup;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class CreateGroup implements ICreateGroup {
 
 	@Override

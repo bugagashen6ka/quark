@@ -26,27 +26,32 @@ import edu.quark.systemlogic.DeleteAppointment;
 @ManagedBean
 @ViewScoped
 public class ScheduleView {
-	
+
 	@EJB
 	private CreateAppointment createAppointment;
 	@EJB
 	private DeleteAppointment deleteAppointment;
 
 	private ScheduleModel eventModel;
-     
-    private ScheduleModel lazyEventModel;
- 
-    private ScheduleEvent event = new DefaultScheduleEvent();
- 
-    @PostConstruct
-    public void init() {
-/*        eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));*/
-         
-        lazyEventModel = new LazyScheduleModel() {
+
+	private ScheduleModel lazyEventModel;
+
+	private ScheduleEvent event = new DefaultScheduleEvent();
+
+	@PostConstruct
+	public void init() {
+		/*
+		 * eventModel = new DefaultScheduleModel(); eventModel.addEvent(new
+		 * DefaultScheduleEvent("Champions League Match", previousDay8Pm(),
+		 * previousDay11Pm())); eventModel.addEvent(new
+		 * DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
+		 * eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys",
+		 * nextDay9Am(), nextDay11Am())); eventModel.addEvent(new
+		 * DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(),
+		 * fourDaysLater3pm()));
+		 */
+
+		lazyEventModel = new LazyScheduleModel() {
 
 			@Override
 			public void loadEvents(Date start, Date end) {
@@ -210,12 +215,38 @@ public class ScheduleView {
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
-	
-	public void createAppointment(){
-		//createAppointment.createAppointment(rid, type, groupId, location, description);
+
+	public void createAppointment() {
+		// createAppointment.createAppointment(rid, type, groupId, location,
+		// description);
 	}
-	
-	public void deleteAppiontment(){
-		//deleteAppointment.deleteAppointment(researcherId, appointmentId);
+
+	public void deleteAppiontment() {
+		// deleteAppointment.deleteAppointment(researcherId, appointmentId);
 	}
+
+	public CreateAppointment getCreateAppointment() {
+		return createAppointment;
+	}
+
+	public void setCreateAppointment(CreateAppointment createAppointment) {
+		this.createAppointment = createAppointment;
+	}
+
+	public DeleteAppointment getDeleteAppointment() {
+		return deleteAppointment;
+	}
+
+	public void setDeleteAppointment(DeleteAppointment deleteAppointment) {
+		this.deleteAppointment = deleteAppointment;
+	}
+
+	public void setEventModel(ScheduleModel eventModel) {
+		this.eventModel = eventModel;
+	}
+
+	public void setLazyEventModel(ScheduleModel lazyEventModel) {
+		this.lazyEventModel = lazyEventModel;
+	}
+
 }

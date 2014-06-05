@@ -4,12 +4,14 @@ import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.systeminterfaces.ISearchGroup;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class SearchGroup implements ISearchGroup {
 
 	@Override

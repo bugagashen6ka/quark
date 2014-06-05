@@ -3,12 +3,14 @@ package edu.quark.systemlogic;
 import java.math.BigInteger;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.systeminterfaces.ILogout;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class Logout implements ILogout {
 
 	@Override

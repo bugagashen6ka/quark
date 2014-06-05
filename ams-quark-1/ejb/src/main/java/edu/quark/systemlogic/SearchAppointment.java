@@ -4,14 +4,16 @@ import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
 import edu.quark.systeminterfaces.ISearchAppointment;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class SearchAppointment implements ISearchAppointment {
 
 	@Override

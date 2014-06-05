@@ -42,7 +42,6 @@ public class GroupView {
 	private Group selectedGroup;
 	private GroupType selectedGroupType;
 	private String password;
-	
 
 	@PostConstruct
 	public void init() {
@@ -69,14 +68,84 @@ public class GroupView {
 		createGroup.createGroup(selectedGroup.getName(), selectedGroupType);
 	}
 
-	
 	public void joinGroup() {
-		//joinGroup.join(rid, password);
+		// joinGroup.join(rid, password);
 	}
 
-	
-	public void leaveGroup(){
-		//leaveGroup.leave(rid, selectedGroup.getGid());
+	public void leaveGroup() {
+		// leaveGroup.leave(rid, selectedGroup.getGid());
+	}
+
+	public ResearcherDAO getResearcherDAO() {
+		return researcherDAO;
+	}
+
+	public void setResearcherDAO(ResearcherDAO researcherDAO) {
+		this.researcherDAO = researcherDAO;
+	}
+
+	public CreateGroup getCreateGroup() {
+		return createGroup;
+	}
+
+	public void setCreateGroup(CreateGroup createGroup) {
+		this.createGroup = createGroup;
+	}
+
+	public SearchAppointment getSearchAppointment() {
+		return searchAppointment;
+	}
+
+	public void setSearchAppointment(SearchAppointment searchAppointment) {
+		this.searchAppointment = searchAppointment;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}
+
+	public JoinGroup getJoinGroup() {
+		return joinGroup;
+	}
+
+	public void setJoinGroup(JoinGroup joinGroup) {
+		this.joinGroup = joinGroup;
+	}
+
+	public LeaveGroup getLeaveGroup() {
+		return leaveGroup;
+	}
+
+	public void setLeaveGroup(LeaveGroup leaveGroup) {
+		this.leaveGroup = leaveGroup;
+	}
+
+	public Group getSelectedGroup() {
+		return selectedGroup;
+	}
+
+	public void setSelectedGroup(Group selectedGroup) {
+		this.selectedGroup = selectedGroup;
+	}
+
+	public GroupType getSelectedGroupType() {
+		return selectedGroupType;
+	}
+
+	public void setSelectedGroupType(GroupType selectedGroupType) {
+		this.selectedGroupType = selectedGroupType;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

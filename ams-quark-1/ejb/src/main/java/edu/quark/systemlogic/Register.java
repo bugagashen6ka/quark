@@ -3,12 +3,14 @@ package edu.quark.systemlogic;
 import java.math.BigInteger;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 
 import edu.quark.systeminterfaces.IRegister;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class Register implements IRegister {
 
 	@Override
