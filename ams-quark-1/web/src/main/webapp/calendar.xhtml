@@ -64,63 +64,58 @@
 				<!-- Group Tab -->
 				<div class="content" id="group">
 
-					<div class="table"></div>
+					<div class="table">
+						<div class="group">
+							<div class="row">
+								<div class="small-6 columns">
+									<p>Name</p>
+								</div>
+								<div class="small-3 columns">
+									<p>Type</p>
+								</div>
+								<div class="small-3 columns"></div>
+							</div>
+							<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">
+								<div class="row">
+									<div class="small-6 columns">
+										<h:outputText value="#{gd.name}" />
+									</div>
+									<div class="small-3 columns">
+										<h:outputText value="#{gd.type}" />
+									</div>
 
-					<div class="row">
-						<div class="small-6 columns">
-							<p>Name</p>
+									<div class="small-3 columns">
+										<h:form>
+											<p:commandButton styleClass="button tiny alert" value="Leave"
+												actionListener="#{groupView.leaveGroupMethod}">
+												<f:param name="selectedGroupId" value="#{gd.gId}"></f:param>
+											</p:commandButton>
+										</h:form>
+									</div>
+
+								</div>
+							</ui:repeat>
+
+
+							<br /> <br /> <br />
+							<div class="row">
+								<div class="small-6 columns">
+									<input class="button expand" value="Create Group"
+										data-reveal-id="create_group"></input>
+								</div>
+								<div class="small-6 columns">
+									<input class="button expand" value="Join Group" data-reveal-id="join_group"></input>
+								</div>
+							</div>
 						</div>
-						<div class="small-3 columns">
-							<p>Type</p>
-						</div>
-						<div class="small-3 columns"></div>
 					</div>
 
-					<div class="row">
-						<div class="small-6 columns">
-							<p>Group 1</p>
-						</div>
-						<div class="small-3 columns">
-							<p>Type</p>
-						</div>
-						<div class="small-3 columns">
-							<input class="button tiny alert" value="Leave" type="button"></input>
-						</div>
-					</div>
 
-					<div class="row">
-						<div class="small-9 columns">
-							<p>Group 2</p>
-						</div>
-						<div class="small-3 columns">
-							<input class="button tiny alert" value="Leave" type="button"></input>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="small-9 columns">
-							<p>Group 3</p>
-						</div>
-						<div class="small-3 columns">
-							<input class="button tiny alert" value="Leave" type="button"></input>
-						</div>
-					</div>
-
-					<br />
-					<br />
-					<br />
-					<div class="row">
-						<div class="small-6 columns">
-							<input class="button expand" value="Create Group" type="button" data-reveal-id="create_group"></input>
-						</div>
-						<div class="small-6 columns">
-							<input class="button expand" value="Join Group" type="button" data-reveal-id="join_group"></input>
-						</div>
-					</div>
 				</div>
 			</div>
 
 			<!-- Popup windows -->
+
 			<p:dialog widgetVar="eventDialog" header="Event Details"
 				showEffect="clip" hideEffect="clip">
 				<h:panelGrid id="eventDetails" columns="2">

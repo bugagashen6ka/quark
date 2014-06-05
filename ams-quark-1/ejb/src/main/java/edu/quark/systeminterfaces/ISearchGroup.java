@@ -1,10 +1,12 @@
 package edu.quark.systeminterfaces;
 
-import java.math.BigInteger;
 import java.util.List;
+
+import edu.quark.datatypes.GroupDetails;
+import edu.quark.model.Researcher;
 
 public interface ISearchGroup {
 	/**
 	 * @return group id's */
-	List<BigInteger> getGroupIds(BigInteger researcherId);
+	List<GroupDetails> getGroupDetails(Researcher researcher);
 }

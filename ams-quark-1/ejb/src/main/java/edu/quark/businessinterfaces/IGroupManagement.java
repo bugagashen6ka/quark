@@ -9,7 +9,7 @@ import edu.quark.model.Researcher;
 
 public interface IGroupManagement {
 	/** @return group id's */
-	List<BigInteger> getGroupIds(BigInteger researcherId);
+	List<GroupDetails> getGroupDetails(Researcher researcher);
 
 	GroupDetails getGroupDetails(BigInteger groupId);
 
@@ -17,7 +17,7 @@ public interface IGroupManagement {
 
 	void leaveGroup(BigInteger researcherId, BigInteger groupId);
 
-	boolean joinGroup(BigInteger researcherId, BigInteger groupId,
+	boolean joinGroup(Researcher researcher, BigInteger groupId,
 			String password);
 
 	BigInteger createGroup(Researcher creator, String name, GroupType type, String password);

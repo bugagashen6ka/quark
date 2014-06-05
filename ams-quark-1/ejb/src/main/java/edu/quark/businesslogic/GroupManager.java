@@ -32,13 +32,13 @@ public class GroupManager implements IGroupManagement {
 	}
 
 	@Override
-	public List<BigInteger> getGroupIds(BigInteger researcherId) {
-		List<BigInteger> retval = new ArrayList<BigInteger>();
+	public List<GroupDetails> getGroupDetails(Researcher researcher) {
+		List<GroupDetails> retval = new ArrayList<GroupDetails>();
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
 			for (Researcher r : g.getMembers()) {
-				if (r.getRid().equals(researcherId)) {
-					retval.add(g.getGid());
+				if(r.getRid()==researcher.getRid()) {
+					retval.add(new GroupDetails(g));
 				}
 			}
 		}
@@ -85,17 +85,15 @@ public class GroupManager implements IGroupManagement {
 	}
 
 	@Override
-	public boolean joinGroup(BigInteger researcherId, BigInteger groupId,
+	public boolean joinGroup(Researcher researcher, BigInteger groupId,
 			String password) {
 		try {
-			Researcher r = researcherDAO.read(researcherId);
-			if (r == null)
+			if (researcher == null)
 				return false;
 			Group g = groupDAO.read(groupId);
 
 			if (g.getClass() == ResearchGroup.class) {
-				List<BigInteger> gids = this.getGroupIds(r.getRid());
-				List<GroupDetails> gds = this.getGroupDetails(gids);
+				List<GroupDetails> gds = this.getGroupDetails(researcher);
 				for (GroupDetails gd : gds) {
 					if (gd.getType() == GroupType.RESEARCH_GROUP) {
 						return false; // already member of research group
@@ -107,7 +105,7 @@ public class GroupManager implements IGroupManagement {
 				return false;
 			}
 
-			g.getMembers().add(r);
+			g.getMembers().add(researcher);
 			groupDAO.update(g);
 			return true;
 		} catch (Exception e) {
@@ -124,9 +122,8 @@ public class GroupManager implements IGroupManagement {
 		}
 		if (!this.isNameUnique(name))
 			return null;
-		if (type == GroupType.RESEARCH_GROUP) {
-			List<BigInteger> gids = this.getGroupIds(creator.getRid());
-			List<GroupDetails> gds = this.getGroupDetails(gids);
+		if(type==GroupType.RESEARCH_GROUP) {
+			List<GroupDetails> gds = this.getGroupDetails(creator);
 			for (GroupDetails gd : gds) {
 				if (gd.getType() == GroupType.RESEARCH_GROUP) {
 					return null; // already member of research group
