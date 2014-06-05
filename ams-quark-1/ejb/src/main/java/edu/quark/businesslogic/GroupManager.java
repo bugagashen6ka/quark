@@ -158,7 +158,7 @@ public class GroupManager implements IGroupManagement {
 	public boolean checkPassword(BigInteger groupId, String password) {
 		Group g = groupDAO.read(groupId);
 		if (g != null) {
-			return password==g.getPassword();
+			return password.equals(g.getPassword());
 		}
 		return false;
 	}
