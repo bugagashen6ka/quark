@@ -69,9 +69,9 @@ public class ResearcherManager implements IResearcherManagement {
 	}
 
 	@Override
-	public List<BigInteger> getAppointmentIds(BigInteger researcherId,
+	public List<Appointment> getAppointments(BigInteger researcherId,
 			TimeInfo time) {
-		List<BigInteger> retval = new ArrayList<BigInteger>();
+		List<Appointment> retval = new ArrayList<Appointment>();
 		try{
 			Researcher r = researcherDAO.read(researcherId);
 			Set<Appointment> as = r.getAppointments();
@@ -79,7 +79,7 @@ public class ResearcherManager implements IResearcherManagement {
 				if(a.getStart().after(time.getStart()) &&
 				   a.getEnd().before(time.getEnd())&&
 				   a.getStart().before(a.getEnd())) {
-					retval.add(a.getAid());
+					retval.add(a);
 				}
 			}
 			return retval;

@@ -7,10 +7,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import edu.quark.businessinterfaces.IResearcherManagement;
 import edu.quark.businesslogic.ResearcherManager;
 import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
+import edu.quark.model.Appointment;
 import edu.quark.model.Researcher;
 
 @Stateless
@@ -48,9 +50,9 @@ public class SearchResearcher implements IResearcherManagement {
 	}
 
 	@Override
-	public List<BigInteger> getAppointmentIds(BigInteger researcherId,
+	public List<Appointment> getAppointments(BigInteger researcherId,
 			TimeInfo time) {
-		return researcherManager.getAppointmentIds(researcherId, time);
+		return researcherManager.getAppointments(researcherId, time);
 	}
 
 	@Override

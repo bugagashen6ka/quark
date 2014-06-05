@@ -19,16 +19,9 @@ public class SearchAppointment implements ISearchAppointment {
 	private ResearcherManager researcherManager;
 
 	@Override
-	public List<BigInteger> getAppointmentIds(BigInteger researcherId,
-			TimeInfo time) {
-		return researcherManager.getAppointmentIds(researcherId, time);
-	}
-
-	@Override
 	public List<Appointment> getAppointments(BigInteger researcherId,
 			TimeInfo time) {
-		// TODO Auto-generated method stub
-		return null;
+		return researcherManager.getAppointments(researcherId, time);
 	}
 
 }
