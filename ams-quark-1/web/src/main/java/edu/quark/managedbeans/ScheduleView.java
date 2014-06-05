@@ -1,9 +1,12 @@
 package edu.quark.managedbeans;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -13,56 +16,37 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.LazyScheduleModel;
-import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import edu.quark.datatypes.AppointmentDetails;
+import edu.quark.datatypes.AppointmentType;
+import edu.quark.systemlogic.CreateAppointment;
+import edu.quark.systemlogic.DeleteAppointment;
+
 
 @ManagedBean
 @ViewScoped
 public class ScheduleView {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4048631837903318541L;
-
-	private ScheduleModel eventModel;
-     
-    private ScheduleModel lazyEventModel;
+	
+	@EJB
+	private CreateAppointment createAppointment;
+	@EJB
+	private DeleteAppointment deleteAppointment; 
  
     private AppointmentDetails appointmentDetails;
- 
+    
+	private AppointmentType type;
+    private Date start;
+    private Date end;
+    private String location;
+	private String description;
+	private Set<BigInteger> participants;
+    
     @PostConstruct
     public void init() {
-         
-        lazyEventModel = new LazyScheduleModel() {
 
-			@Override
-			public void loadEvents(Date start, Date end) {
-				Date random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 1", random,
-						random));
-
-				random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 2", random,
-						random));
-			}
-		};
 	}
-
-	public Date getRandomDate(Date base) {
-		Calendar date = Calendar.getInstance();
-		date.setTime(base);
-		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
-																	// day of
-																	// month
-
-		return date.getTime();
-	}
+    
 
 	public Date getInitialDate() {
 		Calendar calendar = Calendar.getInstance();
@@ -72,13 +56,6 @@ public class ScheduleView {
 		return calendar.getTime();
 	}
 
-	public ScheduleModel getEventModel() {
-		return eventModel;
-	}
-
-	public ScheduleModel getLazyEventModel() {
-		return lazyEventModel;
-	}
 
 	private Calendar today() {
 		Calendar calendar = Calendar.getInstance();
@@ -88,119 +65,67 @@ public class ScheduleView {
 		return calendar;
 	}
 
-	private Date previousDay8Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-		t.set(Calendar.HOUR, 8);
-
-		return t.getTime();
+	public AppointmentDetails getAppointmentDetails() {
+		return appointmentDetails;
 	}
 
-	private Date previousDay11Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-		t.set(Calendar.HOUR, 11);
-
-		return t.getTime();
-	}
-
-	private Date today1Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 1);
-
-		return t.getTime();
-	}
-
-	private Date theDayAfter3Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 3);
-
-		return t.getTime();
-	}
-
-	private Date today6Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 6);
-
-		return t.getTime();
-	}
-
-	private Date nextDay9Am() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.AM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-		t.set(Calendar.HOUR, 9);
-
-		return t.getTime();
-	}
-
-	private Date nextDay11Am() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.AM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-		t.set(Calendar.HOUR, 11);
-
-		return t.getTime();
-	}
-
-	private Date fourDaysLater3pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-		t.set(Calendar.HOUR, 3);
-
-		return t.getTime();
-	}
-
-	public ScheduleEvent getEvent() {
-		return event;
-	}
-
-	public void setEvent(ScheduleEvent event) {
-		this.event = event;
+	public void setAppointmentDetails(AppointmentDetails appointmentDetails) {
+		this.appointmentDetails = appointmentDetails;
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		if (event.getId() == null)
-			eventModel.addEvent(event);
+		/*if (appointmentDetails.getId() == null)
+			eventModel.addEvent(appointmentDetails);
 		else
-			eventModel.updateEvent(event);
+			eventModel.updateEvent(appointmentDetails);
 
-		event = new DefaultScheduleEvent();
+		appointmentDetails = new DefaultScheduleEvent();*/
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
-		event = (ScheduleEvent) selectEvent.getObject();
+		/*appointmentDetails = (ScheduleEvent) selectEvent.getObject()*/;
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
-		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(),
-				(Date) selectEvent.getObject());
+		/*appointmentDetails = new AppointmentDetails("", (Date) selectEvent.getObject(),
+				(Date) selectEvent.getObject());*/
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Event moved", "Day delta:" + event.getDayDelta()
 						+ ", Minute delta:" + event.getMinuteDelta());
 
-		addMessage(message);
+		addMessage(message);*/
 	}
 
 	public void onEventResize(ScheduleEntryResizeEvent event) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Event resized", "Day delta:" + event.getDayDelta()
 						+ ", Minute delta:" + event.getMinuteDelta());
 
-		addMessage(message);
+		addMessage(message);*/
 	}
 
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	public void createAppointment(){
+		//createAppointment.createAppointment(rid, type, groupId, location, description);
+	}
+	
+	public void deleteAppiontment(){
+		//deleteAppointment.deleteAppointment(researcherId, appointmentId);
+	}
+
+
+	public AppointmentType getType() {
+		return type;
+	}
+
+
+	public void setType(AppointmentType type) {
+		this.type = type;
 	}
 }

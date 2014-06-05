@@ -27,6 +27,7 @@ ResearcherDetails
 
 AppointmentDetails
   - aid
+  - type
   - timeInterval
   - location
   - description

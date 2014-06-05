@@ -17,14 +17,16 @@
 		<h:form>
 			<p:growl id="messages" showDetail="true" />
 	
-			
+			<!-- Select Tab -->
 			<ul class="tabs" data-tab="sfd">
 				<li class="tab-title active"><a href="#appointment">Appointment Management</a></li>
 				<li class="tab-title"><a href="#group">Group Management</a></li>
 			</ul>
 			
-			
+			<!-- Tabs -->
 			<div class="tabs-content">
+			
+				<!-- Appointment Tab -->
 				<div class="content active" id="appointment">
 				  	<div class="table">
 						<h:panelGrid columnClasses="value">
@@ -40,6 +42,7 @@
 					</div>
 				</div>
 				
+				<!-- Group Tab -->
 				<div class="content" id="group">
 					<div class="table"></div>
 					
@@ -83,27 +86,30 @@
 				</div>
 			</div>
 	
+			<!-- Popup windows -->
 			<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
 				<h:panelGrid id="eventDetails" columns="2">
 				
 					<h:outputLabel for="type" value="Type:" />
-					<p:inputText id="type" value="#{scheduleView.event.type}" required="true" />
+					<p:inputText id="type" value="#{scheduleView.type}" required="true" />
 	
+					<h:outputLabel for="description" value="Description:" />
+					<p:inputText id="description" value="#{scheduleView.description}" required="true" />
+	
+					<h:outputLabel for="location" value="Description:" />
+					<p:inputText id="location" value="#{scheduleView.location}" required="true" />
+					
 					<h:outputLabel for="from" value="From:" />
-					<p:inputMask id="from" value="#{scheduleView.event.startDate}"
-						mask="99/99/9999">
+					<p:inputMask id="from" value="#{scheduleView.start}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 	
 					<h:outputLabel for="to" value="To:" />
-					<p:inputMask id="to" value="#{scheduleView.event.endDate}"
-						mask="99/99/9999">
+					<p:inputMask id="to" value="#{scheduleView.end}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
-	
-					<h:outputLabel for="allDay" value="All Day:" />
-					<h:selectBooleanCheckbox id="allDay"
-						value="#{scheduleView.event.allDay}" />
+					
+					<!-- Participants -->
 	
 					<p:commandButton type="reset" value="Reset" />
 					<p:commandButton id="addButton" value="Save"
@@ -113,14 +119,6 @@
 			</p:dialog>
 		</h:form>
 	</div>
-
-
-
-	<style type="text/css">
-		.value {
-			width: 1000px;
-		}
-	</style>
 	
 	<!-- <script src="foundation/js/vendor/jquery.js"></script> -->
  	<script src="foundation/js/foundation.min.js"></script>

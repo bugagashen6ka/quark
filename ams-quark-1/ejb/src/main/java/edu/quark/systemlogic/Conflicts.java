@@ -3,9 +3,14 @@ package edu.quark.systemlogic;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.enterprise.context.ApplicationScoped;
+
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.systeminterfaces.IConflicts;
 
+@Local
+@ApplicationScoped
 public class Conflicts implements IConflicts {
 
 	@Override

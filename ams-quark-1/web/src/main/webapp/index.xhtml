@@ -28,7 +28,7 @@
 			<h:inputSecret id="pass" value="#{credentials.password}" />
 			<p:watermark for="pass" value="Password" />
 
-			<h:commandButton value="Log in" action="#{login.login}" />
+			<h:commandButton value="Log in" action="#{login.login()}" />
 			<br />
 			<br />
 			<a href="#" data-reveal-id="register">Register new user</a>

@@ -1,11 +1,13 @@
 package edu.quark.dao;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import edu.quark.model.Appointment;
 
@@ -32,8 +34,21 @@ public class AppointmentDAO implements GenericDAO<Appointment, BigInteger> {
 	}
 
 	@Override
+	public List<Appointment> findAll() {
+        TypedQuery<Appointment> query = em.createNamedQuery(
+                "Appointment.findAll", Appointment.class);
+        List<Appointment> results = query.getResultList();
+        return results;
+    }
+
+	@Override
 	public void update(Appointment transientObject) {
 		em.merge(transientObject);
+	}
+
+	@Override
+	public void delete(Appointment persistentObj) {
+		em.remove(persistentObj);
 	}
 
 }

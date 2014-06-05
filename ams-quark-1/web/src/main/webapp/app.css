@@ -120,6 +120,6 @@ input[type="submit"]:hover{
 	max-width: 800px;
 }
 
-.row { 
-	
+.value {
+	width: 1000px;
 }

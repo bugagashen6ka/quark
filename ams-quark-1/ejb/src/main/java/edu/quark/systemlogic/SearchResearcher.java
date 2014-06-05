@@ -3,10 +3,15 @@ package edu.quark.systemlogic;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.enterprise.context.ApplicationScoped;
+
 import edu.quark.businessinterfaces.IResearcherManagement;
 import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
 
+@Local
+@ApplicationScoped
 public class SearchResearcher implements IResearcherManagement {
 
 	@Override
