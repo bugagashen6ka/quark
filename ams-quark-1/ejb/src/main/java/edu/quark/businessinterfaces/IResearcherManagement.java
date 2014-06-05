@@ -5,6 +5,8 @@ import java.util.List;
 
 import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
+import edu.quark.model.Appointment;
+import edu.quark.model.Researcher;
 
 public interface IResearcherManagement {
 	/** @return researcher id's */
@@ -15,7 +17,7 @@ public interface IResearcherManagement {
 	List<ResearcherDetails> getResearcherDetails(List<BigInteger> researcherIds);
 
 	/** @return appointment id's */
-	List<BigInteger> getAppointmentIds(BigInteger researcherId, TimeInfo time);
+	List<Appointment> getAppointments(BigInteger researcherId, TimeInfo time);
 
 	boolean checkEmail(String email);
 
@@ -23,5 +25,5 @@ public interface IResearcherManagement {
 	BigInteger createResearcher(String email, String password,
 			String firstName, String lastName, String title, String phoneNumber);
 
-	boolean checkCredentials(String email, String password);
+	Researcher checkCredentials(String email, String password);
 }

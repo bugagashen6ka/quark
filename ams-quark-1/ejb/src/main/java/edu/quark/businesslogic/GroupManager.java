@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import edu.quark.businessinterfaces.IGroupManagement;
 import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
@@ -20,7 +20,8 @@ import edu.quark.model.ProjectGroup;
 import edu.quark.model.ResearchGroup;
 import edu.quark.model.Researcher;
 
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class GroupManager implements IGroupManagement {
 	@EJB
 	GroupDAO groupDAO;
@@ -30,12 +31,12 @@ public class GroupManager implements IGroupManagement {
 	}
 
 	@Override
-	public List<BigInteger> getGroupIds(BigInteger researchId) {
+	public List<BigInteger> getGroupIds(BigInteger researcherId) {
 		List<BigInteger> retval = new ArrayList<BigInteger>();
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
 			for (Researcher r : g.getMembers()) {
-				if(r.getRid()==researchId) {
+				if(r.getRid()==researcherId) {
 					retval.add(g.getGid());					
 				}
 			}
@@ -102,21 +103,20 @@ public class GroupManager implements IGroupManagement {
 	}
 
 	@Override
-	public boolean createGroup(String name, GroupType type, String password) {
+	public BigInteger createGroup(Researcher creator, String name, GroupType type, String password) {
 		if(password.length()<6) {
-			return false;
+			return null;
 		}
-		// TODO: get Session info
 		if(type==GroupType.RESEARCH_GROUP) {
-			Researcher r=new Researcher();
-			List<BigInteger> gids = this.getGroupIds(r.getRid());
+			List<BigInteger> gids = this.getGroupIds(creator.getRid());
 			List<GroupDetails> gds = this.getGroupDetails(gids);
 			for (GroupDetails gd : gds) {
 				if(gd.getType()==GroupType.RESEARCH_GROUP) {
-					return false; // already member of research group
+					return null; // already member of research group
 				}
 			}
 		}
+
 		Group g = null;
 		try {
 			if (type == GroupType.PROJECT_GROUP) {
@@ -128,12 +128,13 @@ public class GroupManager implements IGroupManagement {
 			e.printStackTrace();
 		}
 		if (g == null)
-			return false;
+			return null;
 
-		// TODO: Add creator via DAO and ManagedBean and passing some crazy stuff into session state
-		g.setCreator(null);
+		g.setAppointments(new HashSet<Appointment>());
+		g.setMembers(new HashSet<Researcher>());
+		g.setCreator(creator);
 		Set<Researcher> members = new HashSet<Researcher>();
-		members.add(null);
+		members.add(creator);
 
 		g.setAppointments(new HashSet<Appointment>());
 		g.setMembers(members);
@@ -141,7 +142,7 @@ public class GroupManager implements IGroupManagement {
 		g.setName(name);
 		g.setPassword(password);
 		groupDAO.create(g);
-		return true;
+		return g.getGid();
 	}
 
 	@Override

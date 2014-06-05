@@ -5,10 +5,11 @@ import java.util.List;
 
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
+import edu.quark.model.Researcher;
 
 public interface IGroupManagement {
 	/** @return group id's */
-	List<BigInteger> getGroupIds(BigInteger researchId);
+	List<BigInteger> getGroupIds(BigInteger researcherId);
 
 	GroupDetails getGroupDetails(BigInteger groupId);
 
@@ -19,7 +20,7 @@ public interface IGroupManagement {
 	boolean joinGroup(BigInteger researcherId, BigInteger groupId,
 			String password);
 
-	boolean createGroup(String name, GroupType type, String password);
+	BigInteger createGroup(Researcher creator, String name, GroupType type, String password);
 
 	List<BigInteger> getMemberIds(BigInteger groupId);
 

@@ -2,26 +2,29 @@ package edu.quark.systemlogic;
 
 import java.math.BigInteger;
 
-import javax.ejb.Local;
-import javax.enterprise.context.ApplicationScoped;
-
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import edu.quark.businesslogic.ResearcherManager;
 import edu.quark.systeminterfaces.IRegister;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class Register implements IRegister {
+
+	@EJB
+	private ResearcherManager researcherManager;
 
 	@Override
 	public boolean checkEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		return researcherManager.checkEmail(email);
 	}
 
 	@Override
 	public BigInteger createResearcher(String email, String password,
 			String firstName, String lastName, String title, String phoneNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return researcherManager.createResearcher(email, password, firstName,
+				lastName, title, phoneNumber);
 	}
 
 }

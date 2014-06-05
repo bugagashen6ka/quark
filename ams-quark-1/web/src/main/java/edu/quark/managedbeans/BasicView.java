@@ -19,9 +19,9 @@ public class BasicView {
 	private Group group;
 	private Group group2;
 	private String text;
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		group = new Group();
 		group2 = new Group();
 	}

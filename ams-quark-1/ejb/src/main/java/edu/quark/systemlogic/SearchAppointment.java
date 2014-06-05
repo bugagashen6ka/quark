@@ -3,29 +3,25 @@ package edu.quark.systemlogic;
 import java.math.BigInteger;
 import java.util.List;
 
-import javax.ejb.Local;
-import javax.enterprise.context.ApplicationScoped;
-
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import edu.quark.businesslogic.ResearcherManager;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
 import edu.quark.systeminterfaces.ISearchAppointment;
 
-@Local
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class SearchAppointment implements ISearchAppointment {
 
-	@Override
-	public List<BigInteger> getAppointmentIds(BigInteger researcherId,
-			TimeInfo time) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@EJB
+	private ResearcherManager researcherManager;
 
 	@Override
 	public List<Appointment> getAppointments(BigInteger researcherId,
 			TimeInfo time) {
-		// TODO Auto-generated method stub
-		return null;
+		return researcherManager.getAppointments(researcherId, time);
 	}
 
 }

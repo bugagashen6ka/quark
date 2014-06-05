@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import edu.quark.businessinterfaces.IResearcherManagement;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.ResearcherDetails;
@@ -17,7 +17,8 @@ import edu.quark.model.Appointment;
 import edu.quark.model.Group;
 import edu.quark.model.Researcher;
 
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class ResearcherManager implements IResearcherManagement {
 	@EJB
 	ResearcherDAO researcherDAO;
@@ -66,9 +67,9 @@ public class ResearcherManager implements IResearcherManagement {
 	}
 
 	@Override
-	public List<BigInteger> getAppointmentIds(BigInteger researcherId,
+	public List<Appointment> getAppointments(BigInteger researcherId,
 			TimeInfo time) {
-		List<BigInteger> retval = new ArrayList<BigInteger>();
+		List<Appointment> retval = new ArrayList<Appointment>();
 		try{
 			Researcher r = researcherDAO.read(researcherId);
 			Set<Appointment> as = r.getAppointments();
@@ -76,7 +77,7 @@ public class ResearcherManager implements IResearcherManagement {
 				if(a.getStart().after(time.getStart()) &&
 				   a.getEnd().before(time.getEnd())&&
 				   a.getStart().before(a.getEnd())) {
-					retval.add(a.getAid());
+					retval.add(a);
 				}
 			}
 			return retval;
@@ -115,12 +116,13 @@ public class ResearcherManager implements IResearcherManagement {
 	}
 
 	@Override
-	public boolean checkCredentials(String email, String password) {
+	public Researcher checkCredentials(String email, String password) {
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if(r.getEmail()==email && r.getPassword()==password) return true;
+			if(r.getEmail()==email && r.getPassword()==password)
+				return r;
 		}
-		return false;
+		return null;
 	}
 
 }
