@@ -9,6 +9,7 @@
     <script src="foundation/js/vendor/modernizr.js" />
     <link rel="stylesheet" href="foundation/css/foundation.css" />
     <link rel="stylesheet" href="app.css" />
+    <script src="foundation/js/vendor/modernizr.js"></script>
 </h:head>
 <h:body>
 
@@ -16,20 +17,72 @@
 		<h:form>
 			<p:growl id="messages" showDetail="true" />
 	
-			<div class="table">
-				<h:panelGrid columnClasses="value">
-					<h3 style="margin-top: 0">Editable Schedule</h3>
-					<p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule">
-		
-						<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-						<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-						<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
-						<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
-		
-					</p:schedule>
-				</h:panelGrid>
-			</div>
 			
+			<ul class="tabs" data-tab="sfd">
+				<li class="tab-title active"><a href="#appointment">Appointment Management</a></li>
+				<li class="tab-title"><a href="#group">Group Management</a></li>
+			</ul>
+			
+			
+			<div class="tabs-content">
+				<div class="content active" id="appointment">
+				  	<div class="table">
+						<h:panelGrid columnClasses="value">
+							<p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule">
+				
+								<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+								<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+								<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
+								<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
+				
+							</p:schedule>
+						</h:panelGrid>
+					</div>
+				</div>
+				<div class="content" id="group">
+					<div class="table">
+						<div class="group">
+					  		<div class="row">
+					  			<div class="small-9 columns">
+					  				<p> Group 1</p>
+					  			</div>
+					  			<div class="small-3 columns">
+					  				<input class="button tiny" value="Leave"></input>
+					  			</div>
+					  		</div>
+					  		
+					  		<div class="row">
+					  			<div class="small-9 columns">
+					  				<p> Group 2</p>
+					  			</div>
+					  			<div class="small-3 columns">
+					  				<input class="button tiny" value="Leave"></input>
+					  			</div>
+					  		</div>
+					  		
+					  		<div class="row">
+					  			<div class="small-9 columns">
+					  				<p> Group 3</p>
+					  			</div>
+					  			<div class="small-3 columns">
+					  				<input class="button tiny" value="Leave"></input>
+					  			</div>
+					  		</div>
+					  		
+					  		
+					  		<br /><br /><br />
+					  		<div class="row">
+					  			<div class="small-6 columns">
+					  				<input class="button expand" value="Create Group"></input>
+					  			</div>
+						  		<div class="small-6 columns">
+					  				<input class="button expand" value="Join Group"></input>
+					  			</div>
+					  		</div>
+					  	</div>	
+				  	</div>
+				</div>
+			</div>
 	
 			<p:dialog widgetVar="eventDialog" header="Event Details"
 				showEffect="clip" hideEffect="clip">
@@ -69,34 +122,12 @@
 		.value {
 			width: 1000px;
 		}
-		
-		.formcont {
-			display:block;
-	  		margin:0 auto;
-	  		margin-top:1%;
-	  		padding:30px;
-	  		position: relative;
-	  		display: table;
-		}
-		
-		.table {
-			display: table-row;
-			width: 80%;
-			height: 80%;
-			min-width: 300px;
-			max-width: 800px;
-			padding: 40px;
-			
-   			/* width: 70%;
-			height: 70%; */
- 			overflow: overlay;
-			margin: auto;
-			position: relative;
-			top: 0; left: 0; bottom: 0; right: 0;
-	  		
-		}
-		
-  		
 	</style>
+	
+	<!-- <script src="foundation/js/vendor/jquery.js"></script> -->
+ 	<script src="foundation/js/foundation.min.js"></script>
+	<script>
+	  $(document).foundation();
+	</script>
 </h:body>
 </html>

@@ -86,3 +86,33 @@ input[type="submit"]:hover{
   background:#2288bb;
   
 }
+
+.formcont {
+	width: 80%;
+	height: 80%;
+	display:block;
+	margin:0 auto;
+	margin-top:1%;
+	padding:30px;
+	position: relative;
+	display: table;
+}
+		
+		
+.table {
+	display: table-row;
+	width: 80%;
+	height: 80%;
+	min-width: 100px;
+	max-width: 800px;
+	padding: 40px;
+
+	overflow: overlay;
+	margin: auto;
+	position: relative;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.group {
+	width: 1000px;
+}
