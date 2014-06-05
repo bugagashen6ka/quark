@@ -1,6 +1,5 @@
 package edu.quark.managedbeans;
 
-
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,17 +25,19 @@ import org.primefaces.model.ScheduleModel;
 
 import edu.quark.businesslogic.AppointmentManager;
 import edu.quark.businesslogic.ResearcherManager;
+import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
 import edu.quark.model.ProjectGroup;
 
 import edu.quark.datatypes.TimeInfo;
+import edu.quark.model.Appointment;
+import edu.quark.model.Researcher;
 import edu.quark.systemlogic.CreateAppointment;
 import edu.quark.systemlogic.DeleteAppointment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @ManagedBean
 @ViewScoped
@@ -45,71 +46,67 @@ public class ScheduleView {
 	@EJB
 	private CreateAppointment createAppointment;
 	@EJB
-	private DeleteAppointment deleteAppointment; 
+	private DeleteAppointment deleteAppointment;
 	@EJB
 	private ResearcherManager researcherManager;
 	@EJB
 	private AppointmentManager appointmentManager;
-	
-	@ManagedProperty(value="#{credentials}")
+	@EJB
+	private ResearcherDAO researcherDAO;
+
+	@ManagedProperty(value = "#{credentials}")
 	private Credentials credentials;
 
 	private ScheduleModel eventModel;
 	private ScheduleModel lazyEventModel;
-    private AppointmentDetails appointmentDetails;
-    
+	private AppointmentDetails appointmentDetails;
+
 	private AppointmentType type;
-    private Date start;
-    private Date end;
-    private String location;
+	private Date start;
+	private Date end;
+	private String location;
 	private String description;
 	private Set<String> participants;
-	private List<String> availableParticipants;
-	private String project;
-    
+	private List<Researcher> availableParticipants;
+	private Appointment selectedAppointment;
 
 	private ScheduleEvent event = new DefaultScheduleEvent();
 
 	@PostConstruct
 	public void init() {
-		
+		selectedAppointment = new Appointment();
+
 		lazyEventModel = new LazyScheduleModel() {
 			private static final long serialVersionUID = -1508233823680543048L;
 
 			@Override
 			public void loadEvents(Date start, Date end) {
-				
+
 			}
 		};
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
-		availableParticipants = new ArrayList<String>();
-		availableParticipants.add("Tom");
-		availableParticipants.add("John");
-		availableParticipants.add("Sam");
-        availableParticipants.add("sdfgdfg");
-        if(credentials.getResearcher()!=null) {
-        	Date t1=new Date();
-            Date t2=new Date();
-            Date t3=new Date();
-            Date t4=new Date();
-            t1.setHours(18);
-            t2.setHours(19);
-            t3.setHours(11);
-            t4.setHours(23);
-            appointmentManager.createAppointment(
-            		credentials.getResearcher().getRid(),
-            		AppointmentType.CONFERENCE_APPOINTMENT, 
-            		null, "3076", "JJJ", new TimeInfo(t1,t2));
-            appointmentManager.createAppointment(
-            		credentials.getResearcher().getRid(),
-            		AppointmentType.GENERIC_APPOINTMENT, 
-            		null, "3076", "XXX", new TimeInfo(t3,t4));
-            this.AppointmentDetailsToView();
-        }
-        
+		availableParticipants = researcherDAO.findAll();
+
+		// if (credentials.getResearcher() != null) {
+		// Date t1 = new Date();
+		// Date t2 = new Date();
+		// Date t3 = new Date();
+		// Date t4 = new Date();
+		// t1.setHours(18);
+		// t2.setHours(19);
+		// t3.setHours(11);
+		// t4.setHours(23);
+		// appointmentManager.createAppointment(credentials.getResearcher()
+		// .getRid(), AppointmentType.CONFERENCE_APPOINTMENT, null,
+		// "3076", "JJJ", new TimeInfo(t1, t2));
+		// appointmentManager.createAppointment(credentials.getResearcher()
+		// .getRid(), AppointmentType.GENERIC_APPOINTMENT, null,
+		// "3076", "XXX", new TimeInfo(t3, t4));
+		// this.AppointmentDetailsToView();
+		// }
+
 	}
-    
 
 	public Date getInitialDate() {
 		Calendar calendar = Calendar.getInstance();
@@ -122,17 +119,18 @@ public class ScheduleView {
 	private void AppointmentDetailsToView() {
 		eventModel.clear();
 		List<AppointmentDetails> as = researcherManager.getAppointmentDetails(
-				credentials.getResearcher().getRid(), 
-				new TimeInfo(new Date(1,0,0), new Date(9999,12,12)));
-		System.out.println("Length "+as.size());
+				credentials.getResearcher().getRid(), new TimeInfo(new Date(1,
+						0, 0), new Date(9999, 12, 12)));
+		System.out.println("Length " + as.size());
 		for (AppointmentDetails a : as) {
 			AppointmentType t = a.getType();
 			TimeInfo ti = a.getTimeInterval();
-			eventModel.addEvent(new DefaultScheduleEvent(a.getDescription()+" at "+a.getLocation(),
-					ti.getStart(),ti.getEnd(), "evtype"+t.ordinal()));
+			eventModel.addEvent(new DefaultScheduleEvent(a.getDescription()
+					+ " at " + a.getLocation(), ti.getStart(), ti.getEnd(),
+					"evtype" + t.ordinal()));
 		}
 	}
-	
+
 	private Calendar today() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
@@ -149,116 +147,117 @@ public class ScheduleView {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		/*if (appointmentDetails.getId() == null)
-			eventModel.addEvent(appointmentDetails);
-		else
-			eventModel.updateEvent(appointmentDetails);
-
-		appointmentDetails = new DefaultScheduleEvent();*/
+		createAppointment.createAppointment(credentials.getResearcher()
+				.getRid(), type, null, selectedAppointment.getLocation(),
+				selectedAppointment.getDescription(),
+				new TimeInfo(selectedAppointment.getStart(),
+						selectedAppointment.getEnd()));
+		this.AppointmentDetailsToView();
+		/*
+		 * if (appointmentDetails.getId() == null)
+		 * eventModel.addEvent(appointmentDetails); else
+		 * eventModel.updateEvent(appointmentDetails);
+		 * 
+		 * appointmentDetails = new DefaultScheduleEvent();
+		 */
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
-		/*appointmentDetails = (ScheduleEvent) selectEvent.getObject()*/;
+		/* appointmentDetails = (ScheduleEvent) selectEvent.getObject() */;
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
-		/*appointmentDetails = new AppointmentDetails("", (Date) selectEvent.getObject(),
-				(Date) selectEvent.getObject());*/
+		/*
+		 * appointmentDetails = new AppointmentDetails("", (Date)
+		 * selectEvent.getObject(), (Date) selectEvent.getObject());
+		 */
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {
-		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Event moved", "Day delta:" + event.getDayDelta()
-						+ ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);*/
+		/*
+		 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		 * "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:"
+		 * + event.getMinuteDelta());
+		 * 
+		 * addMessage(message);
+		 */
 	}
 
 	public void onEventResize(ScheduleEntryResizeEvent event) {
-		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Event resized", "Day delta:" + event.getDayDelta()
-						+ ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);*/
+		/*
+		 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		 * "Event resized", "Day delta:" + event.getDayDelta() +
+		 * ", Minute delta:" + event.getMinuteDelta());
+		 * 
+		 * addMessage(message);
+		 */
 	}
 
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
-	
-	public void createAppointment(){
-		//createAppointment.createAppointment(rid, type, groupId, location, description);
-	}
-	
-	public void deleteAppiontment(){
-		//deleteAppointment.deleteAppointment(researcherId, appointmentId);
+
+	public void createAppointment() {
+		// createAppointment.createAppointment(rid, type, groupId, location,
+		// description);
 	}
 
+	public void deleteAppiontment() {
+		// deleteAppointment.deleteAppointment(researcherId, appointmentId);
+	}
 
 	public AppointmentType getType() {
 		return type;
 	}
 
-
 	public void setType(AppointmentType type) {
 		this.type = type;
 	}
-
 
 	public Date getStart() {
 		return start;
 	}
 
-
 	public void setStart(Date start) {
 		this.start = start;
 	}
-
 
 	public Date getEnd() {
 		return end;
 	}
 
-
 	public void setEnd(Date end) {
 		this.end = end;
 	}
-
 
 	public String getLocation() {
 		return location;
 	}
 
-
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public Set<String> getParticipants() {
 		return participants;
 	}
 
-
 	public void setParticipants(Set<String> participants) {
 		this.participants = participants;
 	}
 
-	
 	public ScheduleModel getEventModel() {
 		return eventModel;
 	}
-	
+
 	public void setEventModel(ScheduleModel eventModel) {
 		this.eventModel = eventModel;
 	}
@@ -279,36 +278,68 @@ public class ScheduleView {
 		this.deleteAppointment = deleteAppointment;
 	}
 
-
 	public void setLazyEventModel(ScheduleModel lazyEventModel) {
 		this.lazyEventModel = lazyEventModel;
 	}
 
-	public List<String> getAvailableParticipants() {
+	public ResearcherDAO getResearcherDAO() {
+		return researcherDAO;
+	}
+
+	public void setResearcherDAO(ResearcherDAO researcherDAO) {
+		this.researcherDAO = researcherDAO;
+	}
+
+	public List<Researcher> getAvailableParticipants() {
 		return availableParticipants;
 	}
 
-	public void setAvailableParticipants(List<String> availableParticipants) {
+	public void setAvailableParticipants(List<Researcher> availableParticipants) {
 		this.availableParticipants = availableParticipants;
 	}
-	
+
 	public Credentials getCredentials() {
 		return credentials;
 	}
-
 
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
 	}
 
-
-	public String getProject() {
-		return project;
+	public ResearcherManager getResearcherManager() {
+		return researcherManager;
 	}
 
+	public void setResearcherManager(ResearcherManager researcherManager) {
+		this.researcherManager = researcherManager;
+	}
 
-	public void setProject(String project) {
-		this.project = project;
+	public AppointmentManager getAppointmentManager() {
+		return appointmentManager;
+	}
+
+	public void setAppointmentManager(AppointmentManager appointmentManager) {
+		this.appointmentManager = appointmentManager;
+	}
+
+	public ScheduleEvent getEvent() {
+		return event;
+	}
+
+	public void setEvent(ScheduleEvent event) {
+		this.event = event;
+	}
+
+	public ScheduleModel getLazyEventModel() {
+		return lazyEventModel;
+	}
+
+	public Appointment getSelectedAppointment() {
+		return selectedAppointment;
+	}
+
+	public void setSelectedAppointment(Appointment selectedAppointment) {
+		this.selectedAppointment = selectedAppointment;
 	}
 
 }

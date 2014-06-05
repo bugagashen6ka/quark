@@ -133,27 +133,27 @@
 					</p:selectOneMenu>
 
 					<h:outputLabel for="description" value="Description:" />
-					<p:inputText id="description" value="#{scheduleView.description}"
+					<p:inputText id="description" value="#{scheduleView.selectedAppointment.description}"
 						required="true" />
 
 					<h:outputLabel for="location" value="Location:" />
-					<p:inputText id="location" value="#{scheduleView.location}"
+					<p:inputText id="location" value="#{scheduleView.selectedAppointment.location}"
 						required="true" />
 
 					<h:outputLabel for="from" value="From:" />
-					<p:inputMask id="from" value="#{scheduleView.start}"
+					<p:inputMask id="from" value="#{scheduleView.selectedAppointment.start}"
 						mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 
 					<h:outputLabel for="to" value="To:" />
-					<p:inputMask id="to" value="#{scheduleView.end}" mask="99/99/9999">
+					<p:inputMask id="to" value="#{scheduleView.selectedAppointment.end}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 
 					<h:outputLabel for="participant" value="Participant:" />
 					<p:selectCheckboxMenu id="participant"
-						value="#{scheduleView.participants}" label="Participants"
+						value="#{scheduleView.selectedAppointment.participants}" label="Participants"
 						filter="true" filterMatchMode="startsWith"
 						panelStyle="width:300px">
 						<f:selectItems value="#{scheduleView.availableParticipants}" />
