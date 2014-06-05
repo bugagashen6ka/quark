@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Appointment")
 @Inheritance(strategy=InheritanceType.JOINED)
+@NamedQueries({ @NamedQuery(name = "Appointment.findAll", query = "SELECT a FROM Appointment a") })
 public class Appointment implements Serializable {
 
 	@Id
