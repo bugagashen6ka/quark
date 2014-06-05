@@ -14,19 +14,18 @@
 </h:head>
 <h:body>
 
-
-
-	<div class="formcont">
-		<div align="right">
+	<h2 class="header">Lets Quark!</h2>
+	<div class="formcont">	
+	
+		<div class="logout">
 			<h:form>
-				<h:commandLink action="#{credentials.logout}">
-					<h:outputText value="Logout" immediate="true" />
-				</h:commandLink>
+				<h:commandLink action="#{credentials.logout}">Logout</h:commandLink>
 			</h:form>
 		</div>
+
 		<h:form>
 			<p:growl id="messages" showDetail="true" />
-
+			
 			<!-- Select Tab -->
 			<ul class="tabs" data-tab="sfd">
 				<li class="tab-title active"><a href="#appointment">Appointment
