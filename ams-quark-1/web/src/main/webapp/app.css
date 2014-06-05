@@ -92,7 +92,7 @@ input[type="submit"]:hover{
 	height: 80%;
 	display:block;
 	margin:0 auto;
-	margin-top:1%;
+/* 	margin-top:1%; */
 	padding:30px;
 	position: relative;
 	display: table;
@@ -129,4 +129,18 @@ input[type="submit"]:hover{
 }
 .ui-selectonemenu-label{
      width: 100% !important;
+}
+
+.logout {
+	margin-top:1%;
+	margin-right:1%;
+	position:relative;
+    float:right;
+
+}
+
+.header {
+	margin-top:1%;
+	position:relative;
+    text-align: center;
 }
