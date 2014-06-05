@@ -2,6 +2,7 @@ package edu.quark.managedbeans;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +19,8 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import edu.quark.datatypes.AppointmentDetails;
+
 @ManagedBean
 @ViewScoped
 public class ScheduleView {
@@ -31,15 +34,10 @@ public class ScheduleView {
      
     private ScheduleModel lazyEventModel;
  
-    private ScheduleEvent event = new DefaultScheduleEvent();
+    private AppointmentDetails appointmentDetails;
  
     @PostConstruct
     public void init() {
-/*        eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));*/
          
         lazyEventModel = new LazyScheduleModel() {
 

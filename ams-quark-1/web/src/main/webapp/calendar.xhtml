@@ -39,57 +39,55 @@
 						</h:panelGrid>
 					</div>
 				</div>
+				
 				<div class="content" id="group">
-					<div class="table">
-						<div class="group">
-					  		<div class="row">
-					  			<div class="small-9 columns">
-					  				<p> Group 1</p>
-					  			</div>
-					  			<div class="small-3 columns">
-					  				<input class="button tiny" value="Leave"></input>
-					  			</div>
-					  		</div>
-					  		
-					  		<div class="row">
-					  			<div class="small-9 columns">
-					  				<p> Group 2</p>
-					  			</div>
-					  			<div class="small-3 columns">
-					  				<input class="button tiny" value="Leave"></input>
-					  			</div>
-					  		</div>
-					  		
-					  		<div class="row">
-					  			<div class="small-9 columns">
-					  				<p> Group 3</p>
-					  			</div>
-					  			<div class="small-3 columns">
-					  				<input class="button tiny" value="Leave"></input>
-					  			</div>
-					  		</div>
-					  		
-					  		
-					  		<br /><br /><br />
-					  		<div class="row">
-					  			<div class="small-6 columns">
-					  				<input class="button expand" value="Create Group"></input>
-					  			</div>
-						  		<div class="small-6 columns">
-					  				<input class="button expand" value="Join Group"></input>
-					  			</div>
-					  		</div>
-					  	</div>	
-				  	</div>
+					<div class="table"></div>
+					
+				  	<div class="row">
+			  			<div class="small-9 columns">
+		  					<p> Group 1</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				<input class="button tiny alert" value="Leave" type="button"></input>
+			  			</div>
+			  		</div>
+			  		
+			  		<div class="row">
+			  			<div class="small-9 columns">
+			  				<p> Group 2</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				<input class="button tiny alert" value="Leave" type="button"></input>
+			  			</div>
+			  		</div>
+			  		
+			  		<div class="row">
+			  			<div class="small-9 columns">
+			  				<p> Group 3</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				<input class="button tiny alert" value="Leave" type="button"></input>
+			  			</div>
+			  		</div>
+			  		
+			  		<br /><br /><br />
+			  		<div class="row">
+			  			<div class="small-6 columns">
+			  				<input class="button expand" value="Create Group" type="button"></input>
+			  			</div>
+				  		<div class="small-6 columns">
+			  				<input class="button expand" value="Join Group" type="button"></input>
+			  			</div>
+			  		</div>
+				  		
 				</div>
 			</div>
 	
-			<p:dialog widgetVar="eventDialog" header="Event Details"
-				showEffect="clip" hideEffect="clip">
+			<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
 				<h:panelGrid id="eventDetails" columns="2">
-					<h:outputLabel for="title" value="Title:" />
-					<p:inputText id="title" value="#{scheduleView.event.title}"
-						required="true" />
+				
+					<h:outputLabel for="type" value="Type:" />
+					<p:inputText id="type" value="#{scheduleView.event.type}" required="true" />
 	
 					<h:outputLabel for="from" value="From:" />
 					<p:inputMask id="from" value="#{scheduleView.event.startDate}"
