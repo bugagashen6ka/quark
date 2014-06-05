@@ -14,9 +14,7 @@
 
 </h:head>
 <h:body>
-	
-	<h:outputStylesheet library="css" name="app.css"  />
-	
+
 	<h2 class="header">Lets Quark!</h2>
 	<div class="formcont">	
 	
@@ -65,39 +63,29 @@
 
 				<!-- Group Tab -->
 				<div class="content" id="group">
-					
-					<table>
-						<thead>
-						  <tr>
-						    <th width="500">Name</th>
-						    <th width="300">Type</th>
-						    <th width="150">Action</th>
-						  </tr>
-						</thead>
-						<tbody>
-						
-						<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">			
-						  <tr>
-						    <td>
-						    	<h:outputText value="#{gd.name}" />
-					    	</td>
-						    <td>
-						    	<h:outputText value="#{gd.type}" />
-						    </td>
-						    <td>
-						    	<h:form>
-									<p:commandButton styleClass="button tiny alert" value="Leave"
-										actionListener="#{groupView.leaveGroupMethod}">
-										<f:param name="selectedGroupId" value="#{gd.gId}"></f:param>
-									</p:commandButton>
-								</h:form>
-						    </td>
-						  </tr>
-						</ui:repeat>
 
-						</tbody>
-					</table>
-					
+					<h:form>
+						<p:dataTable var="gd"
+							value="#{groupView.updateResearcherGroups()}">
+							<p:column headerText="Name">
+								<h:outputText value="#{gd.name}" />
+							</p:column>
+
+							<p:column headerText="Type">
+								<h:outputText value="#{gd.type}" />
+							</p:column>
+
+							<p:column headerText="Action">
+								<h:commandButton styleClass="button tiny alert" value="Leave"
+									action="#{groupView.leaveGroupMethod}">
+									<f:setPropertyActionListener
+										target="#{groupView.selectedGroupId}" value="#{gd.gId}" />
+								</h:commandButton>
+							</p:column>
+						</p:dataTable>
+
+					</h:form>
+
 					<br /> <br /> <br />
 					<div class="row">
 						<div class="small-6 columns">
@@ -108,6 +96,7 @@
 							<input class="button expand" value="Join Group" data-reveal-id="join_group"></input>
 						</div>
 					</div>
+
 
 				</div>
 			</div>
@@ -120,7 +109,7 @@
 
 					<h:outputLabel for="type" value="Type:" />
 					<p:selectOneMenu id="type" value="#{scheduleView.type}"
-						panelStyle="width:250px" widgetVar="typeList">
+						panelStyle="width:250px">
 						<f:selectItem itemLabel="General Appointment"
 							itemValue="GENERIC_APPOINTMENT" required="true" label="Text 3" />
 						<f:selectItem itemLabel="Group Meeting"
@@ -131,33 +120,32 @@
 							itemValue="TEACHING_APPOINTMENT" />
 						<f:selectItem itemLabel="Conference Appointment"
 							itemValue="CONFERENCE_APPOINTMENT" />
-						<f:ajax render="@form" />
 					</p:selectOneMenu>
 
 					<h:outputLabel for="description" value="Description:" />
-					<p:inputText id="description" value="#{scheduleView.selectedAppointment.description}"
+					<p:inputText id="description" value="#{scheduleView.appointment.description}"
 						required="true" />
 
 					<h:outputLabel for="location" value="Location:" />
-					<p:inputText id="location" value="#{scheduleView.selectedAppointment.location}"
+					<p:inputText id="location" value="#{scheduleView.appointment.location}"
 						required="true" />
 
 					<h:outputLabel for="from" value="From:" />
-					<p:inputMask id="from" value="#{scheduleView.selectedAppointment.start}"
+					<p:inputMask id="from" value="#{scheduleView.appointment.start}"
 						mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 
 					<h:outputLabel for="to" value="To:" />
-					<p:inputMask id="to" value="#{scheduleView.selectedAppointment.end}" mask="99/99/9999">
+					<p:inputMask id="to" value="#{scheduleView.appointment.end}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 
 					<h:outputLabel for="participant" value="Participant:" />
 					<p:selectCheckboxMenu id="participant"
-						value="#{scheduleView.selectedAppointment.participants}" label="Select"
+						value="#{scheduleView.appointment.participants}" label="Participants"
 						filter="true" filterMatchMode="startsWith"
-						panelStyle="width:330px;">
+						panelStyle="width:300px">
 						<f:selectItems value="#{scheduleView.availableParticipants}" />
 					</p:selectCheckboxMenu>
 
@@ -168,88 +156,55 @@
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
-		
-		<div id="create_group" class="reveal-modal" data-reveal="sdf" style="width: 400px;">
+		<div id="create_group" class="reveal-modal" data-reveal="sdf"
+			style="width: 300px;">
 			<h3>Create a new group</h3>
 			<h:form id="create_group">
-			
-				<div class="row">
-					<div class="small-12 columns">
-					<h:outputLabel for="type" value="Type:" />
-					<p:selectOneMenu id="type" value="#{groupView.groupType}"
-						style="width: 100%">
-						<f:selectItem itemLabel="Project Group" itemValue="PROJECT_GROUP"
-							required="true" label="Text 3" />
-						<f:selectItem itemLabel="Research Group" itemValue="RESEARCH_GROUP" />
-					</p:selectOneMenu>
-					</div>
-				</div>
-				<br />
-				
-				<div class="row">
-				<div class="small-12 columns">
+				<h:outputLabel for="type" value="Type:" />
+				<p:selectOneMenu id="type" value="#{groupView.groupType}"
+					style="width: 100%">
+					<f:selectItem itemLabel="Project Group" itemValue="PROJECT_GROUP"
+						required="true" label="Text 3" />
+					<f:selectItem itemLabel="Research Group" itemValue="RESEARCH_GROUP" />
+				</p:selectOneMenu>
 				<h:inputText id="cr_gr_name" value="#{groupView.newGroup.name}" />
 				<p:watermark for="cr_gr_name" value="Group Name" />
-				</div>
-				</div>
 
-				<div class="row">
-				<div class="small-12 columns">
 				<h:inputSecret id="cr_gr_pass"
 					value="#{groupView.newGroup.password}" />
+
 				<p:watermark for="cr_gr_pass" value="Group Password" />
-				</div>
-				</div>
-				
-				<div class="row">
-				<div class="small-12 columns">
 				<h:commandButton value="Create"
 					action="#{groupView.createGroupMethod}" />
-				</div>
-				</div>
-				
 			</h:form>
 		</div>
 
 
 		<div id="join_group" class="reveal-modal" data-reveal="sdf"
-			style="width: 400px;">
+			style="width: 300px;">
 			<h3>Choose the group</h3>
-			
 			<h:form id="join_group">
-			
-				<div class="row">
-					<div class="small-12 columns">
-						<h:outputLabel for="type" value="Type:" />
-						<p:selectOneMenu id="type" value="#{groupView.chosenGroup}"
-							style="width: 100%" converter="#{groupConverter}">
-							<f:selectItems value="#{groupView.groups}" var="group"
-								itemValue="#{groupView.chosenGroup.name}"
-								itemLabel="#{group.name}" />
-						</p:selectOneMenu>
-					</div>
-				</div>
-					
-				<br />
+				<h:outputLabel for="type" value="Type:" />
+				<p:selectOneMenu id="type" value="#{groupView.chosenGroup}"
+					style="width: 100%" converter="#{groupConverter}">
+					<f:selectItems value="#{groupView.groups}" var="group"
+						itemValue="#{groupView.chosenGroup.name}"
+						itemLabel="#{group.name}" />
+				</p:selectOneMenu>
 
-				<div class="row">
-					<div class="small-12 columns">
-						<h:inputSecret id="cr_gr_pass" value="#{groupView.chosenGroup.password}" />
-						<p:watermark for="cr_gr_pass" value="Group Password" />
-					</div>
-				</div>
+				<h:inputSecret id="cr_gr_pass"
+					value="#{groupView.chosenGroup.password}" />
 
-				<div class="row">
-					<div class="small-12 columns">
-						<h:commandButton value="Join" action="#{groupView.joinGroupMethod}" />
-					</div>
-				</div>
+				<p:watermark for="cr_gr_pass" value="Group Password" />
+				<h:commandButton value="Join" action="#{groupView.joinGroupMethod}" />
 			</h:form>
 		</div>
 	</div>
 
 	<script src="foundation/js/foundation.min.js"></script>
-	<script src="app.js"></script>
-	<h:outputScript library="js" name="app.js" />
+	<script>
+	  $(document).foundation();
+	  $('td.fc-day.fc-wed.ui-widget-content').click(function() { alert("sdf"); $('.ui-selectonemenu-trigger').width(17); });
+	</script>
 </h:body>
 </html>

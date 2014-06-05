@@ -23,6 +23,60 @@ public class AppointmentDetails {
 		this.description = description;
 		this.participants = participants;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aId == null) ? 0 : aId.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((location == null) ? 0 : location.hashCode());
+		result = prime * result
+				+ ((participants == null) ? 0 : participants.hashCode());
+		result = prime * result
+				+ ((timeInterval == null) ? 0 : timeInterval.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AppointmentDetails other = (AppointmentDetails) obj;
+		if (aId == null) {
+			if (other.aId != null)
+				return false;
+		} else if (!aId.equals(other.aId))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (participants == null) {
+			if (other.participants != null)
+				return false;
+		} else if (!participants.equals(other.participants))
+			return false;
+		if (timeInterval == null) {
+			if (other.timeInterval != null)
+				return false;
+		} else if (!timeInterval.equals(other.timeInterval))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
 	public AppointmentDetails(Appointment a) {
 		super();
 		this.aId = a.getAid();

@@ -2,19 +2,25 @@ package edu.quark.systemlogic;
 
 import java.math.BigInteger;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import edu.quark.businesslogic.GroupManager;
 import edu.quark.systeminterfaces.ILeaveGroup;
 
 @Stateless
 @LocalBean
 public class LeaveGroup implements ILeaveGroup {
 
+	@EJB
+	private GroupManager groupManager;
+
 	@Override
-	public boolean leave(BigInteger researcherId, BigInteger groupId) {
+	public void leave(BigInteger researcherId, BigInteger groupId) {
 		// TODO Auto-generated method stub
 		// Do nothing at the moment
-		return false;
+		groupManager.leaveGroup(researcherId, groupId);
 	}
 
 }
