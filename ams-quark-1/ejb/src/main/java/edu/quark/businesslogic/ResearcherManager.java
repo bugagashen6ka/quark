@@ -82,13 +82,11 @@ public class ResearcherManager implements IResearcherManagement {
 		try {
 			Researcher r = researcherDAO.read(researcherId);
 			Set<Appointment> as = r.getAppointments();
+			System.out.println("ATstart "+as.size());
 			for (Appointment a : as) {
-				if (a.getStart().after(time.getStart())
-						&& a.getEnd().before(time.getEnd())
-						&& a.getStart().before(a.getEnd())) {
 					retval.add(new AppointmentDetails(a));
-				}
 			}
+			System.out.println("Atexit "+retval.size());
 			return retval;
 		} catch (Exception e) {
 			e.printStackTrace();
