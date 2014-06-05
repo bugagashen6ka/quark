@@ -36,7 +36,7 @@ public class GroupManager implements IGroupManagement {
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
 			for (Researcher r : g.getMembers()) {
-				if(r.getRid()==researcherId) {
+				if(r.getRid().equals(researcherId)) {
 					retval.add(g.getGid());					
 				}
 			}
@@ -48,7 +48,7 @@ public class GroupManager implements IGroupManagement {
 	public GroupDetails getGroupDetails(BigInteger groupId) {
 		List<Group> gs = groupDAO.findAll();
 		for (Group g : gs) {
-			if(g.getGid()==groupId) {
+			if(g.getGid().equals(groupId)) {
 				return new GroupDetails(g);
 			}
 		}
@@ -73,7 +73,7 @@ public class GroupManager implements IGroupManagement {
 		Group g = groupDAO.read(groupId);
 		Set<Researcher> rs = g.getMembers();
 		for (Researcher r : rs) {
-			if(r.getRid()==researcherId)
+			if(r.getRid().equals(researcherId))
 				rs.remove(r);
 			}
 		groupDAO.update(g);
@@ -87,12 +87,23 @@ public class GroupManager implements IGroupManagement {
 	public boolean joinGroup(BigInteger researcherId, BigInteger groupId,
 			String password) {
 		try {
-			Group g = groupDAO.read(groupId);
-			if(g.getPassword() != password) {
-				return false;
-			}
 			Researcher r=researcherDAO.read(researcherId);
 			if(r==null) return false; 
+			Group g = groupDAO.read(groupId);
+			if(g.getClass()==ResearchGroup.class) {
+				List<BigInteger> gids = this.getGroupIds(r.getRid());
+				List<GroupDetails> gds = this.getGroupDetails(gids);
+				for (GroupDetails gd : gds) {
+					if(gd.getType()==GroupType.RESEARCH_GROUP) {
+						return false; // already member of research group
+					}
+				}
+			}
+
+			if(!g.getPassword().equals(password)) {
+				return false;
+			}
+			
 			g.getMembers().add(r);
 			groupDAO.update(g);
 			return true;
@@ -107,6 +118,7 @@ public class GroupManager implements IGroupManagement {
 		if(password.length()<6) {
 			return null;
 		}
+		if(!this.isNameUnique(name)) return null;
 		if(type==GroupType.RESEARCH_GROUP) {
 			List<BigInteger> gids = this.getGroupIds(creator.getRid());
 			List<GroupDetails> gds = this.getGroupDetails(gids);
@@ -161,6 +173,16 @@ public class GroupManager implements IGroupManagement {
 			return password.equals(g.getPassword());
 		}
 		return false;
+	}
+	
+	public boolean isNameUnique(String name) {
+		List<Group> gs = groupDAO.findAll();
+		for (Group g : gs) {
+			if(g.getName().equals(name)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
