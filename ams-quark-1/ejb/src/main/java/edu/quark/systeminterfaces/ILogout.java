@@ -1,7 +1,7 @@
 package edu.quark.systeminterfaces;
 
-import java.math.BigInteger;
+import edu.quark.model.Researcher;
 
 public interface ILogout {
-	boolean logout(BigInteger researcherId);
+	boolean logout(Researcher researcher);
 }

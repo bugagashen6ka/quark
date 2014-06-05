@@ -118,12 +118,13 @@ public class ResearcherManager implements IResearcherManagement {
 	}
 
 	@Override
-	public boolean checkCredentials(String email, String password) {
+	public Researcher checkCredentials(String email, String password) {
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if(r.getEmail()==email && r.getPassword()==password) return true;
+			if(r.getEmail()==email && r.getPassword()==password)
+				return r;
 		}
-		return false;
+		return null;
 	}
 
 }

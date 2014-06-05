@@ -1,22 +1,22 @@
 package edu.quark.systemlogic;
 
-import java.math.BigInteger;
-
-import javax.ejb.Local;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
-
+import edu.quark.businesslogic.ResearcherManager;
+import edu.quark.model.Researcher;
 import edu.quark.systeminterfaces.ILogin;
 
 @Stateless
 @LocalBean
 public class Login implements ILogin {
 
+	@EJB
+	private ResearcherManager researcherManager;
+
 	@Override
-	public BigInteger login(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public Researcher login(String email, String password) {
+		return researcherManager.checkCredentials(email, password);
 	}
 
 }

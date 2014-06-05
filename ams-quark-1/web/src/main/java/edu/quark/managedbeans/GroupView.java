@@ -1,8 +1,5 @@
 package edu.quark.managedbeans;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +8,6 @@ import javax.faces.bean.ViewScoped;
 import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.GroupType;
-import edu.quark.model.Appointment;
 import edu.quark.model.Group;
 import edu.quark.systemlogic.CreateGroup;
 import edu.quark.systemlogic.JoinGroup;
@@ -65,7 +61,7 @@ public class GroupView {
 	}
 
 	public void createGroup() {
-		createGroup.createGroup(selectedGroup.getName(), selectedGroupType);
+		createGroup.createGroup(selectedGroup.getName(), selectedGroupType, password);
 	}
 
 	public void joinGroup() {

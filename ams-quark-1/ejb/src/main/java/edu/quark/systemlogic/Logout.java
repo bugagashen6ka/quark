@@ -1,12 +1,8 @@
 package edu.quark.systemlogic;
 
-import java.math.BigInteger;
-
-import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
-
+import edu.quark.model.Researcher;
 import edu.quark.systeminterfaces.ILogout;
 
 @Stateless
@@ -14,7 +10,7 @@ import edu.quark.systeminterfaces.ILogout;
 public class Logout implements ILogout {
 
 	@Override
-	public boolean logout(BigInteger researcherId) {
+	public boolean logout(Researcher researcher) {
 		// TODO Auto-generated method stub
 		return false;
 	}

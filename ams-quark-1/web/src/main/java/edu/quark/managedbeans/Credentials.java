@@ -3,21 +3,23 @@ package edu.quark.managedbeans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import javax.ejb.EJB;
+import edu.quark.model.Researcher;
+import edu.quark.systemlogic.Login;
+import edu.quark.systemlogic.Logout;
+
 @ManagedBean
 @SessionScoped
 public class Credentials {
 
-	private String username;
+	@EJB
+	private Login login;
+	@EJB
+	private Logout logout;
+
+	private String email;
 	private String password;
-	private Boolean logedIn;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	private Researcher researcher;
 
 	public String getPassword() {
 		return password;
@@ -27,11 +29,28 @@ public class Credentials {
 		this.password = password;
 	}
 
-	public Boolean getLogedIn() {
-		return logedIn;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogedIn(Boolean logedIn) {
-		this.logedIn = logedIn;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Researcher getResearcher() {
+		return researcher;
+	}
+
+	public void setResearcher(Researcher researcher) {
+		this.researcher = researcher;
+	}
+
+	public void login() {
+		setResearcher(login.login(email, password));
+	}
+
+	public void logout() {
+		logout.logout(researcher);
+		setResearcher(null);
 	}
 }

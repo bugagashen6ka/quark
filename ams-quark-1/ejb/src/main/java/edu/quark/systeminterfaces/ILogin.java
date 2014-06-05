@@ -1,8 +1,8 @@
 package edu.quark.systeminterfaces;
 
-import java.math.BigInteger;
+import edu.quark.model.Researcher;
 
 public interface ILogin {
 	/** @return researcher id */
-	BigInteger login(String email, String password);
+	Researcher login(String email, String password);
 }
