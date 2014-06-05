@@ -63,53 +63,49 @@
 
 				<!-- Group Tab -->
 				<div class="content" id="group">
+					
+					<table>
+						<thead>
+						  <tr>
+						    <th width="500">Name</th>
+						    <th width="300">Type</th>
+						    <th width="150">Action</th>
+						  </tr>
+						</thead>
+						<tbody>
+						
+						<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">			
+						  <tr>
+						    <td>
+						    	<h:outputText value="#{gd.name}" />
+					    	</td>
+						    <td>
+						    	<h:outputText value="#{gd.type}" />
+						    </td>
+						    <td>
+						    	<h:form>
+									<p:commandButton styleClass="button tiny alert" value="Leave"
+										actionListener="#{groupView.leaveGroupMethod}">
+										<f:param name="selectedGroupId" value="#{gd.gId}"></f:param>
+									</p:commandButton>
+								</h:form>
+						    </td>
+						  </tr>
+						</ui:repeat>
 
-					<div class="table">
-						<div class="group">
-							<div class="row">
-								<div class="small-6 columns">
-									<p>Name</p>
-								</div>
-								<div class="small-3 columns">
-									<p>Type</p>
-								</div>
-								<div class="small-3 columns"></div>
-							</div>
-							<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">
-								<div class="row">
-									<div class="small-6 columns">
-										<h:outputText value="#{gd.name}" />
-									</div>
-									<div class="small-3 columns">
-										<h:outputText value="#{gd.type}" />
-									</div>
-
-									<div class="small-3 columns">
-										<h:form>
-											<p:commandButton styleClass="button tiny alert" value="Leave"
-												actionListener="#{groupView.leaveGroupMethod}">
-												<f:param name="selectedGroupId" value="#{gd.gId}"></f:param>
-											</p:commandButton>
-										</h:form>
-									</div>
-
-								</div>
-							</ui:repeat>
-
-
-							<br /> <br /> <br />
-							<div class="row">
-								<div class="small-6 columns">
-									<input class="button expand" value="Create Group"
-										data-reveal-id="create_group"></input>
-								</div>
-								<div class="small-6 columns">
-									<input class="button expand" value="Join Group" data-reveal-id="join_group"></input>
-								</div>
-							</div>
+						</tbody>
+					</table>
+					
+					<br /> <br /> <br />
+					<div class="row">
+						<div class="small-6 columns">
+							<input class="button expand" value="Create Group"
+								data-reveal-id="create_group"></input>
+						</div>
+						<div class="small-6 columns">
+							<input class="button expand" value="Join Group" data-reveal-id="join_group"></input>
 						</div>
 					</div>
-
 
 				</div>
 			</div>

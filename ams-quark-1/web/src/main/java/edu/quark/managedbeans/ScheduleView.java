@@ -68,8 +68,6 @@ public class ScheduleView {
 	private String project;
     
 
-	private ScheduleModel lazyEventModel;
-
 	private ScheduleEvent event = new DefaultScheduleEvent();
 
 	@PostConstruct
