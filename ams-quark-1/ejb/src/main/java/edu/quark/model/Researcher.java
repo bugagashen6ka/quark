@@ -146,9 +146,4 @@ public class Researcher implements Serializable {
 	public void setCreatedAppointments(Set<Appointment> createdAppointments) {
 		this.createdAppointments = createdAppointments;
 	}
-
-	@Override
-	public String toString() {
-		return title + " " + firstName + " " + lastName;
-	}
 }
