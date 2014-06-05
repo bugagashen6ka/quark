@@ -155,7 +155,7 @@ input[type="submit"]:hover{
 }
 .evtype5 {
 	background-color: #f00f00;
-}
+}ui-selectcheckboxmenu-panel
 .evtype6 {
 	background-color: #000f0f;
 }
@@ -165,5 +165,7 @@ input[type="submit"]:hover{
     text-align: center;
 }
 
-.selector .ui-selectonemenu-trigger {
-	
+.ui-selectcheckboxmenu {
+	width: 200px;
+}
+

@@ -14,7 +14,9 @@
 
 </h:head>
 <h:body>
-
+	
+	<h:outputStylesheet library="css" name="app.css"  />
+	
 	<h2 class="header">Lets Quark!</h2>
 	<div class="formcont">	
 	
@@ -47,10 +49,10 @@
 
 								<p:ajax event="dateSelect"
 									listener="#{scheduleView.onDateSelect}" update="eventDetails"
-									oncomplete="PF('eventDialog').show();" />
+									oncomplete="PF('eventDialog').show(); window.fix();"/>
 								<p:ajax event="eventSelect"
 									listener="#{scheduleView.onEventSelect}" update="eventDetails"
-									oncomplete="PF('eventDialog').show();" />
+									oncomplete="PF('eventDialog').show(); window.fix();"/>
 								<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
 									update="messages" />
 								<p:ajax event="eventResize"
@@ -153,9 +155,9 @@
 
 					<h:outputLabel for="participant" value="Participant:" />
 					<p:selectCheckboxMenu id="participant"
-						value="#{scheduleView.selectedAppointment.participants}" label="Participants"
+						value="#{scheduleView.selectedAppointment.participants}}" label="Select"
 						filter="true" filterMatchMode="startsWith"
-						panelStyle="width:300px">
+						panelStyle="width:330px;">
 						<f:selectItems value="#{scheduleView.availableParticipants}" />
 					</p:selectCheckboxMenu>
 
@@ -248,5 +250,6 @@
 
 	<script src="foundation/js/foundation.min.js"></script>
 	<script src="app.js"></script>
+	<h:outputScript library="js" name="app.js" />
 </h:body>
 </html>
