@@ -15,6 +15,11 @@ import javax.persistence.*;
 @NamedQueries({ @NamedQuery(name = "Researcher.findAll", query = "SELECT r FROM Researcher r") })
 public class Researcher implements Serializable {
 
+	@Override
+	public String toString() {
+		return title + " " + firstName + " " + lastName;
+	}
+
 	@Id
 	@Column(name = "rid", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
