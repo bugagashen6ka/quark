@@ -5,13 +5,16 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputStylesheet name="resources/css/screen.css" />
-	<title>calendar</title>
-	<script src="foundation/js/vendor/modernizr.js" />
-	<link rel="stylesheet" href="foundation/css/foundation.css" />
-	<link rel="stylesheet" href="app.css" />
-	<script src="foundation/js/vendor/modernizr.js"></script>
+	<title>index</title>
+    <script src="foundation/js/vendor/modernizr.js" />
+    <link rel="stylesheet" href="foundation/css/foundation.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script src="foundation/js/vendor/modernizr.js"></script>
+	<link type="text/css" rel="stylesheet" href="/project/faces/javax.faces.resource/theme.css?ln=primefaces-glass-x" />	
 </h:head>
 <h:body>
+
+
 
 	<div class="formcont">
 		<div align="right">
@@ -24,15 +27,18 @@
 		<h:form>
 			<p:growl id="messages" showDetail="true" />
 
-
+			<!-- Select Tab -->
 			<ul class="tabs" data-tab="sfd">
 				<li class="tab-title active"><a href="#appointment">Appointment
 						Management</a></li>
 				<li class="tab-title"><a href="#group">Group Management</a></li>
 			</ul>
 
-
+			
+			<!-- Tabs -->
 			<div class="tabs-content">
+			
+				<!-- Appointment Tab -->
 				<div class="content active" id="appointment">
 					<div class="table">
 						<h:panelGrid columnClasses="value">
@@ -54,80 +60,104 @@
 						</h:panelGrid>
 					</div>
 				</div>
+				
+				<!-- Group Tab -->
 				<div class="content" id="group">
-					<div class="table">
-						<div class="group">
-							<div class="row">
-								<div class="small-9 columns">
-									<p>Group 1</p>
-								</div>
-								<div class="small-3 columns">
-									<input class="button tiny" value="Leave"></input>
-								</div>
-							</div>
 
-							<div class="row">
-								<div class="small-9 columns">
-									<p>Group 2</p>
-								</div>
-								<div class="small-3 columns">
-									<input class="button tiny" value="Leave"></input>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="small-9 columns">
-									<p>Group 3</p>
-								</div>
-								<div class="small-3 columns">
-									<input class="button tiny" value="Leave"></input>
-								</div>
-							</div>
-
-
-							<br /> <br /> <br />
-							<div class="row">
-								<div class="small-6 columns">
-									<input class="button expand" value="Create Group"
-										data-reveal-id="create_group"></input>
-								</div>
-								<div class="small-6 columns">
-									<input class="button expand" value="Join Group"></input>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div class="table"></div>
+					
+					<div class="row">
+			  			<div class="small-6 columns">
+		  					<p>Name</p>
+			  			</div>
+			  			<div class="small-3 columns">
+		  					<p>Type</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				
+			  			</div>
+			  		</div>
+					
+				  	<div class="row">
+			  			<div class="small-6 columns">
+		  					<p> Group 1</p>
+			  			</div>
+			  			<div class="small-3 columns">
+		  					<p> Type</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				<input class="button tiny alert" value="Leave" type="button"></input>
+			  			</div>
+			  		</div>
+			  		
+			  		<div class="row">
+			  			<div class="small-9 columns">
+			  				<p> Group 2</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				<input class="button tiny alert" value="Leave" type="button"></input>
+			  			</div>
+			  		</div>
+			  		
+			  		<div class="row">
+			  			<div class="small-9 columns">
+			  				<p> Group 3</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				<input class="button tiny alert" value="Leave" type="button"></input>
+			  			</div>
+			  		</div>
+			  		
+			  		<br /><br /><br />
+			  		<div class="row">
+			  			<div class="small-6 columns">
+			  				<input class="button expand" value="Create Group" type="button"></input>
+			  			</div>
+				  		<div class="small-6 columns">
+			  				<input class="button expand" value="Join Group" type="button"></input>
+			  			</div>
+			  		</div>
+				  		
 				</div>
 			</div>
-
-
-
-			<p:dialog widgetVar="eventDialog" header="Event Details"
-				showEffect="clip" hideEffect="clip">
+	
+			<!-- Popup windows -->
+			<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
 				<h:panelGrid id="eventDetails" columns="2">
-					<h:outputLabel for="title" value="Title:" />
-					<p:inputText id="title" value="#{scheduleView.event.title}"
-						required="true" />
-
+				
+					<h:outputLabel for="type" value="Type:" />
+					<p:selectOneMenu id="type" value="#{scheduleView.type}" panelStyle="width:250px">
+						<f:selectItem itemLabel="General Appointment" itemValue="GENERIC_APPOINTMENT" required="true" label="Text 3"/>
+			            <f:selectItem itemLabel="Group Meeting" itemValue="PROJECT_GROUP_MEETING" />
+			            <f:selectItem itemLabel="Research Meeting" itemValue="RESEARCH_GROUP_MEETING" />
+			            <f:selectItem itemLabel="Teaching Appointment" itemValue="TEACHING_APPOINTMENT" />
+			            <f:selectItem itemLabel="Conference Appointment" itemValue="CONFERENCE_APPOINTMENT" />
+			        </p:selectOneMenu>
+	
+					<h:outputLabel for="description" value="Description:" />
+					<p:inputText id="description" value="#{scheduleView.description}" required="true" />
+	
+					<h:outputLabel for="location" value="Location:" />
+					<p:inputText id="location" value="#{scheduleView.location}" required="true" />
+					
 					<h:outputLabel for="from" value="From:" />
-					<p:inputMask id="from" value="#{scheduleView.event.startDate}"
-						mask="99/99/9999">
+					<p:inputMask id="from" value="#{scheduleView.start}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 
 					<h:outputLabel for="to" value="To:" />
-					<p:inputMask id="to" value="#{scheduleView.event.endDate}"
-						mask="99/99/9999">
+					<p:inputMask id="to" value="#{scheduleView.end}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 
-					<h:outputLabel for="allDay" value="All Day:" />
-					<h:selectBooleanCheckbox id="allDay"
-						value="#{scheduleView.event.allDay}" />
-
+					<h:outputLabel for="participant" value="Participant:" />
+			        <p:selectCheckboxMenu id="participant" value="#{scheduleView.participants}" label="Participants"
+			                              filter="true" filterMatchMode="startsWith" panelStyle="width:300px">
+			            <f:selectItems value="#{scheduleView.availableParticipants}" />
+			        </p:selectCheckboxMenu>
+					
 					<p:commandButton type="reset" value="Reset" />
-					<p:commandButton id="addButton" value="Save"
-						actionListener="#{scheduleView.addEvent}"
+					<p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}"
 						oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 				</h:panelGrid>
 			</p:dialog>
@@ -155,19 +185,11 @@
 			</h:form>
 		</div>
 	</div>
-
-
-
-	<style type="text/css">
-.value {
-	width: 1000px;
-}
-</style>
-
-	<!-- <script src="foundation/js/vendor/jquery.js"></script> -->
-	<script src="foundation/js/foundation.min.js"></script>
+	
+ 	<script src="foundation/js/foundation.min.js"></script>
 	<script>
 	  $(document).foundation();
+	  $('td.fc-day.fc-wed.ui-widget-content').click(function() { alert("sdf"); $('.ui-selectonemenu-trigger').width(17); });
 	</script>
 </h:body>
 </html>
