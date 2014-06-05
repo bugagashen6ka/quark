@@ -1,0 +1,169 @@
+diff --cc ams-quark-1/ejb/src/main/java/edu/quark/businesslogic/ResearcherManager.java
+index 1f27995,438f086..0000000
+--- a/ams-quark-1/ejb/src/main/java/edu/quark/businesslogic/ResearcherManager.java
++++ b/ams-quark-1/ejb/src/main/java/edu/quark/businesslogic/ResearcherManager.java
+@@@ -115,12 -118,13 +115,17 @@@ public class ResearcherManager implemen
+  	}
+  
+  	@Override
+ -	public Researcher checkCredentials(String email, String password) {
+ +	public boolean checkCredentials(String email, String password) {
+  		List<Researcher> rs = researcherDAO.findAll();
+  		for (Researcher r : rs) {
+++<<<<<<< Updated upstream
+ +			if(r.getEmail()==email && r.getPassword()==password) return true;
+++=======
++ 			if(r.getEmail().equals(email) && r.getPassword().equals(password))
++ 				return r;
+++>>>>>>> Stashed changes
+  		}
+ -		return null;
+ +		return false;
+  	}
+  
+  }
+diff --cc ams-quark-1/web/src/main/java/edu/quark/managedbeans/Credentials.java
+index 59e0980,f139728..0000000
+--- a/ams-quark-1/web/src/main/java/edu/quark/managedbeans/Credentials.java
++++ b/ams-quark-1/web/src/main/java/edu/quark/managedbeans/Credentials.java
+@@@ -1,22 -1,118 +1,140 @@@
+  package edu.quark.managedbeans;
+  
+++<<<<<<< Updated upstream
+ +import javax.faces.bean.RequestScoped;
+ +import javax.faces.bean.SessionScoped;
+ +import javax.inject.Named;
+ +
+ +@Named @SessionScoped
+ +public class Credentials {
+ +	
+ +	private String username;
+ +    private String password;
+ +    private Boolean logedIn;
+ +
+ +    public String getUsername() { return username; }
+ +    public void setUsername(String username) { this.username = username; }
+ +
+ +    public String getPassword() { return password; }
+ +    public void setPassword(String password) { this.password = password; }
+ +    
+ +    public Boolean getLogedIn() { return logedIn; }
+ +    public void setLogedIn(Boolean logedIn) { this.logedIn = logedIn; }
+++=======
++ import javax.faces.bean.ManagedBean;
++ import javax.faces.bean.ManagedProperty;
++ import javax.faces.bean.SessionScoped;
++ import javax.annotation.PostConstruct;
++ import javax.ejb.EJB;
++ 
++ import edu.quark.dao.ResearcherDAO;
++ import edu.quark.model.Researcher;
++ import edu.quark.systemlogic.Login;
++ import edu.quark.systemlogic.Logout;
++ 
++ @ManagedBean
++ @SessionScoped
++ public class Credentials {
++ 
++ 	@EJB
++ 	private Login login;
++ 	@EJB
++ 	private Logout logout;
++ 
++ 	@EJB
++ 	private ResearcherDAO researcherDAO;
++ 
++ 	private String email;
++ 	private String password;
++ 	private Researcher researcher;
++ 	@ManagedProperty(value = "#{navigationBean}")
++ 	private NavigationBean navigationBean;
++ 
++ 	@PostConstruct
++ 	public void init() {
++ 		Researcher researcher2 = new Researcher();
++ 		researcher2.setEmail("email");
++ 		researcher2.setPassword("1");
++ 		researcher2.setFirstName("vas");
++ 		researcher2.setLastName("pup");
++ 		researcher2.setPhoneNumber("1111");
++ 		researcher2.setTitle("Dr.");
++ 		researcherDAO.create(researcher2);
++ 	}
++ 
++ 	public String getPassword() {
++ 		return password;
++ 	}
++ 
++ 	public void setPassword(String password) {
++ 		this.password = password;
++ 	}
++ 
++ 	public String getEmail() {
++ 		return email;
++ 	}
++ 
++ 	public void setEmail(String email) {
++ 		this.email = email;
++ 	}
++ 
++ 	public Researcher getResearcher() {
++ 		return researcher;
++ 	}
++ 
++ 	public void setResearcher(Researcher researcher) {
++ 		this.researcher = researcher;
++ 	}
++ 
++ 	public String login() {
++ 		setResearcher(login.login(email, password));
++ 		if(researcher==null){
++ 			return "failure";
++ 		}
++ 		navigationBean.moveToCalendar();
++ 		return "success";
++ 	}
++ 
++ 	public void logout() {
++ 		logout.logout(researcher);
++ 		setResearcher(null);
++ 	}
++ 
++ 	public void register() {
++ 
++ 	}
++ 
++ 	public Login getLogin() {
++ 		return login;
++ 	}
++ 
++ 	public void setLogin(Login login) {
++ 		this.login = login;
++ 	}
++ 
++ 	public Logout getLogout() {
++ 		return logout;
++ 	}
++ 
++ 	public void setLogout(Logout logout) {
++ 		this.logout = logout;
++ 	}
++ 
++ 	public ResearcherDAO getResearcherDAO() {
++ 		return researcherDAO;
++ 	}
++ 
++ 	public void setResearcherDAO(ResearcherDAO researcherDAO) {
++ 		this.researcherDAO = researcherDAO;
++ 	}
++ 
++ 	public NavigationBean getNavigationBean() {
++ 		return navigationBean;
++ 	}
++ 
++ 	public void setNavigationBean(NavigationBean navigationBean) {
++ 		this.navigationBean = navigationBean;
++ 	}
++ 
+++>>>>>>> Stashed changes
+  }

@@ -22,20 +22,26 @@ import edu.quark.model.Researcher;
 public class ResearcherManager implements IResearcherManagement {
 	@EJB
 	ResearcherDAO researcherDAO;
+
 	public ResearcherManager() {
 	}
 
 	@Override
 	public List<BigInteger> getResearcherIds(ResearcherDetails details) {
-		List<BigInteger> retval = new ArrayList<BigInteger>(); 
+		List<BigInteger> retval = new ArrayList<BigInteger>();
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if((details.getrId()==null || (details.getrId() == r.getRid())) &&
-				(details.getTitle()==null || (details.getTitle() == r.getTitle())) &&
-				(details.getEmailAddress()==null || (details.getEmailAddress() == r.getEmail())) &&
-				(details.getFirstName()==null || (details.getFirstName() == r.getFirstName())) &&
-				(details.getLastName()==null || (details.getLastName() == r.getLastName())) &&
-				(details.getPhoneNbr()==null || (details.getPhoneNbr() == r.getPhoneNumber()))) {
+			if ((details.getrId() == null || (details.getrId() == r.getRid()))
+					&& (details.getTitle() == null || (details.getTitle() == r
+							.getTitle()))
+					&& (details.getEmailAddress() == null || (details
+							.getEmailAddress() == r.getEmail()))
+					&& (details.getFirstName() == null || (details
+							.getFirstName() == r.getFirstName()))
+					&& (details.getLastName() == null || (details.getLastName() == r
+							.getLastName()))
+					&& (details.getPhoneNbr() == null || (details.getPhoneNbr() == r
+							.getPhoneNumber()))) {
 				retval.add(r.getRid());
 			}
 		}
@@ -45,11 +51,11 @@ public class ResearcherManager implements IResearcherManagement {
 	@Override
 	public ResearcherDetails getResearcherDetails(BigInteger researcherId) {
 		List<Researcher> rs = researcherDAO.findAll();
-			for (Researcher r : rs) {
-				if(r.getRid()==researcherId) {
-					return new ResearcherDetails(r);
-				}
+		for (Researcher r : rs) {
+			if (r.getRid() == researcherId) {
+				return new ResearcherDetails(r);
 			}
+		}
 		return null;
 	}
 
@@ -70,13 +76,13 @@ public class ResearcherManager implements IResearcherManagement {
 	public List<Appointment> getAppointments(BigInteger researcherId,
 			TimeInfo time) {
 		List<Appointment> retval = new ArrayList<Appointment>();
-		try{
+		try {
 			Researcher r = researcherDAO.read(researcherId);
 			Set<Appointment> as = r.getAppointments();
 			for (Appointment a : as) {
-				if(a.getStart().after(time.getStart()) &&
-				   a.getEnd().before(time.getEnd())&&
-				   a.getStart().before(a.getEnd())) {
+				if (a.getStart().after(time.getStart())
+						&& a.getEnd().before(time.getEnd())
+						&& a.getStart().before(a.getEnd())) {
 					retval.add(a);
 				}
 			}
@@ -85,14 +91,15 @@ public class ResearcherManager implements IResearcherManagement {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	public boolean checkEmail(String email) {
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if(r.getEmail()==email) return false;
+			if (r.getEmail() == email)
+				return false;
 		}
 		return true;
 	}
@@ -100,7 +107,8 @@ public class ResearcherManager implements IResearcherManagement {
 	@Override
 	public BigInteger createResearcher(String email, String password,
 			String firstName, String lastName, String title, String phoneNumber) {
-		if(!this.checkEmail(email)) return null;
+		if (!this.checkEmail(email))
+			return null;
 		Researcher r = new Researcher();
 		r.setAppointments(new HashSet<Appointment>());
 		r.setCreatedAppointments(new HashSet<Appointment>());
@@ -119,7 +127,7 @@ public class ResearcherManager implements IResearcherManagement {
 	public Researcher checkCredentials(String email, String password) {
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if(r.getEmail()==email && r.getPassword()==password)
+			if (r.getEmail().equals(email) && r.getPassword().equals(password))
 				return r;
 		}
 		return null;
