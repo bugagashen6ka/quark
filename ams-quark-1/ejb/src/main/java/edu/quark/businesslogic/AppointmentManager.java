@@ -9,14 +9,17 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import edu.quark.businessinterfaces.IAppointmentManagement;
 import edu.quark.dao.AppointmentDAO;
+import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
 import edu.quark.model.ConferenceAppointment;
+import edu.quark.model.Group;
 import edu.quark.model.ProjectGroupMeeting;
 import edu.quark.model.ResearchGroupMeeting;
 import edu.quark.model.Researcher;
@@ -29,6 +32,8 @@ public class AppointmentManager implements IAppointmentManagement {
 	AppointmentDAO appointmentDAO;
 	@EJB
 	ResearcherDAO researcherDAO;
+	@EJB
+	GroupDAO groupDAO;
 	public AppointmentManager() {
 	}
 
@@ -116,6 +121,10 @@ public class AppointmentManager implements IAppointmentManagement {
 			}
 			Researcher r = researcherDAO.read(researcherId);
 			a.setCreator(r);
+			if(groupId!=null) {
+				Group g = groupDAO.read(groupId);
+				a.setGroup(g);
+			}
 			a.setDescription(description);
 			a.setLocation(location);
 			a.setStart(time.getStart());
@@ -123,6 +132,9 @@ public class AppointmentManager implements IAppointmentManagement {
 			Set<Researcher> ps = new HashSet<Researcher>();
 			ps.add(r);
 			a.setParticipants(ps);
+			Set<Appointment> apps = r.getAppointments();
+			apps.add(a);
+			r.setAppointments(apps);
 			BigInteger aid = appointmentDAO.create(a);
 			return aid;
 		} catch (Exception e) {

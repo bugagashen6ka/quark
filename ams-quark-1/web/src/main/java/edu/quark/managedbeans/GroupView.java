@@ -65,10 +65,6 @@ public class GroupView {
 
 		researcherGroupDetails = new ArrayList<GroupDetails>();
 		GroupDetails detail;
-		for (Integer i = 0; i < 5; i++) {
-			detail = new GroupDetails(BigInteger.valueOf(i), "group" + i.toString(), GroupType.PROJECT_GROUP, null);
-			researcherGroupDetails.add(detail);
-		}
 		newGroup = new Group();
 		chosenGroup = new Group();
 	}
