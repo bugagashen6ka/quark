@@ -138,7 +138,27 @@ input[type="submit"]:hover{
     float:right;
 
 }
-
+.evtype0 {
+	background-color: #0000ff;
+}
+.evtype1 {
+	background-color: #ff0000;
+}
+.evtype2 {
+	background-color: #00ff00;
+}
+.evtype3 {
+	background-color: #f0000f;
+}
+.evtype4 {
+	background-color: #0f00f0;
+}
+.evtype5 {
+	background-color: #f00f00;
+}
+.evtype6 {
+	background-color: #000f0f;
+}
 .header {
 	margin-top:1%;
 	position:relative;
