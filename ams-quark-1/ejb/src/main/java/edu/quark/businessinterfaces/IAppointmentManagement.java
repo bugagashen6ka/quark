@@ -5,10 +5,11 @@ import java.util.List;
 
 import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
+import edu.quark.datatypes.TimeInfo;
 
 public interface IAppointmentManagement {
 	/** @return researcher id's */
-	BigInteger getParticipantIds(BigInteger appointmentId);
+	List<BigInteger>  getParticipantIds(BigInteger appointmentId);
 
 	AppointmentDetails getAppointmentDetails(BigInteger appointmentId);
 
@@ -20,5 +21,5 @@ public interface IAppointmentManagement {
 	boolean deleteAppointment(BigInteger researcherId, BigInteger appointmentId);
 
 	BigInteger createAppointment(BigInteger researcherId, AppointmentType type,
-			BigInteger groupId, String location, String description);
+			BigInteger groupId, String location, String description, TimeInfo time);
 }

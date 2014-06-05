@@ -103,23 +103,41 @@ public class GroupManager implements IGroupManagement {
 
 	@Override
 	public boolean createGroup(String name, GroupType type, String password) {
+		if(password.length()<6) {
+			return false;
+		}
+		// TODO: get Session info
+		if(type==GroupType.RESEARCH_GROUP) {
+			Researcher r=new Researcher();
+			List<BigInteger> gids = this.getGroupIds(r.getRid());
+			List<GroupDetails> gds = this.getGroupDetails(gids);
+			for (GroupDetails gd : gds) {
+				if(gd.getType()==GroupType.RESEARCH_GROUP) {
+					return false; // already member of research group
+				}
+			}
+		}
 		Group g = null;
 		try {
 			if (type == GroupType.PROJECT_GROUP) {
-				g = ProjectGroup.class.newInstance();
+				g = new ProjectGroup();
 			} else {
-				g = ResearchGroup.class.newInstance();
+				g = new ResearchGroup();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (g == null)
 			return false;
-		
-		g.setAppointments(new HashSet<Appointment>());
-		g.setMembers(new HashSet<Researcher>());
+
 		// TODO: Add creator via DAO and ManagedBean and passing some crazy stuff into session state
 		g.setCreator(null);
+		Set<Researcher> members = new HashSet<Researcher>();
+		members.add(null);
+
+		g.setAppointments(new HashSet<Appointment>());
+		g.setMembers(members);
+
 		g.setName(name);
 		g.setPassword(password);
 		groupDAO.create(g);

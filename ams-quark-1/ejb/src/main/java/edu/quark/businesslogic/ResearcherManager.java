@@ -99,6 +99,7 @@ public class ResearcherManager implements IResearcherManagement {
 	@Override
 	public BigInteger createResearcher(String email, String password,
 			String firstName, String lastName, String title, String phoneNumber) {
+		if(!this.checkEmail(email)) return null;
 		Researcher r = new Researcher();
 		r.setAppointments(new HashSet<Appointment>());
 		r.setCreatedAppointments(new HashSet<Appointment>());
@@ -109,8 +110,8 @@ public class ResearcherManager implements IResearcherManagement {
 		r.setPassword(password);
 		r.setPhoneNumber(phoneNumber);
 		r.setTitle(title);
-		researcherDAO.create(r);
-		return null;
+		BigInteger rid = researcherDAO.create(r);
+		return rid;
 	}
 
 	@Override
