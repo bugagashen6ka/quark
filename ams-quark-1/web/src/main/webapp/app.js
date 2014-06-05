@@ -8,6 +8,8 @@ $(document).ready( function () {
 		$('.ui-selectcheckboxmenu-trigger').width(17);
 		
     };
+    
+    window.fix();
 
 
 	
