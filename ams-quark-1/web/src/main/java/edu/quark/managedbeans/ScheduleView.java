@@ -32,6 +32,8 @@ public class ScheduleView {
 	private CreateAppointment createAppointment;
 	@EJB
 	private DeleteAppointment deleteAppointment; 
+	
+	private ScheduleModel eventModel;
  
     private AppointmentDetails appointmentDetails;
     
@@ -128,4 +130,63 @@ public class ScheduleView {
 	public void setType(AppointmentType type) {
 		this.type = type;
 	}
+
+
+	public Date getStart() {
+		return start;
+	}
+
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+
+	public Date getEnd() {
+		return end;
+	}
+
+
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+
+
+	public String getLocation() {
+		return location;
+	}
+
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Set<BigInteger> getParticipants() {
+		return participants;
+	}
+
+
+	public void setParticipants(Set<BigInteger> participants) {
+		this.participants = participants;
+	}
+	
+	public ScheduleModel getEventModel() {
+		return eventModel;
+	}
+	
+	public void setEventModel(ScheduleModel eventModel) {
+		this.eventModel = eventModel;
+	}
+	
 }
