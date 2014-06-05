@@ -23,6 +23,7 @@ import org.primefaces.model.ScheduleModel;
 
 import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
+import edu.quark.model.ProjectGroup;
 import edu.quark.systemlogic.CreateAppointment;
 import edu.quark.systemlogic.DeleteAppointment;
 
@@ -50,6 +51,7 @@ public class ScheduleView {
 	private String description;
 	private Set<String> participants;
 	private List<String> availableParticipants;
+	private String project;
     
 
 	private ScheduleModel lazyEventModel;
@@ -58,7 +60,7 @@ public class ScheduleView {
 
 	@PostConstruct
 	public void init() {
-		/*
+		/* 
 		 * eventModel = new DefaultScheduleModel(); eventModel.addEvent(new
 		 * DefaultScheduleEvent("Champions League Match", previousDay8Pm(),
 		 * previousDay11Pm())); eventModel.addEvent(new
@@ -252,6 +254,16 @@ public class ScheduleView {
 
 	public void setAvailableParticipants(List<String> availableParticipants) {
 		this.availableParticipants = availableParticipants;
+	}
+
+
+	public String getProject() {
+		return project;
+	}
+
+
+	public void setProject(String project) {
+		this.project = project;
 	}
 
 }
