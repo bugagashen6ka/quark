@@ -59,12 +59,12 @@ public class GroupView {
 
 	@PostConstruct
 	public void init() {
+		selectedGroupId = BigInteger.valueOf(0);
 		groups = groupDAO.findAll();
 
 		updateResearcherGroups();
 
 		researcherGroupDetails = new ArrayList<GroupDetails>();
-		GroupDetails detail;
 		newGroup = new Group();
 		chosenGroup = new Group();
 	}
@@ -97,17 +97,11 @@ public class GroupView {
 		updateResearcherGroups();
 	}
 
-	public void leaveGroupMethod() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
-		String groupString = params.get("selectedGroupId");
-		System.out.println("Try to leave group " + groupString);
-		if (groupString != null) {
-			selectedGroupId = new BigInteger(groupString);
-			leaveGroup.leave(credentials.getResearcher().getRid(), selectedGroupId);
-		}
-		System.out.println("Try to leave group " + selectedGroupId + " | " + groupString);
+	public String leaveGroupMethod() {
+		leaveGroup.leave(credentials.getResearcher().getRid(), selectedGroupId);
+		groups = groupDAO.findAll();
 		updateResearcherGroups();
+		return "success";
 	}
 
 	public ResearcherDAO getResearcherDAO() {
@@ -222,8 +216,9 @@ public class GroupView {
 		this.researcherGroupDetails = researcherGroups;
 	}
 
-	public void updateResearcherGroups() {
+	public List<GroupDetails> updateResearcherGroups() {
 		researcherGroupDetails = searchGroup.getGroupDetails(credentials.getResearcher());
+		return researcherGroupDetails;
 	}
 
 	public BigInteger getSelectedGroupId() {
