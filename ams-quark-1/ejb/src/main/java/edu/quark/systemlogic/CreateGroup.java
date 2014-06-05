@@ -5,8 +5,11 @@ import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+
 import edu.quark.businesslogic.GroupManager;
 import edu.quark.datatypes.GroupType;
+import edu.quark.model.Researcher;
 import edu.quark.systeminterfaces.ICreateGroup;
 
 @Stateless
@@ -17,8 +20,9 @@ public class CreateGroup implements ICreateGroup {
 	private GroupManager groupManager;
 
 	@Override
-	public BigInteger createGroup(String name, GroupType type, String password) {
-		return groupManager.createGroup(null, name, type, password);
+	public BigInteger createGroup(Researcher researcher, String name,
+			GroupType type, String password) {
+		return groupManager.createGroup(researcher, name, type, password);
 	}
 
 }

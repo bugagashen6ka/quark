@@ -10,6 +10,7 @@ import edu.quark.dao.ResearcherDAO;
 import edu.quark.model.Researcher;
 import edu.quark.systemlogic.Login;
 import edu.quark.systemlogic.Logout;
+import edu.quark.systemlogic.Register;
 
 @ManagedBean
 @SessionScoped
@@ -19,13 +20,21 @@ public class Credentials {
 	private Login login;
 	@EJB
 	private Logout logout;
+	@EJB
+	private Register register;
 
 	@EJB
 	private ResearcherDAO researcherDAO;
 
 	private String email;
 	private String password;
+	private String firstName;
+	private String lastName;
+	private String phoneNumber;
+	private String title;
+
 	private Researcher researcher;
+
 	@ManagedProperty(value = "#{navigationBean}")
 	private NavigationBean navigationBean;
 
@@ -67,7 +76,7 @@ public class Credentials {
 
 	public String login() {
 		setResearcher(login.login(email, password));
-		if(researcher==null){
+		if (researcher == null) {
 			return "failure";
 		}
 		navigationBean.moveToCalendar();
@@ -80,7 +89,8 @@ public class Credentials {
 	}
 
 	public void register() {
-
+		register.createResearcher(email, password, firstName, lastName, title,
+				phoneNumber);
 	}
 
 	public Login getLogin() {
@@ -114,4 +124,45 @@ public class Credentials {
 	public void setNavigationBean(NavigationBean navigationBean) {
 		this.navigationBean = navigationBean;
 	}
+
+	public Register getRegister() {
+		return register;
+	}
+
+	public void setRegister(Register register) {
+		this.register = register;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 }

@@ -3,6 +3,7 @@ package edu.quark.managedbeans;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import edu.quark.dao.GroupDAO;
@@ -33,15 +34,20 @@ public class GroupView {
 	private JoinGroup joinGroup;
 	@EJB
 	private LeaveGroup leaveGroup;
+	@ManagedProperty(value = "#{credentials}")
+	private Credentials credentials;
 
+	private Group newGroup;
 	private java.util.List<Group> groups;
 	private Group selectedGroup;
 	private GroupType selectedGroupType;
 	private String password;
+	private GroupType groupType;
 
 	@PostConstruct
 	public void init() {
 		groups = groupDAO.findAll();
+		newGroup = new Group();
 	}
 
 	public GroupDAO getGroupDAO() {
@@ -60,8 +66,9 @@ public class GroupView {
 		this.groups = groups;
 	}
 
-	public void createGroup() {
-		createGroup.createGroup(selectedGroup.getName(), selectedGroupType, password);
+	public void createGroupMethod() {
+		createGroup.createGroup(credentials.getResearcher(),
+				newGroup.getName(), groupType, newGroup.getPassword());
 	}
 
 	public void joinGroup() {
@@ -143,6 +150,29 @@ public class GroupView {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public Group getNewGroup() {
+		return newGroup;
+	}
+
+	public void setNewGroup(Group newGroup) {
+		this.newGroup = newGroup;
+	}
+
+	public GroupType getGroupType() {
+		return groupType;
+	}
+
+	public void setGroupType(GroupType groupType) {
+		this.groupType = groupType;
+	}
+
+	public Credentials getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(Credentials credentials) {
+		this.credentials = credentials;
+	}
 
 }

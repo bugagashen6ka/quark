@@ -35,21 +35,34 @@
 		</h:form>
 	</div>
 
-	<div id="register" class="reveal-modal" data-reveal="sdf" style="width: 300px;">
-	  <h3>Register new user</h3>
-	  <h:form>
+	<div id="register" class="reveal-modal" data-reveal="sdf"
+		style="width: 300px;">
+		<h3>Register new user</h3>
+		<h:form>
 			<h:inputText id="reg_user" value="#{credentials.email}" />
 			<p:watermark for="reg_user" value="Email" />
 
 			<h:inputSecret id="reg_pass" value="#{credentials.password}" />
 			<p:watermark for="reg_pass" value="Password" />
 
+			<h:inputText id="reg_title" value="#{credentials.title}" />
+			<p:watermark for="reg_title" value="Title" />
+
+			<h:inputText id="reg_first_name" value="#{credentials.firstName}" />
+			<p:watermark for="reg_first_name" value="First Name" />
+
+			<h:inputText id="reg_last_name" value="#{credentials.lastName}" />
+			<p:watermark for="reg_last_name" value="Last Name" />
+
+			<h:inputText id="reg_phone_number" value="#{credentials.phoneNumber}" />
+			<p:watermark for="reg_phone_number" value="Phone Number" />
+
 			<h:commandButton value="Register" action="#{credentials.register}" />
 		</h:form>
 	</div>
-	
-  	<script src="foundation/js/foundation.min.js"></script>
-  	<script>
+
+	<script src="foundation/js/foundation.min.js"></script>
+	<script>
 	    $(document).foundation();
   	</script>
 

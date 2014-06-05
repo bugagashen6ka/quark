@@ -5,36 +5,44 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputStylesheet name="resources/css/screen.css" />
-	<title>index</title>
-    <script src="foundation/js/vendor/modernizr.js" />
-    <link rel="stylesheet" href="foundation/css/foundation.css" />
-    <link rel="stylesheet" href="app.css" />
-    <script src="foundation/js/vendor/modernizr.js"></script>
+	<title>calendar</title>
+	<script src="foundation/js/vendor/modernizr.js" />
+	<link rel="stylesheet" href="foundation/css/foundation.css" />
+	<link rel="stylesheet" href="app.css" />
+	<script src="foundation/js/vendor/modernizr.js"></script>
 </h:head>
 <h:body>
 
 	<div class="formcont">
 		<h:form>
 			<p:growl id="messages" showDetail="true" />
-	
-			
+
+
 			<ul class="tabs" data-tab="sfd">
-				<li class="tab-title active"><a href="#appointment">Appointment Management</a></li>
+				<li class="tab-title active"><a href="#appointment">Appointment
+						Management</a></li>
 				<li class="tab-title"><a href="#group">Group Management</a></li>
 			</ul>
-			
-			
+
+
 			<div class="tabs-content">
 				<div class="content active" id="appointment">
-				  	<div class="table">
+					<div class="table">
 						<h:panelGrid columnClasses="value">
-							<p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule">
-				
-								<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-								<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-								<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
-								<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
-				
+							<p:schedule id="schedule" value="#{scheduleView.eventModel}"
+								widgetVar="myschedule">
+
+								<p:ajax event="dateSelect"
+									listener="#{scheduleView.onDateSelect}" update="eventDetails"
+									oncomplete="PF('eventDialog').show();" />
+								<p:ajax event="eventSelect"
+									listener="#{scheduleView.onEventSelect}" update="eventDetails"
+									oncomplete="PF('eventDialog').show();" />
+								<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
+									update="messages" />
+								<p:ajax event="eventResize"
+									listener="#{scheduleView.onEventResize}" update="messages" />
+
 							</p:schedule>
 						</h:panelGrid>
 					</div>
@@ -42,71 +50,74 @@
 				<div class="content" id="group">
 					<div class="table">
 						<div class="group">
-					  		<div class="row">
-					  			<div class="small-9 columns">
-					  				<p> Group 1</p>
-					  			</div>
-					  			<div class="small-3 columns">
-					  				<input class="button tiny" value="Leave"></input>
-					  			</div>
-					  		</div>
-					  		
-					  		<div class="row">
-					  			<div class="small-9 columns">
-					  				<p> Group 2</p>
-					  			</div>
-					  			<div class="small-3 columns">
-					  				<input class="button tiny" value="Leave"></input>
-					  			</div>
-					  		</div>
-					  		
-					  		<div class="row">
-					  			<div class="small-9 columns">
-					  				<p> Group 3</p>
-					  			</div>
-					  			<div class="small-3 columns">
-					  				<input class="button tiny" value="Leave"></input>
-					  			</div>
-					  		</div>
-					  		
-					  		
-					  		<br /><br /><br />
-					  		<div class="row">
-					  			<div class="small-6 columns">
-					  				<input class="button expand" value="Create Group"></input>
-					  			</div>
-						  		<div class="small-6 columns">
-					  				<input class="button expand" value="Join Group"></input>
-					  			</div>
-					  		</div>
-					  	</div>	
-				  	</div>
+							<div class="row">
+								<div class="small-9 columns">
+									<p>Group 1</p>
+								</div>
+								<div class="small-3 columns">
+									<input class="button tiny" value="Leave"></input>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="small-9 columns">
+									<p>Group 2</p>
+								</div>
+								<div class="small-3 columns">
+									<input class="button tiny" value="Leave"></input>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="small-9 columns">
+									<p>Group 3</p>
+								</div>
+								<div class="small-3 columns">
+									<input class="button tiny" value="Leave"></input>
+								</div>
+							</div>
+
+
+							<br /> <br /> <br />
+							<div class="row">
+								<div class="small-6 columns">
+									<input class="button expand" value="Create Group"
+										data-reveal-id="create_group"></input>
+								</div>
+								<div class="small-6 columns">
+									<input class="button expand" value="Join Group"></input>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-	
+
+
+
 			<p:dialog widgetVar="eventDialog" header="Event Details"
 				showEffect="clip" hideEffect="clip">
 				<h:panelGrid id="eventDetails" columns="2">
 					<h:outputLabel for="title" value="Title:" />
 					<p:inputText id="title" value="#{scheduleView.event.title}"
 						required="true" />
-	
+
 					<h:outputLabel for="from" value="From:" />
 					<p:inputMask id="from" value="#{scheduleView.event.startDate}"
 						mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
-	
+
 					<h:outputLabel for="to" value="To:" />
 					<p:inputMask id="to" value="#{scheduleView.event.endDate}"
 						mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
-	
+
 					<h:outputLabel for="allDay" value="All Day:" />
 					<h:selectBooleanCheckbox id="allDay"
 						value="#{scheduleView.event.allDay}" />
-	
+
 					<p:commandButton type="reset" value="Reset" />
 					<p:commandButton id="addButton" value="Save"
 						actionListener="#{scheduleView.addEvent}"
@@ -114,18 +125,40 @@
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
+		<div id="create_group" class="reveal-modal" data-reveal="sdf"
+			style="width: 300px;">
+			<h3>Create a new group</h3>
+			<h:form id="create_group">
+				<h:outputLabel for="type" value="Type:" />
+				<p:selectOneMenu id="type" value="#{groupView.groupType}"
+					style="width: 100%">
+					<f:selectItem itemLabel="Project Group" itemValue="PROJECT_GROUP"
+						required="true" label="Text 3" />
+					<f:selectItem itemLabel="Research Group" itemValue="RESEARCH_GROUP" />
+				</p:selectOneMenu>
+				<h:inputText id="cr_gr_name" value="#{groupView.newGroup.name}" />
+				<p:watermark for="cr_gr_name" value="Group Name" />
+
+				<h:inputSecret id="cr_gr_pass"
+					value="#{groupView.newGroup.password}" />
+
+				<p:watermark for="cr_gr_pass" value="Group Password" />
+				<h:commandButton value="Create"
+					action="#{groupView.createGroupMethod}" />
+			</h:form>
+		</div>
 	</div>
 
 
 
 	<style type="text/css">
-		.value {
-			width: 1000px;
-		}
-	</style>
-	
+.value {
+	width: 1000px;
+}
+</style>
+
 	<!-- <script src="foundation/js/vendor/jquery.js"></script> -->
- 	<script src="foundation/js/foundation.min.js"></script>
+	<script src="foundation/js/foundation.min.js"></script>
 	<script>
 	  $(document).foundation();
 	</script>
