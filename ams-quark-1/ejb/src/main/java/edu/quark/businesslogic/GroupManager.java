@@ -107,10 +107,8 @@ public class GroupManager implements IGroupManagement {
 		if(password.length()<6) {
 			return null;
 		}
-		// TODO: get Session info
 		if(type==GroupType.RESEARCH_GROUP) {
-			Researcher r = new Researcher();
-			List<BigInteger> gids = this.getGroupIds(r.getRid());
+			List<BigInteger> gids = this.getGroupIds(creator.getRid());
 			List<GroupDetails> gds = this.getGroupDetails(gids);
 			for (GroupDetails gd : gds) {
 				if(gd.getType()==GroupType.RESEARCH_GROUP) {
