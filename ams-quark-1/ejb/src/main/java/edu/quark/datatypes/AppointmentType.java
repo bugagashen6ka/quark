@@ -1,0 +1,9 @@
+package edu.quark.datatypes;
+
+public enum AppointmentType {
+	PROJECT_GROUP_MEETING,
+	RESEARCH_GROUP_MEETING,
+	TEACHING_APPOINTMENT, 
+	CONFERENCE_APPOINTMENT,
+	GENERIC_APPOINTMENT;
+}

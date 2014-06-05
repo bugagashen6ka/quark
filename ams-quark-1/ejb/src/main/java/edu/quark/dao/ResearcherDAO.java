@@ -1,11 +1,13 @@
 package edu.quark.dao;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import edu.quark.model.Researcher;
 
@@ -31,7 +33,14 @@ public class ResearcherDAO implements GenericDAO<Researcher, BigInteger> {
 		Researcher researcher = em.find(Researcher.class, id);
 		return researcher;
 	}
-
+	
+	public List<Researcher> findAll() {
+        TypedQuery<Researcher> query = em.createNamedQuery(
+                "Researcher.findAll", Researcher.class);
+        List<Researcher> results = query.getResultList();
+        return results;
+    }
+	
 	@Override
 	public void update(Researcher transientObject) {
 		em.merge(transientObject);

@@ -20,10 +20,10 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="owner.project.facets" value="jboss.m2"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/primefaces-5.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javaee-api-6.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

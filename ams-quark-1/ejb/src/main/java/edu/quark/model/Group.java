@@ -12,7 +12,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "Group")
+@Table(name = "GroupTable")
+@Inheritance(strategy=InheritanceType.JOINED)
+@NamedQueries({ @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g") })
 public class Group implements Serializable {
 
 	@Id
@@ -26,7 +28,7 @@ public class Group implements Serializable {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@OneToMany
+	@OneToMany(mappedBy="group")
 	// one group can have many appointments associated with it
 	// Do we need to declare this end of the association? I am not sure we need
 	// to display appointments

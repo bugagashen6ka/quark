@@ -22,10 +22,17 @@
 		<jta-data-source>java:jboss/datasources/ams-quark-1DS</jta-data-source>
 		<class>edu.quark.model.Appointment</class>
 		<class>edu.quark.model.Researcher</class>
+		<class>edu.quark.model.Group</class>
+		<class>edu.quark.model.ConferenceAppointment</class>
+		<class>edu.quark.model.ProjectGroup</class>
+		<class>edu.quark.model.ProjectGroupMeeting</class>
+		<class>edu.quark.model.ResearchGroup</class>
+		<class>edu.quark.model.ResearchGroupMeeting</class>
+		<class>edu.quark.model.TeachingAppointment</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.max_fetch_depth" value="3" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
