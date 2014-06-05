@@ -14,6 +14,29 @@
 ** DONE Component Interaction
    CLOSED: [2014-06-05 Thu 22:51]
 
+*** Collaboration Diagrams
+
+    #+CAPTION: IConflicts
+    [[./ch6-comp-interaction/IConflicts.eps]]
+    
+    #+CAPTION: ICreateAppointment
+    [[./ch6-comp-interaction/ICreateAppointment.eps]]
+    
+    #+CAPTION: ICreateGroup
+    [[./ch6-comp-interaction/ICreateGroup.eps]]
+    
+    #+CAPTION: ILogin
+    [[./ch6-comp-interaction/ILogin.eps]]
+    
+    #+CAPTION: IRegister
+    [[./ch6-comp-interaction/IRegister.eps]]
+    
+    #+CAPTION: ISearchAppointment
+    [[./ch6-comp-interaction/ISearchAppointment.eps]]
+    
+    #+CAPTION: ITime
+    [[./ch6-comp-interaction/ITime.eps]]
+    
 *** Auxiliary types
 #+INCLUDE: "./ch6-comp-interaction/auxiliary-types.org"
 
@@ -22,14 +45,46 @@
 
 *** System Interfaces
 #+INCLUDE: "./ch6-comp-interaction/system-interfaces.org"
-   
+
+
 ** DONE Component Specification
    CLOSED: [2014-06-05 Thu 22:51]
+
+*** Business interface specification diagrams
+
+#+INCLUDE: "./ch7-component-specification/business-interface-specification-diagrams.org"
+
+*** System interface specification diagrams
+
+    #+CAPTION: iAddResearcherToAnAppointment
+    [[./ch7-component-specification/iAddResearcherToAnAppointment-sys-iface-model.eps]]
+
+    #+CAPTION: iCreateAppointment
+    [[./ch7-component-specification/iCreateAppointment-sys-iface-model.eps]]
+
+    #+CAPTION: iCreateGroup
+    [[./ch7-component-specification/iCreateGroup-sys-iface-model.eps]]
+
+    #+CAPTION: iDeleteAppointment
+    [[./ch7-component-specification/iDeleteAppointment-sys-iface-model.eps]]
+
+    #+CAPTION: iJoinGroup
+    [[./ch7-component-specification/iJoinGroup-sys-iface-model.eps]]
+
+    #+CAPTION: iLeaveGroup
+    [[./ch7-component-specification/iLeaveGroup-sys-iface-model.eps]]
+
+    #+CAPTION: ilogin
+    [[./ch7-component-specification/ilogin-sys-iface-model.eps]]
+
+    #+CAPTION: ilogout
+    [[./ch7-component-specification/ilogout-sys-iface-model.eps]]
+
+    #+CAPTION: iregister
+    [[./ch7-component-specification/iregister-sys-iface-model.eps]]
+
 
 *** Pre- and Post- Conditions
 
 #+INCLUDE: "./ch7-component-specification/conditions.org"
 
-*** Business interface specification diagrams
-
-#+INCLUDE: "./ch7-component-specification/conditions.org"

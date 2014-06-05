@@ -62,6 +62,7 @@
   #+END_src
 
 * Create group
+
   #+begin_src plantuml :file ./icreate_group.png
   interface ICreateGroup {
     createGroup(in creator: Researcher, in name: String, in type: GroupType, in password: String): GroupId
@@ -69,6 +70,7 @@
   #+END_src
 
 * Join group
+
   #+begin_src plantuml :file ./ijoin_group.png
   interface IJoinGroup {
     joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
@@ -79,6 +81,7 @@
   [[file:./ijoin_group.png]]
 
 * Leave group
+
   #+begin_src plantuml :file ./ileave_group.png
   interface ILeaveGroup {
     leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
@@ -96,6 +99,7 @@
 
   
 * Search appointment
+
   #+begin_src plantuml :file ./isearch_appointment.png
   interface ISearchAppointment {
     getAppointmentIds(in rid: ResearcherId, in til: TimeInterval): AppointmentId [ ]
