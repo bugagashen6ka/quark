@@ -157,54 +157,87 @@
 			</p:dialog>
 		</h:form>
 		<div id="create_group" class="reveal-modal" data-reveal="sdf"
-			style="width: 300px;">
+			style="width: 400px;">
 			<h3>Create a new group</h3>
 			<h:form id="create_group">
-				<h:outputLabel for="type" value="Type:" />
-				<p:selectOneMenu id="type" value="#{groupView.groupType}"
-					style="width: 100%">
-					<f:selectItem itemLabel="Project Group" itemValue="PROJECT_GROUP"
-						required="true" label="Text 3" />
-					<f:selectItem itemLabel="Research Group" itemValue="RESEARCH_GROUP" />
-				</p:selectOneMenu>
-				<h:inputText id="cr_gr_name" value="#{groupView.newGroup.name}" />
-				<p:watermark for="cr_gr_name" value="Group Name" />
-
-				<h:inputSecret id="cr_gr_pass"
-					value="#{groupView.newGroup.password}" />
-
-				<p:watermark for="cr_gr_pass" value="Group Password" />
-				<h:commandButton value="Create"
-					action="#{groupView.createGroupMethod}" />
+				
+				<div class="row">
+					<div class="small-12 columns">
+						<h:outputLabel for="type" value="Type:" />
+						<p:selectOneMenu id="type" value="#{groupView.groupType}"
+							style="width: 100%">
+							<f:selectItem itemLabel="Project Group" itemValue="PROJECT_GROUP"
+								required="true" label="Text 3" />
+							<f:selectItem itemLabel="Research Group" itemValue="RESEARCH_GROUP" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				
+				<br />
+				
+				<div class="row">
+					<div class="small-12 columns">
+						<h:inputText id="cr_gr_name" value="#{groupView.newGroup.name}" />
+						<p:watermark for="cr_gr_name" value="Group Name" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="small-12 columns">
+						<h:inputSecret id="cr_gr_pass"
+							value="#{groupView.newGroup.password}" />
+						<p:watermark for="cr_gr_pass" value="Group Password" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="small-12 columns">
+					<h:commandButton value="Create"	action="#{groupView.createGroupMethod}" />
+					</div>
+				</div>
+				
+				
 			</h:form>
 		</div>
 
 
 		<div id="join_group" class="reveal-modal" data-reveal="sdf"
-			style="width: 300px;">
+			style="width: 400px;">
 			<h3>Choose the group</h3>
 			<h:form id="join_group">
-				<h:outputLabel for="type" value="Type:" />
-				<p:selectOneMenu id="type" value="#{groupView.chosenGroup}"
-					style="width: 100%" converter="#{groupConverter}">
-					<f:selectItems value="#{groupView.groups}" var="group"
-						itemValue="#{groupView.chosenGroup.name}"
-						itemLabel="#{group.name}" />
-				</p:selectOneMenu>
-
-				<h:inputSecret id="cr_gr_pass"
-					value="#{groupView.chosenGroup.password}" />
-
-				<p:watermark for="cr_gr_pass" value="Group Password" />
-				<h:commandButton value="Join" action="#{groupView.joinGroupMethod}" />
+			
+				<div class="row">
+					<div class="small-12 columns">
+						<h:outputLabel for="type" value="Type:" />
+						<p:selectOneMenu id="type" value="#{groupView.chosenGroup}"	style="width: 100%" converter="#{groupConverter}">
+							<f:selectItems value="#{groupView.groups}" var="group"
+								itemValue="#{groupView.chosenGroup.name}"
+								itemLabel="#{group.name}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				
+				<br />
+				
+				<div class="row">
+					<div class="small-12 columns">
+						<h:inputSecret id="cr_gr_pass"
+							value="#{groupView.chosenGroup.password}" />
+						<p:watermark for="cr_gr_pass" value="Group Password" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="small-12 columns">
+						<h:commandButton value="Join" action="#{groupView.joinGroupMethod}" />
+					</div>
+				</div>
+				
 			</h:form>
 		</div>
 	</div>
 
 	<script src="foundation/js/foundation.min.js"></script>
-	<script>
-	  $(document).foundation();
-	  $('td.fc-day.fc-wed.ui-widget-content').click(function() { alert("sdf"); $('.ui-selectonemenu-trigger').width(17); });
-	</script>
+	<script src="app.js"></script>
 </h:body>
 </html>
