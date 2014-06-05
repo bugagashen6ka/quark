@@ -1,5 +1,6 @@
 package edu.quark.managedbeans;
 
+
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,12 +17,17 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
 import edu.quark.systemlogic.CreateAppointment;
 import edu.quark.systemlogic.DeleteAppointment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ManagedBean
@@ -42,7 +48,8 @@ public class ScheduleView {
     private Date end;
     private String location;
 	private String description;
-	private Set<BigInteger> participants;
+	private Set<String> participants;
+	private List<String> availableParticipants;
     
 
 	private ScheduleModel lazyEventModel;
@@ -62,27 +69,12 @@ public class ScheduleView {
 		 * fourDaysLater3pm()));
 		 */
 
-		lazyEventModel = new LazyScheduleModel() {
-
-			@Override
-			public void loadEvents(Date start, Date end) {
-				Date random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 1", random,
-						random));
-
-				random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 2", random,
-						random));
-			}
-		};
-	}
-
-	public Date getRandomDate(Date base) {
-		Calendar date = Calendar.getInstance();
-		date.setTime(base);
-		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
-																	// day of
-																	// montht
+		
+		availableParticipants = new ArrayList<String>();
+		availableParticipants.add("Tom");
+		availableParticipants.add("John");
+		availableParticipants.add("Sam");
+        availableParticipants.add("sdfgdfg");
 
 	}
     
@@ -209,12 +201,12 @@ public class ScheduleView {
 	}
 
 
-	public Set<BigInteger> getParticipants() {
+	public Set<String> getParticipants() {
 		return participants;
 	}
 
 
-	public void setParticipants(Set<BigInteger> participants) {
+	public void setParticipants(Set<String> participants) {
 		this.participants = participants;
 	}
 
@@ -225,15 +217,6 @@ public class ScheduleView {
 	
 	public void setEventModel(ScheduleModel eventModel) {
 		this.eventModel = eventModel;
-	}
-
-	public void createAppointment() {
-		// createAppointment.createAppointment(rid, type, groupId, location,
-		// description);
-	}
-
-	public void deleteAppiontment() {
-		// deleteAppointment.deleteAppointment(researcherId, appointmentId);
 	}
 
 	public CreateAppointment getCreateAppointment() {
@@ -252,12 +235,23 @@ public class ScheduleView {
 		this.deleteAppointment = deleteAppointment;
 	}
 
-	public void setEventModel(ScheduleModel eventModel) {
-		this.eventModel = eventModel;
-	}
 
 	public void setLazyEventModel(ScheduleModel lazyEventModel) {
 		this.lazyEventModel = lazyEventModel;
+	}
+
+
+
+
+	public List<String> getAvailableParticipants() {
+		return availableParticipants;
+	}
+
+
+
+
+	public void setAvailableParticipants(List<String> availableParticipants) {
+		this.availableParticipants = availableParticipants;
 	}
 
 }

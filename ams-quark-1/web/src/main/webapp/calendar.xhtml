@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="foundation/css/foundation.css" />
     <link rel="stylesheet" href="app.css" />
     <script src="foundation/js/vendor/modernizr.js"></script>
+	<link type="text/css" rel="stylesheet" href="/project/faces/javax.faces.resource/theme.css?ln=primefaces-glass-x" />	
 </h:head>
 <h:body>
+
+
 
 	<div class="formcont">
 		<h:form>
@@ -46,9 +49,25 @@
 				<div class="content" id="group">
 					<div class="table"></div>
 					
+					
+					<div class="row">
+			  			<div class="small-6 columns">
+		  					<p>Name</p>
+			  			</div>
+			  			<div class="small-3 columns">
+		  					<p>Type</p>
+			  			</div>
+			  			<div class="small-3 columns">
+			  				
+			  			</div>
+			  		</div>
+					
 				  	<div class="row">
-			  			<div class="small-9 columns">
+			  			<div class="small-6 columns">
 		  					<p> Group 1</p>
+			  			</div>
+			  			<div class="small-3 columns">
+		  					<p> Type</p>
 			  			</div>
 			  			<div class="small-3 columns">
 			  				<input class="button tiny alert" value="Leave" type="button"></input>
@@ -91,12 +110,18 @@
 				<h:panelGrid id="eventDetails" columns="2">
 				
 					<h:outputLabel for="type" value="Type:" />
-					<p:inputText id="type" value="#{scheduleView.type}" required="true" />
+					<p:selectOneMenu id="type" value="#{scheduleView.type}" panelStyle="width:250px">
+						<f:selectItem itemLabel="General Appointment" itemValue="GENERIC_APPOINTMENT" required="true" label="Text 3"/>
+			            <f:selectItem itemLabel="Group Meeting" itemValue="PROJECT_GROUP_MEETING" />
+			            <f:selectItem itemLabel="Research Meeting" itemValue="RESEARCH_GROUP_MEETING" />
+			            <f:selectItem itemLabel="Teaching Appointment" itemValue="TEACHING_APPOINTMENT" />
+			            <f:selectItem itemLabel="Conference Appointment" itemValue="CONFERENCE_APPOINTMENT" />
+			        </p:selectOneMenu>
 	
 					<h:outputLabel for="description" value="Description:" />
 					<p:inputText id="description" value="#{scheduleView.description}" required="true" />
 	
-					<h:outputLabel for="location" value="Description:" />
+					<h:outputLabel for="location" value="Location:" />
 					<p:inputText id="location" value="#{scheduleView.location}" required="true" />
 					
 					<h:outputLabel for="from" value="From:" />
@@ -109,21 +134,25 @@
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
 					
-					<!-- Participants -->
-	
+					<h:outputLabel for="participant" value="Participant:" />
+			        <p:selectCheckboxMenu id="participant" value="#{scheduleView.participants}" label="Participants"
+			                              filter="true" filterMatchMode="startsWith" panelStyle="width:300px">
+			            <f:selectItems value="#{scheduleView.availableParticipants}" />
+			        </p:selectCheckboxMenu>
+					
+					
 					<p:commandButton type="reset" value="Reset" />
-					<p:commandButton id="addButton" value="Save"
-						actionListener="#{scheduleView.addEvent}"
+					<p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}"
 						oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
 	</div>
 	
-	<!-- <script src="foundation/js/vendor/jquery.js"></script> -->
  	<script src="foundation/js/foundation.min.js"></script>
 	<script>
 	  $(document).foundation();
+	  $('td.fc-day.fc-wed.ui-widget-content').click(function() { alert("sdf"); $('.ui-selectonemenu-trigger').width(17); });
 	</script>
 </h:body>
 </html>

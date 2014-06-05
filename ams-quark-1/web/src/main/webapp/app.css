@@ -123,3 +123,10 @@ input[type="submit"]:hover{
 .value {
 	width: 1000px;
 }
+
+.ui-selectonemenu{
+     width: 100% !important;
+}
+.ui-selectonemenu-label{
+     width: 100% !important;
+}
