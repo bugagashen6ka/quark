@@ -2,8 +2,13 @@ package edu.quark.systemlogic;
 
 import java.math.BigInteger;
 
+import javax.ejb.Local;
+import javax.enterprise.context.ApplicationScoped;
+
 import edu.quark.systeminterfaces.IRegister;
 
+@Local
+@ApplicationScoped
 public class Register implements IRegister {
 
 	@Override

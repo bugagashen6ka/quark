@@ -2,9 +2,14 @@ package edu.quark.systemlogic;
 
 import java.math.BigInteger;
 
+import javax.ejb.Local;
+import javax.enterprise.context.ApplicationScoped;
+
 import edu.quark.datatypes.AppointmentType;
 import edu.quark.systeminterfaces.ICreateAppointment;
 
+@Local
+@ApplicationScoped
 public class CreateAppointment implements ICreateAppointment {
 
 	@Override

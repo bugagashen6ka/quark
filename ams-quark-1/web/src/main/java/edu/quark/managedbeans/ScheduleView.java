@@ -2,7 +2,9 @@ package edu.quark.managedbeans;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -18,14 +20,17 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import edu.quark.systemlogic.CreateAppointment;
+import edu.quark.systemlogic.DeleteAppointment;
+
 @ManagedBean
 @ViewScoped
 public class ScheduleView {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4048631837903318541L;
+	
+	@EJB
+	private CreateAppointment createAppointment;
+	@EJB
+	private DeleteAppointment deleteAppointment;
 
 	private ScheduleModel eventModel;
      
@@ -204,5 +209,13 @@ public class ScheduleView {
 
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	public void createAppointment(){
+		//createAppointment.createAppointment(rid, type, groupId, location, description);
+	}
+	
+	public void deleteAppiontment(){
+		//deleteAppointment.deleteAppointment(researcherId, appointmentId);
 	}
 }
