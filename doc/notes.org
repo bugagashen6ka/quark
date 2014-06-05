@@ -10,3 +10,26 @@
    CLOSED: [2014-06-05 Thu 22:51]
 
 #+INCLUDE: "./ch5-comp-identification/notes_interfaces.org"
+
+** DONE Component Interaction
+   CLOSED: [2014-06-05 Thu 22:51]
+
+*** Auxiliary types
+#+INCLUDE: "./ch6-comp-interaction/auxiliary-types.org"
+
+*** Business Interfaces
+#+INCLUDE: "./ch6-comp-interaction/business-interfaces.org"
+
+*** System Interfaces
+#+INCLUDE: "./ch6-comp-interaction/system-interfaces.org"
+   
+** DONE Component Specification
+   CLOSED: [2014-06-05 Thu 22:51]
+
+*** Pre- and Post- Conditions
+
+#+INCLUDE: "./ch7-component-specification/conditions.org"
+
+*** Business interface specification diagrams
+
+#+INCLUDE: "./ch7-component-specification/conditions.org"

@@ -86,7 +86,8 @@
   #+END_src
 
 * Conflicts
-  #+begin_scr plantuml :file ./iconflicts.png
+
+  #+begin_src plantuml :file ./iconflicts.png
   interface IConflicts {
     getAppointmentsWithConflicts(in rid: ReseacherId, in til: TimeInterval): AppointmentId [ ][ ]
     getResearchersWithConflicts(in aid: AppoinmentId, in til: TimeInterval): ResearcherId [ ]

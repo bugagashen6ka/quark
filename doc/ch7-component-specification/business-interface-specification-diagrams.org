@@ -4,7 +4,7 @@
   - AppointmentType is enum {PROJECT_GROUP_MEETING, RESEARCH_GROUP_MEETING, TEACHING_APPOINTMENT, CONFERENCE_APPOINTMENT, GENERIC_APPOINTMENT}
 
 * IGroupManagement
-  #+begin_src plantuml :file ./igroup_management.png
+  #+begin_src plantuml :file ./igroup_management.eps
   interface IGroupManagement << interface type >> {
     getGroupIds(in rid: ResearcherId): GroupId [ ]
     getGroupDetails(in gid: GroupId): GroupDetails
@@ -36,10 +36,10 @@
   #+END_src
 
   #+RESULTS:
-  [[file:./igroup_management.png]]
+  [[file:./igroup_management.eps]]
 
 * IResearcherManagement
-  #+begin_src plantuml :file ./ireseacher_management.png
+  #+begin_src plantuml :file ./ireseacher_management.eps
   interface IResearcherManagement << interface type >> {
     getResearcherIds(in rd: ResearcherDetails): ResearcherId [ ]
     getResearcherDetails(in rid: ResearcherId): ResearcherDetails
@@ -84,7 +84,7 @@
   #+END_src
 
 * IAppointmentManagement
-  #+begin_src plantuml :file ./iappointment_management.png
+  #+begin_src plantuml :file ./iappointment_management.eps
   interface IAppointmentManagement << interface type >> {
     getParticipantIds(in aid: AppointmentId): ResearcherId [ ]
     getAppointmentDetails(in aid: AppointmentId): AppointmentDetails
@@ -132,5 +132,5 @@
   #+END_src
 
   #+RESULTS:
-  [[file:./iappointment_management.png]]
+  [[file:./iappointment_management.eps]]
 
