@@ -121,4 +121,11 @@ public class Appointment implements Serializable {
 		this.participants = participants;
 	}
 
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
 }
