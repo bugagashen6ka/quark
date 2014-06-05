@@ -3,9 +3,9 @@ package edu.quark.businessinterfaces;
 import java.math.BigInteger;
 import java.util.List;
 
+import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
-import edu.quark.model.Appointment;
 import edu.quark.model.Researcher;
 
 public interface IResearcherManagement {
@@ -17,7 +17,7 @@ public interface IResearcherManagement {
 	List<ResearcherDetails> getResearcherDetails(List<BigInteger> researcherIds);
 
 	/** @return appointment id's */
-	List<Appointment> getAppointments(BigInteger researcherId, TimeInfo time);
+	List<AppointmentDetails> getAppointmentDetails(BigInteger researcherId, TimeInfo time);
 
 	boolean checkEmail(String email);
 

@@ -9,8 +9,10 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import edu.quark.businessinterfaces.IResearcherManagement;
 import edu.quark.dao.ResearcherDAO;
+import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
@@ -67,9 +69,9 @@ public class ResearcherManager implements IResearcherManagement {
 	}
 
 	@Override
-	public List<Appointment> getAppointments(BigInteger researcherId,
+	public List<AppointmentDetails> getAppointmentDetails(BigInteger researcherId,
 			TimeInfo time) {
-		List<Appointment> retval = new ArrayList<Appointment>();
+		List<AppointmentDetails> retval = new ArrayList<AppointmentDetails>();
 		try{
 			Researcher r = researcherDAO.read(researcherId);
 			Set<Appointment> as = r.getAppointments();
@@ -77,7 +79,7 @@ public class ResearcherManager implements IResearcherManagement {
 				if(a.getStart().after(time.getStart()) &&
 				   a.getEnd().before(time.getEnd())&&
 				   a.getStart().before(a.getEnd())) {
-					retval.add(a);
+					retval.add(new AppointmentDetails(a));
 				}
 			}
 			return retval;

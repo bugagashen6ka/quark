@@ -10,8 +10,8 @@ import javax.ejb.Stateless;
 
 import edu.quark.businesslogic.AppointmentManager;
 import edu.quark.businesslogic.ResearcherManager;
+import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.TimeInfo;
-import edu.quark.model.Appointment;
 import edu.quark.systeminterfaces.IConflicts;
 
 @Stateless
@@ -25,9 +25,9 @@ public class Conflicts implements IConflicts {
 	private AppointmentManager appointmentManager;
 
 	@Override
-	public List<Appointment> getAppointmentsWithConflicts(
+	public List<AppointmentDetails> getAppointmentsWithConflicts(
 			BigInteger researcherId, TimeInfo time) {
-		return researcherManager.getAppointments(researcherId, time);
+		return researcherManager.getAppointmentDetails(researcherId, time);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Conflicts implements IConflicts {
 		List<BigInteger> conflicts = new ArrayList<BigInteger>();
 
 		for (BigInteger p : participants) {
-			if (researcherManager.getAppointments(p, time).size() > 1) {
+			if (researcherManager.getAppointmentDetails(p, time).size() > 1) {
 				conflicts.add(p);
 			}
 		}

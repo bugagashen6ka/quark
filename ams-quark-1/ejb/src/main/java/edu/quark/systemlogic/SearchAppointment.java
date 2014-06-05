@@ -6,9 +6,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import edu.quark.businesslogic.ResearcherManager;
+import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.TimeInfo;
-import edu.quark.model.Appointment;
 import edu.quark.systeminterfaces.ISearchAppointment;
 
 @Stateless
@@ -19,9 +20,9 @@ public class SearchAppointment implements ISearchAppointment {
 	private ResearcherManager researcherManager;
 
 	@Override
-	public List<Appointment> getAppointments(BigInteger researcherId,
+	public List<AppointmentDetails> getAppointmentDetails(BigInteger researcherId,
 			TimeInfo time) {
-		return researcherManager.getAppointments(researcherId, time);
+		return researcherManager.getAppointmentDetails(researcherId, time);
 	}
 
 }
