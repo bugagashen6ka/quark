@@ -42,7 +42,7 @@
     getAppointmentDetailsForMany(in aid: AppointmentId [ ]): AppointmentDetails [ ]
     addResearcherToAppointment(in rid: ResearcherId, in aid: AppointmentId): bool
     deleteAppointment(in aid: AppointmentId, in rid: ResearcherId): bool
-    createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
+    createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String, in time :TimeInfo): AppointmentId
   }
   #+END_src
 
