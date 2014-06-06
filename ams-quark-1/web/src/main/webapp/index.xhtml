@@ -21,7 +21,7 @@
 	<div id="login">
 		<div id="triangle"></div>
 		<h1>Log in</h1>
-		<h:form>
+		<h:form styleClass="login">
 			<h:inputText id="user" value="#{credentials.email}" />
 			<p:watermark for="user" value="Email" />
 
@@ -37,10 +37,9 @@
 		</h:form>
 	</div>
 
-	<div id="register" class="reveal-modal" data-reveal="sdf"
-		style="width: 300px;">
+	<div id="register" class="reveal-modal" data-reveal="sdf" style="width: 300px;">
 		<h3>Register new user</h3>
-		<h:form>
+		<h:form styleClass="login">
 			<h:inputText id="reg_user" value="#{credentials.email}" />
 			<p:watermark for="reg_user" value="Email" />
 

@@ -15,7 +15,10 @@
 </h:head>
 <h:body>
 
-	<h2 class="header">Lets Quark!</h2>
+	<div id="login">
+		<div id="triangle"></div>	
+		<h1 >Lets Quark!</h1>
+	</div>
 	<div class="formcont">
 
 		<div class="logout">
@@ -103,8 +106,7 @@
 							<h:outputLabel for="participant" value="Participant:" />
 							<p:selectCheckboxMenu id="participant"
 								value="#{scheduleView.appointment.participants}"
-								label="Participants" filter="true" filterMatchMode="startsWith"
-								panelStyle="width:300px">
+								label="Select participants" filter="true" filterMatchMode="startsWith">
 								<f:selectItems value="#{scheduleView.availableParticipants}" />
 							</p:selectCheckboxMenu>
 
@@ -121,7 +123,7 @@
 			<div class="content" id="group">
 
 				<h:form>
-					<table>
+					<table class="table">
 						<thead>
 							<tr>
 								<th width="500">Name</th>
@@ -150,7 +152,7 @@
 				</h:form>
 
 
-				<br /> <br /> <br />
+				<br />
 				<div class="row">
 					<div class="small-6 columns">
 						<a href='#' class="button expand" data-reveal-id="create_group">Create
@@ -172,7 +174,7 @@
 		<div id="create_group" class="reveal-modal" data-reveal="sdf"
 			style="width: 400px;">
 			<h3>Create a new group</h3>
-			<h:form id="create_group">
+			<h:form id="create_group" styleClass="popup">
 
 				<div class="row">
 					<div class="small-12 columns">
@@ -218,7 +220,7 @@
 		<div id="join_group" class="reveal-modal" data-reveal="sdf"
 			style="width: 400px;">
 			<h3>Choose the group</h3>
-			<h:form id="join_group">
+			<h:form id="join_group" styleClass="popup">
 
 				<div class="row">
 					<div class="small-12 columns">

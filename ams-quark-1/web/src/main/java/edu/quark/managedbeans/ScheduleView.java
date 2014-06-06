@@ -104,7 +104,7 @@ public class ScheduleView {
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
 		availableParticipants = new ArrayList<Researcher>();
-        if(credentials.getResearcher()!=null) {
+       /* if(credentials.getResearcher()!=null) {
         	Date t1=new Date();
             Date t2=new Date();
             Date t3=new Date();
@@ -122,7 +122,7 @@ public class ScheduleView {
             		AppointmentType.GENERIC_APPOINTMENT, 
             		null, "3076", "XXX", new TimeInfo(t3,t4));
             this.AppointmentDetailsToView();
-        }
+        }*/
         
 	}
     
