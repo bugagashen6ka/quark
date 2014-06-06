@@ -17,6 +17,7 @@ import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
 import edu.quark.model.Group;
+import edu.quark.model.Researcher;
 import edu.quark.systemlogic.CreateGroup;
 import edu.quark.systemlogic.JoinGroup;
 import edu.quark.systemlogic.LeaveGroup;
@@ -67,6 +68,10 @@ public class GroupView {
 		researcherGroupDetails = new ArrayList<GroupDetails>();
 		newGroup = new Group();
 		chosenGroup = new Group();
+		
+		createGroup.createGroup(credentials.getResearcher(), "Food", GroupType.PROJECT_GROUP, "aaaaaa");
+		createGroup.createGroup(credentials.getResearcher(), "Sport", GroupType.PROJECT_GROUP, "aaaaaa");
+		createGroup.createGroup(credentials.getResearcher(), "Drinks", GroupType.RESEARCH_GROUP, "aaaaaa");
 	}
 
 	public GroupDAO getGroupDAO() {
