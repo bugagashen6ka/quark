@@ -96,13 +96,16 @@ input[type="submit"]:hover{
 	padding:30px;
 	position: relative;
 	display: table;
+	background:#f0f0f0;
 }
 		
 		
 .table {
 	display: table-row;
-	width: 80%;
-	height: 80%;
+	ba
+	
+	width: 90%;
+	height: 90%;
 	min-width: 100px;
 	max-width: 800px;
 	padding: 40px;
