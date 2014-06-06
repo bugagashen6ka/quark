@@ -1,2 +1,6 @@
 .metadata/
+doc/auto/
+*.png
+*.tex
+*.html
 *.log

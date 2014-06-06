@@ -1,0 +1,18 @@
+
+** Component Identification
+
+*** Business Type Model
+
+[[./business-type-model.png]]
+
+*** System Interfaces
+
+#+INCLUDE: "./notes_interfaces.org"
+
+*** Business Type Interface Model
+
+[[./business-type-iface-model.png]]
+
+*** Initial Component Specifications
+
+#+INCLUDE: "./initial-comp-spec.org"

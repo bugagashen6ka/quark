@@ -1,30 +1,53 @@
-* leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
+leaveGroup(in rid: ResearcherId, in gid: GroupId): bool
+#+BEGIN_EXAMPLE
   PRE: rid is in group members.
   POST: rid is deleted from group members.
+#+END_EXAMPLE
 
-* joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
+joinGroup(in rid: ResearcherId, in gid: GroupId, in password: String): bool
+
+#+BEGIN_EXAMPLE
   PRE: rid is not a group member.
   POST: rid becomes member of group.
+#+END_EXAMPLE
 
-* createGroup(in name: String, in type: GroupType): GroupId
+createGroup(in name: String, in type: GroupType): GroupId
+
+#+BEGIN_EXAMPLE
   PRE: password < 6 symbols.
   POST: group is not created.
+#+END_EXAMPLE
 
+
+#+BEGIN_EXAMPLE
   PRE: group creator is not member of any  research group and type is RESEARCH_GROUP.
   POST: research group is created.
+#+END_EXAMPLE
 
-*  checkPassword(in gid: GroupId, in password: String): bool
+checkPassword(in gid: GroupId, in password: String): bool
+
+#+BEGIN_EXAMPLE
   PRE: gid must exist.
   POST: password check is conducted.
+#+END_EXAMPLE
 
-* createResearcher(in emailAdr: String, in password: String, in firstname: String, in lastname: String, in title: String, in phoneNbr: String): ResearcherId
+createResearcher(in emailAdr: String, in password: String, in firstname: String, in lastname: String, in title: String, in phoneNbr: String): ResearcherId
+
+#+BEGIN_EXAMPLE
   PRE: email should be unique.
   POST: user is created.
+#+END_EXAMPLE
 
-* createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
+createAppointment(in creator: ResearcherId, in type: AppointmentType, in gid: GroupId, in location: String, in description: String): AppointmentId
+
+#+BEGIN_EXAMPLE
   PRE: researcher id must exist. groupid must exist. 
   POST: appointment is created.
+#+END_EXAMPLE
 
-* createTimeInformation(in start: java.util.Date, in end: java.util.Date): TimeInterval
+createTimeInformation(in start: java.util.Date, in end: java.util.Date): TimeInterval
+
+#+BEGIN_EXAMPLE
   PRE: start < end.
   POST: TimeInterval is returned.
+#+END_EXAMPLE

@@ -1,5 +1,5 @@
 * Register
-  #+begin_src plantuml :file ./iregister.png
+  #+begin_src plantuml :file ./iregister.eps
   interface IRegister {
     check_email()
     create_user()
@@ -7,19 +7,19 @@
   #+END_src
 
 * Login
-  #+begin_src plantuml :file ./ilogin.png
+  #+begin_src plantuml :file ./ilogin.eps
   interface ILogin {
     login()
   }
   #+END_src
 * Logout
-  #+begin_src plantuml :file ./ilogout.png
+  #+begin_src plantuml :file ./ilogout.eps
   interface ILogout {
     logout()
   }
   #+END_src
 * Create appointment
-  #+begin_src plantuml :file ./icreate_appointment.png
+  #+begin_src plantuml :file ./icreate_appointment.eps
   interface ICreateAppointment {
     create_appointment()
   }
@@ -30,7 +30,7 @@
   We do this on the client side by constructing an object that
   encapsulates time range information.
 
-  #+begin_src plantuml :file ./itime.png
+  #+begin_src plantuml :file ./itime.eps
   interface ITime {
     create_time_information()
   }
@@ -43,44 +43,45 @@
   deleted only from ivoker's schedule if he is just participant of the
   appointment.
 
-  #+begin_src plantuml :file ./idelete_appointment.png
+  #+begin_src plantuml :file ./idelete_appointment.eps
   interface IDeleteAppointment {
     delete()
   }
   #+END_src
-* Add researcher to an appointment
-  #+begin_src plantuml :file ./iadd_user_to_an_appointment.png
+* Add researcher to an appointment 
+
+  #+begin_src plantuml :file ./iadd_user_to_an_appointment.eps
   interface IAddResearcherToAnAppointment {
     add()
   }
   #+END_src
 
 * Create group
-  #+begin_src plantuml :file ./icreate_group.png
+  #+begin_src plantuml :file ./icreate_group.eps
   interface ICreateGroup {
     create()
   }
   #+END_src
 
 * Join group
-  #+begin_src plantuml :file ./ijoin_group.png
+  #+begin_src plantuml :file ./ijoin_group.eps
   interface IJoinGroup {
     join()
   }
   #+END_src
 
   #+RESULTS:
-  [[file:./ijoin_group.png]]
+  [[file:./ijoin_group.eps]]
 
 * Leave group
-  #+begin_src plantuml :file ./ileave_group.png
+  #+begin_src plantuml :file ./ileave_group.eps
   interface ILeaveGroup {
     leave()
   }
   #+END_src
 
 * Conflicts
-  #+begin_scr plantuml :file ./iconflicts.png
+  #+begin_src plantuml :file ./iconflicts.eps
   interface IConflicts {
     get_conflicts()
     get_users_with_conflicts()
@@ -89,28 +90,28 @@
 
   
 * Search appointment
-  #+begin_src plantuml :file ./isearch_appointment.png
+  #+begin_src plantuml :file ./isearch_appointment.eps
   interface ISearchAppointment {
     get_appointment_list()
   }
   #+end_src
 
 * Search participant
-  #+begin_src plantuml :file ./isearch_participant.png
+  #+begin_src plantuml :file ./isearch_participant.eps
   interface ISearchParticipant {
     get_participant_list()
   }
   #+end_src
 
 * Search researcher
-  #+begin_src plantuml :file ./isearch_researcher.png
+  #+begin_src plantuml :file ./isearch_researcher.eps
   interface ISearchResearcher {
     get_researcher_list()
   }
   #+end_src
 
 * Search group
-  #+begin_src plantuml :file ./isearch_group.png
+  #+begin_src plantuml :file ./isearch_group.eps
   interface ISearchGroup {
     get_group_list()
   }
