@@ -169,6 +169,15 @@ public class ScheduleView {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
+		createAppointment.createAppointment(credentials.getResearcher()
+				.getRid(), type, null, appointment.getLocation(),
+				appointment.getDescription(),
+				new TimeInfo(appointment.getStart(),
+						appointment.getEnd()));
+		for (Researcher r : appointment.getParticipants())
+			appointmentManager.inviteResearcher(r.getRid(), appointment.getAid());
+
+		this.AppointmentDetailsToView();
 		/*if (appointmentDetails.getId() == null)
 			eventModel.addEvent(appointmentDetails);
 		else
