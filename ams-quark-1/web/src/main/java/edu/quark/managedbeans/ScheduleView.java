@@ -104,25 +104,26 @@ public class ScheduleView {
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
 		availableParticipants = new ArrayList<Researcher>();
-       /* if(credentials.getResearcher()!=null) {
-        	Date t1=new Date();
-            Date t2=new Date();
-            Date t3=new Date();
-            Date t4=new Date();
-            t1.setHours(18);
-            t2.setHours(19);
-            t3.setHours(11);
-            t4.setHours(23);
-            appointmentManager.createAppointment(
-            		credentials.getResearcher().getRid(),
-            		AppointmentType.CONFERENCE_APPOINTMENT, 
-            		null, "3076", "JJJ", new TimeInfo(t1,t2));
-            appointmentManager.createAppointment(
-            		credentials.getResearcher().getRid(),
-            		AppointmentType.GENERIC_APPOINTMENT, 
-            		null, "3076", "XXX", new TimeInfo(t3,t4));
-            this.AppointmentDetailsToView();
-        }*/
+
+//        if(credentials.getResearcher()!=null) {
+//        	Date t1=new Date();
+//            Date t2=new Date();
+//            Date t3=new Date();
+//            Date t4=new Date();
+//            t1.setHours(18);
+//            t2.setHours(19);
+//            t3.setHours(11);
+//            t4.setHours(23);
+//            appointmentManager.createAppointment(
+//            		credentials.getResearcher().getRid(),
+//            		AppointmentType.CONFERENCE_APPOINTMENT, 
+//            		null, "3076", "JJJ", new TimeInfo(t1,t2));
+//            appointmentManager.createAppointment(
+//            		credentials.getResearcher().getRid(),
+//            		AppointmentType.GENERIC_APPOINTMENT, 
+//            		null, "3076", "XXX", new TimeInfo(t3,t4));
+//            this.AppointmentDetailsToView();
+//        }
         
 	}
     
@@ -186,9 +187,12 @@ public class ScheduleView {
 		appointmentDetails = new DefaultScheduleEvent();*/
 	}
 
-	public void onEventSelect(SelectEvent selectEvent) {
+	public void onEventSelect(SelectEvent selectEvent) {//SelectEvent selectEvent
 		ScheduleEvent se = (ScheduleEvent) selectEvent.getObject();
 		this.appointment = (Appointment) se.getData();
+	}
+	
+	public void onEventTypeSelect() {
 		if(this.appointment instanceof Appointment) {
 			this.type = AppointmentType.GENERIC_APPOINTMENT;
 			this.availableParticipants = researcherDAO.findAll();
@@ -228,9 +232,9 @@ public class ScheduleView {
 
 	public void onDateSelect(SelectEvent selectEvent) {
 		this.appointment = new Appointment();
-		Date se =(Date) selectEvent.getObject(); 
-		this.appointment.setStart(se);
-		this.appointment.setEnd(se);
+		Date date =(Date) selectEvent.getObject(); 
+		this.appointment.setStart(date);
+		this.appointment.setEnd(date);
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -301,6 +305,27 @@ public class ScheduleView {
 		this.availableParticipants = availableParticipants;
 	}
 	
+	public void updateAvailableParticipants() {
+		if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
+			this.availableParticipants = researcherDAO.findAll();
+		} else if (this.type == AppointmentType.CONFERENCE_APPOINTMENT) {
+			this.availableParticipants = researcherDAO.findAll();
+		} else if (this.type == AppointmentType.TEACHING_APPOINTMENT) {
+			this.availableParticipants = new ArrayList<Researcher>();
+		} else if (this.type == AppointmentType.RESEARCH_GROUP_MEETING) {
+			this.availableParticipants = new ArrayList<Researcher>();
+			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
+			for (GroupDetails g : gs) {
+				if (g.getType()==GroupType.RESEARCH_GROUP) {
+					Set<BigInteger> gmi = g.getMembers();
+					for (BigInteger gm: gmi) {
+						this.availableParticipants.add(researcherDAO.read(gm));
+					}
+				}
+			}
+		}
+	}
+	
 	public Credentials getCredentials() {
 		return credentials;
 	}
@@ -309,5 +334,71 @@ public class ScheduleView {
 	public void setCredentials(Credentials credentials) {
 		this.credentials = credentials;
 	}
+
+
+	public AppointmentDAO getAppointmentDAO() {
+		return appointmentDAO;
+	}
+
+
+	public void setAppointmentDAO(AppointmentDAO appointmentDAO) {
+		this.appointmentDAO = appointmentDAO;
+	}
+
+
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+
+
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
+
+	public ResearcherDAO getResearcherDAO() {
+		return researcherDAO;
+	}
+
+
+	public void setResearcherDAO(ResearcherDAO researcherDAO) {
+		this.researcherDAO = researcherDAO;
+	}
+
+
+	public ResearcherManager getResearcherManager() {
+		return researcherManager;
+	}
+
+
+	public void setResearcherManager(ResearcherManager researcherManager) {
+		this.researcherManager = researcherManager;
+	}
+
+
+	public AppointmentManager getAppointmentManager() {
+		return appointmentManager;
+	}
+
+
+	public void setAppointmentManager(AppointmentManager appointmentManager) {
+		this.appointmentManager = appointmentManager;
+	}
+
+
+	public ScheduleEvent getEvent() {
+		return event;
+	}
+
+
+	public void setEvent(ScheduleEvent event) {
+		this.event = event;
+	}
+
+
+	public ScheduleModel getLazyEventModel() {
+		return lazyEventModel;
+	}
+	
 
 }

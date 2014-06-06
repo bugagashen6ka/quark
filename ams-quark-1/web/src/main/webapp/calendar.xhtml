@@ -71,6 +71,7 @@
 							<h:outputLabel for="type" value="Type:" />
 							<p:selectOneMenu id="type" value="#{scheduleView.type}"
 								panelStyle="width:250px">
+								<p:ajax listener="#{scheduleView.onEventTypeSelect}" update="participant" />
 								<f:selectItem itemLabel="General Appointment"
 									itemValue="GENERIC_APPOINTMENT" required="true" label="Text 3" />
 								<f:selectItem itemLabel="Group Meeting"
@@ -106,7 +107,8 @@
 							<h:outputLabel for="participant" value="Participant:" />
 							<p:selectCheckboxMenu id="participant"
 								value="#{scheduleView.appointment.participants}"
-								label="Select participants" filter="true" filterMatchMode="startsWith">
+								label="Select participants" filter="true" filterMatchMode="startsWith"
+								converter="#{researcherConverter}">
 								<f:selectItems value="#{scheduleView.availableParticipants}" />
 							</p:selectCheckboxMenu>
 
