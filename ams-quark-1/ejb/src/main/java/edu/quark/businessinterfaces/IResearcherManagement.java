@@ -19,7 +19,7 @@ public interface IResearcherManagement {
 	/** @return appointment id's */
 	List<AppointmentDetails> getAppointmentDetails(BigInteger researcherId, TimeInfo time);
 
-	boolean checkEmail(String email);
+	Researcher checkEmail(String email);
 
 	/** @return researcher id */
 	BigInteger createResearcher(String email, String password,

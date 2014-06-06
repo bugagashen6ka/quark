@@ -96,19 +96,19 @@ public class ResearcherManager implements IResearcherManagement {
 	}
 
 	@Override
-	public boolean checkEmail(String email) {
+	public Researcher checkEmail(String email) {
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if (r.getEmail() == email)
-				return false;
+			if (r.getEmail().equals(email))
+				return r;
 		}
-		return true;
+		return null;
 	}
 
 	@Override
 	public BigInteger createResearcher(String email, String password,
 			String firstName, String lastName, String title, String phoneNumber) {
-		if (!this.checkEmail(email))
+		if (this.checkEmail(email) != null)
 			return null;
 		Researcher r = new Researcher();
 		r.setAppointments(new HashSet<Appointment>());

@@ -35,6 +35,7 @@ import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
+import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
 import edu.quark.model.ConferenceAppointment;
@@ -87,6 +88,8 @@ public class ScheduleView {
     
     private AppointmentType type;
 	private List<Researcher> availableParticipants;
+	private List<Researcher> selectedParticipants;
+	private List<String> selectedParticipantsNames;
 
 	private ScheduleEvent event = new DefaultScheduleEvent();
 
@@ -122,7 +125,7 @@ public class ScheduleView {
 //            		credentials.getResearcher().getRid(),
 //            		AppointmentType.GENERIC_APPOINTMENT, 
 //            		null, "3076", "XXX", new TimeInfo(t3,t4));
-//            this.AppointmentDetailsToView();
+           this.AppointmentDetailsToView();
 //        }
         
 	}
@@ -170,13 +173,15 @@ public class ScheduleView {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		createAppointment.createAppointment(credentials.getResearcher()
+		BigInteger aid = createAppointment.createAppointment(credentials.getResearcher()
 				.getRid(), type, null, appointment.getLocation(),
 				appointment.getDescription(),
 				new TimeInfo(appointment.getStart(),
 						appointment.getEnd()));
-		for (Researcher r : appointment.getParticipants())
-			appointmentManager.inviteResearcher(r.getRid(), appointment.getAid());
+		for (String email : selectedParticipantsNames) {
+			Researcher r = researcherManager.checkEmail(email);
+			appointmentManager.inviteResearcher(r.getRid(), aid);
+		}
 
 		this.AppointmentDetailsToView();
 		/*if (appointmentDetails.getId() == null)
@@ -398,6 +403,27 @@ public class ScheduleView {
 
 	public ScheduleModel getLazyEventModel() {
 		return lazyEventModel;
+	}
+
+
+	public List<Researcher> getSelectedParticipants() {
+		return selectedParticipants;
+	}
+
+
+	public void setSelectedParticipants(List<Researcher> selectedParticipants) {
+		this.selectedParticipants = selectedParticipants;
+	}
+
+
+	public List<String> getSelectedParticipantsNames() {
+		return selectedParticipantsNames;
+	}
+
+
+	public void setSelectedParticipantsNames(
+			List<String> selectedParticipantsNames) {
+		this.selectedParticipantsNames = selectedParticipantsNames;
 	}
 	
 

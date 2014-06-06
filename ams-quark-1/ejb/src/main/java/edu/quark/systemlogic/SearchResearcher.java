@@ -56,7 +56,7 @@ public class SearchResearcher implements IResearcherManagement {
 	}
 
 	@Override
-	public boolean checkEmail(String email) {
+	public Researcher checkEmail(String email) {
 		return researcherManager.checkEmail(email);
 	}
 

@@ -17,7 +17,7 @@ public class Register implements IRegister {
 
 	@Override
 	public boolean checkEmail(String email) {
-		return researcherManager.checkEmail(email);
+		return researcherManager.checkEmail(email) != null;
 	}
 
 	@Override

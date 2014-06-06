@@ -106,10 +106,12 @@
 
 							<h:outputLabel for="participant" value="Participant:" />
 							<p:selectCheckboxMenu id="participant"
-								value="#{scheduleView.appointment.participants}"
-								label="Select participants" filter="true" filterMatchMode="startsWith"
-								converter="#{researcherConverter}">
-								<f:selectItems value="#{scheduleView.availableParticipants}" />
+								value="#{scheduleView.selectedParticipantsNames}"
+								label="Select participants" filter="true" filterMatchMode="startsWith">
+								<f:selectItems value="#{scheduleView.availableParticipants}" 
+									var="p"
+									itemValue="#{p.email}"
+									itemLabel="#{p.email}"/>
 							</p:selectCheckboxMenu>
 
 							<p:commandButton type="reset" value="Reset" />
