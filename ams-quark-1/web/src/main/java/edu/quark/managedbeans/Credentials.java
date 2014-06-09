@@ -1,5 +1,9 @@
 package edu.quark.managedbeans;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -28,7 +32,6 @@ import edu.quark.systemlogic.Register;
 @ManagedBean
 @SessionScoped
 @Path("/")
-@Produces(MediaType.APPLICATION_XML)
 public class Credentials {
 
 	@EJB
@@ -133,6 +136,7 @@ public class Credentials {
 	
 	@GET
 	@Path("/test.json")
+	@Produces(MediaType.APPLICATION_XML)
 	public Researcher test() {
 		Researcher researcher2 = new Researcher();
 		researcher2.setEmail("apfel");
@@ -145,14 +149,17 @@ public class Credentials {
 
 		researcher = researcher2;
 		
+		
 		return researcher;
 	}
-	
+
 	@POST
-	@Path("/echo.json")
-	public String echo(@QueryParam("in") String in) {
+	@Path("/echo.json/{in}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String echo(@PathParam("in") String in) {
 		return in;
 	}
+	
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		setResearcher(login.login(email, password));
