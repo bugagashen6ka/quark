@@ -19,7 +19,7 @@
 		in META-INF/persistence.xml -->
 	<datasource jndi-name="java:jboss/datasources/ams-quark-1DS"
 		pool-name="ams-quark-1" enabled="true" use-java-context="true">
-		<connection-url>jdbc:h2:mem:ams-quark-1;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
+		<connection-url>jdbc:h2:file:~/ams-1-quark;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS INFORMATION_SCHEMA</connection-url>
 		<driver>h2</driver>
 		<security>
 			<user-name>sa</user-name>
