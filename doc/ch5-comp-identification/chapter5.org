@@ -1,18 +1,168 @@
 
-** Component Identification
+* Component Identification
 
-*** Business Type Model
+** Business Type Model
 
-[[./business-type-model.png]]
+[[./ch5-comp-identification/business-type-model.png]]
 
-*** System Interfaces
+** System Interfaces
 
-#+INCLUDE: "./notes_interfaces.org"
+*** Register
+    #+begin_src plantuml :file ./iregister.eps
+    interface IRegister {
+      check_email()
+      create_user()
+    }
+    #+END_src
 
-*** Business Type Interface Model
+*** Login
+    #+begin_src plantuml :file ./ilogin.eps
+    interface ILogin {
+      login()
+    }
+    #+END_src
+*** Logout
+    #+begin_src plantuml :file ./ilogout.eps
+    interface ILogout {
+      logout()
+    }
+    #+END_src
+*** Create appointment
+    #+begin_src plantuml :file ./icreate_appointment.eps
+    interface ICreateAppointment {
+      create_appointment()
+    }
+    #+END_src
 
-[[./business-type-iface-model.png]]
+*** Time management
 
-*** Initial Component Specifications
+    We do this on the client side by constructing an object that
+    encapsulates time range information.
 
-#+INCLUDE: "./initial-comp-spec.org"
+    #+begin_src plantuml :file ./itime.eps
+    interface ITime {
+      create_time_information()
+    }
+    #+END_src
+
+*** Delete appointment
+
+    Delete operation deletes appointment entity if the invoker of this
+    command is the creator of the appointment. And appointment is
+    deleted only from ivoker's schedule if he is just participant of the
+    appointment.
+
+    #+begin_src plantuml :file ./idelete_appointment.eps
+    interface IDeleteAppointment {
+      delete()
+    }
+    #+END_src
+*** Add researcher to an appointment 
+
+    #+begin_src plantuml :file ./iadd_user_to_an_appointment.eps
+    interface IAddResearcherToAnAppointment {
+      add()
+    }
+    #+END_src
+
+*** Create group
+    #+begin_src plantuml :file ./icreate_group.eps
+    interface ICreateGroup {
+      create()
+    }
+    #+END_src
+
+*** Join group
+    #+begin_src plantuml :file ./ijoin_group.eps
+    interface IJoinGroup {
+      join()
+    }
+    #+END_src
+
+    #+RESULTS:
+    [[file:./ijoin_group.eps]]
+
+*** Leave group
+    #+begin_src plantuml :file ./ileave_group.eps
+    interface ILeaveGroup {
+      leave()
+    }
+    #+END_src
+
+*** Conflicts
+    #+begin_src plantuml :file ./iconflicts.eps
+    interface IConflicts {
+      get_conflicts()
+      get_users_with_conflicts()
+    }
+    #+end_src
+
+    
+*** Search appointment
+    #+begin_src plantuml :file ./isearch_appointment.eps
+    interface ISearchAppointment {
+      get_appointment_list()
+    }
+    #+end_src
+
+*** Search participant
+    #+begin_src plantuml :file ./isearch_participant.eps
+    interface ISearchParticipant {
+      get_participant_list()
+    }
+    #+end_src
+
+*** Search researcher
+    #+begin_src plantuml :file ./isearch_researcher.eps
+    interface ISearchResearcher {
+      get_researcher_list()
+    }
+    #+end_src
+
+*** Search group
+    #+begin_src plantuml :file ./isearch_group.eps
+    interface ISearchGroup {
+      get_group_list()
+    }
+
+    
+    note as N 
+      Get list of all groups where participant is a member,
+      if participant is specified, return all groups otherwise
+    end note
+
+    N .. ISearchGroup
+
+    #+end_src
+
+
+
+
+** Business Type Interface Model
+
+[[./ch5-comp-identification/business-type-iface-model.png]]
+
+** Initial Component Specifications
+
+  #+begin_src plantuml :file ./initial-comp-spec.png
+  @startuml
+  ILogin - [Appointment Scheduling System] << comp spec >>
+  ILogout - [Appointment Scheduling System] << comp spec >>
+  IRegister - [Appointment Scheduling System]  << comp spec >>
+  ICreateAppointment - [Appointment Scheduling System] << comp spec >>
+  IDeleteAppointment - [Appointment Scheduling System] << comp spec >>
+  IInviteParticipant - [Appointment Scheduling System] << comp spec >>
+  IJoinGroup - [Appointment Scheduling System] << comp spec >>
+  ICreateGroup - [Appointment Scheduling System] << comp spec >>
+  ILeaveGroup - [Appointment Scheduling System] << comp spec >>
+  IConflict - [Appointment Scheduling System]  << comp spec >>
+  [Appointment Scheduling System] << comp spec >> ..> IGroupMgt
+  [Appointment Scheduling System] << comp spec >> ..> IResearcherMgt
+  [Appointment Scheduling System] << comp spec >> ..> IAppointmentMgt
+  IGroupMgt - [GroupMgt] << comp spec >>
+  IResearcherMgt - [ResearcherMgt] << comp spec >>
+  IAppointmentMgt - [AppointmentMgt] << comp spec >>
+  [AppointmentMgt] << comp spec >> ..> ITimeMgt
+  ITimeMgt - [TimeMgt] << comp spec >>
+  @enduml
+  #+END_src
