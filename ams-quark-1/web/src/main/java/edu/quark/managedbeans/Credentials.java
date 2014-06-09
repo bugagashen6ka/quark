@@ -3,12 +3,23 @@ package edu.quark.managedbeans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.Response.StatusType;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
  
 import edu.quark.dao.ResearcherDAO;
+import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.model.Researcher;
 import edu.quark.systemlogic.Login;
 import edu.quark.systemlogic.Logout;
@@ -16,6 +27,8 @@ import edu.quark.systemlogic.Register;
 
 @ManagedBean
 @SessionScoped
+@Path("/")
+@Produces(MediaType.APPLICATION_XML)
 public class Credentials {
 
 	@EJB
@@ -78,6 +91,7 @@ public class Credentials {
 		researcher2.setTitle("Prof.");
 		researcherDAO.create(researcher2);
 
+		researcher = researcher2;
 	}
 
 	public String getPassword() {
@@ -104,6 +118,41 @@ public class Credentials {
 		this.researcher = researcher;
 	}
 
+	@POST
+	@Path("/login.json")
+	public Response login(
+			@QueryParam("email") String email, 
+			@QueryParam("password") String password) {
+		setResearcher(login.login(email, password));
+		if (researcher == null) {
+			return Response.serverError().status(Status.UNAUTHORIZED).build();
+		}
+		navigationBean.moveToCalendar();
+		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/test.json")
+	public Researcher test() {
+		Researcher researcher2 = new Researcher();
+		researcher2.setEmail("apfel");
+		researcher2.setPassword("1");
+		researcher2.setFirstName("Apfel");
+		researcher2.setLastName("Saft");
+		researcher2.setPhoneNumber("1111");
+		researcher2.setTitle("Prof.");
+		researcherDAO.create(researcher2);
+
+		researcher = researcher2;
+		
+		return researcher;
+	}
+	
+	@POST
+	@Path("/echo.json")
+	public String echo(@QueryParam("in") String in) {
+		return in;
+	}
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		setResearcher(login.login(email, password));
