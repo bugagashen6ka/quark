@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -136,7 +137,7 @@ public class Credentials {
 	
 	@GET
 	@Path("/test.json")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Researcher test() {
 		Researcher researcher2 = new Researcher();
 		researcher2.setEmail("apfel");
@@ -154,9 +155,10 @@ public class Credentials {
 	}
 
 	@POST
-	@Path("/echo.json/{in}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String echo(@PathParam("in") String in) {
+	@Path("/echo.json")
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Researcher echo(Researcher in) {
 		return in;
 	}
 	
