@@ -2,7 +2,6 @@ package edu.quark.managedbeans;
 
 
 import java.math.BigInteger;
-import java.security.cert.CertPathValidatorException.Reason;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
@@ -29,13 +28,11 @@ import edu.quark.businesslogic.AppointmentManager;
 import edu.quark.businesslogic.GroupManager;
 import edu.quark.businesslogic.ResearcherManager;
 import edu.quark.dao.AppointmentDAO;
-import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.AppointmentDetails;
 import edu.quark.datatypes.AppointmentType;
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
-import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
 import edu.quark.model.ConferenceAppointment;
@@ -95,7 +92,15 @@ public class ScheduleView {
 
 	@PostConstruct
 	public void init() {
-		
+		if(credentials.getResearcher()==null) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
 		lazyEventModel = new LazyScheduleModel() {
 			private static final long serialVersionUID = -1508233823680543048L;
 
