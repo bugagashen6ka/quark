@@ -3,8 +3,6 @@ package edu.quark.managedbeans;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +15,6 @@ import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
 import edu.quark.model.Group;
-import edu.quark.model.Researcher;
 import edu.quark.systemlogic.CreateGroup;
 import edu.quark.systemlogic.JoinGroup;
 import edu.quark.systemlogic.LeaveGroup;
@@ -60,6 +57,15 @@ public class GroupView {
 
 	@PostConstruct
 	public void init() {
+		if(credentials.getResearcher()==null) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
 		selectedGroupId = BigInteger.valueOf(0);
 		groups = groupDAO.findAll();
 
