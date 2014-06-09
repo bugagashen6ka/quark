@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Researcher
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Researcher")
 @NamedQueries({ @NamedQuery(name = "Researcher.findAll", query = "SELECT r FROM Researcher r") })
+@XmlRootElement
 public class Researcher implements Serializable {
 
 	@Override
