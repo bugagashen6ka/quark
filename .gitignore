@@ -4,3 +4,5 @@ doc/auto/
 *.tex
 *.html
 *.log
+*.pyc
+
