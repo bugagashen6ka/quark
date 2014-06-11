@@ -121,46 +121,6 @@ public class Credentials {
 	public void setResearcher(Researcher researcher) {
 		this.researcher = researcher;
 	}
-
-	@POST
-	@Path("/login.json")
-	public Response login(
-			@QueryParam("email") String email, 
-			@QueryParam("password") String password) {
-		setResearcher(login.login(email, password));
-		if (researcher == null) {
-			return Response.serverError().status(Status.UNAUTHORIZED).build();
-		}
-		navigationBean.moveToCalendar();
-		return Response.ok().build();
-	}
-	
-	@GET
-	@Path("/test.json")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Researcher test() {
-		Researcher researcher2 = new Researcher();
-		researcher2.setEmail("apfel");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Apfel");
-		researcher2.setLastName("Saft");
-		researcher2.setPhoneNumber("1111");
-		researcher2.setTitle("Prof.");
-		researcherDAO.create(researcher2);
-
-		researcher = researcher2;
-		
-		
-		return researcher;
-	}
-
-	@POST
-	@Path("/echo.json")
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Researcher echo(Researcher in) {
-		return in;
-	}
 	
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
