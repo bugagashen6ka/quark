@@ -179,14 +179,18 @@ public class ScheduleView {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		BigInteger aid = createAppointment.createAppointment(credentials.getResearcher()
-				.getRid(), type, null, appointment.getLocation(),
-				appointment.getDescription(),
-				new TimeInfo(appointment.getStart(),
-						appointment.getEnd()));
-		for (String email : selectedParticipantsNames) {
-			Researcher r = researcherManager.checkEmail(email);
-			appointmentManager.inviteResearcher(r.getRid(), aid);
+		if(this.appointment == null || this.appointment.getAid()==null ) {
+			BigInteger aid = createAppointment.createAppointment(credentials.getResearcher()
+					.getRid(), type, null, appointment.getLocation(),
+					appointment.getDescription(),
+					new TimeInfo(appointment.getStart(),
+							appointment.getEnd()));
+			for (String email : selectedParticipantsNames) {
+				Researcher r = researcherManager.checkEmail(email);
+				appointmentManager.inviteResearcher(r.getRid(), aid);
+			}
+		} else {
+			appointmentDAO.update(appointment);
 		}
 
 		this.AppointmentDetailsToView();
