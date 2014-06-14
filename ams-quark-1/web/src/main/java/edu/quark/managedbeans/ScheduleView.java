@@ -303,7 +303,9 @@ public class ScheduleView {
 		this.appointment.setEnd(c.getTime());
 		appointmentDAO.update(appointment);
 	}
-
+	public boolean deleteImpossible() {
+		return (this.appointment==null || this.appointment.getAid()==null);
+	}
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
@@ -312,8 +314,10 @@ public class ScheduleView {
 		//createAppointment.createAppointment(rid, type, groupId, location, description);
 	}
 	
-	public void deleteAppiontment(){
-		//deleteAppointment.deleteAppointment(researcherId, appointmentId);
+	public void deleteAppointment(){
+		deleteAppointment.deleteAppointment(credentials.getResearcher().getRid(), this.appointment.getAid());
+		this.appointment=null;
+		this.AppointmentDetailsToView();
 	}
 
 
