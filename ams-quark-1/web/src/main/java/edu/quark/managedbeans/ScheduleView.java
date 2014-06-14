@@ -4,6 +4,7 @@ package edu.quark.managedbeans;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -203,10 +204,7 @@ public class ScheduleView {
 	}
 	
 	public void onEventTypeSelect() {
-		if(this.appointment instanceof Appointment) {
-			this.type = AppointmentType.GENERIC_APPOINTMENT;
-			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof ConferenceAppointment) {
+		if (this.appointment instanceof ConferenceAppointment) {
 			this.type=AppointmentType.CONFERENCE_APPOINTMENT;
 			this.availableParticipants = researcherDAO.findAll();
 		} else if (this.appointment instanceof TeachingAppointment){
@@ -226,18 +224,25 @@ public class ScheduleView {
 			}
 		} else if (this.appointment instanceof ProjectGroupMeeting) {
 			this.type=AppointmentType.PROJECT_GROUP_MEETING;
-			this.availableParticipants = new ArrayList<Researcher>();
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
+			// Use set to eliminate duplicates.
+			// One researcher can be in several project groups.
+			Set<Researcher> availableParticipantsTemp = new HashSet<Researcher>();
 			for (GroupDetails g : gs) {
 				if (g.getType()==GroupType.PROJECT_GROUP) {
 					Set<BigInteger> gmi = g.getMembers();
 					for (BigInteger gm: gmi) {
-						this.availableParticipants.add(researcherDAO.read(gm));
+						availableParticipantsTemp.add(researcherDAO.read(gm));
 					}
 				}
 			}
+			this.availableParticipants = new ArrayList<Researcher>(availableParticipantsTemp);
+		} else if(this.appointment instanceof Appointment) {
+			this.type = AppointmentType.GENERIC_APPOINTMENT;
+			this.availableParticipants = researcherDAO.findAll();
 		}
 		
+		availableParticipants.remove(credentials.getResearcher());
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
