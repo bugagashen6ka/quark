@@ -17,8 +17,7 @@ public class Researcher implements Serializable {
 
 	@Override
 	public String toString() {
-		return rid + ": " + title + " " + firstName + " " + lastName + " " +
-				email + " " + password + " " + phoneNumber;
+		return title + " " + firstName + " " + lastName;
 	}
 
 	@Id
