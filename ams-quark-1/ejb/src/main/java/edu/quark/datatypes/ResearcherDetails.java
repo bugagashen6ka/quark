@@ -31,6 +31,12 @@ public class ResearcherDetails {
 	private String lastName;
 	private String title;
 	private String phoneNbr;
+
+	@Override
+	public String toString() {
+		return title + " " + firstName + " " + lastName;
+	}
+
 	public BigInteger getrId() {
 		return rId;
 	}
