@@ -105,7 +105,7 @@
 								<f:selectItems value="#{scheduleView.availableParticipants}" 
 									var="p"
 									itemValue="#{p.email}"
-									itemLabel="#{p.email}"/>
+									itemLabel="#{p.toString()}"/>
 							</p:selectCheckboxMenu>
 							
 							<h:outputLabel for="description" value="Description:" />
