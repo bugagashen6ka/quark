@@ -57,6 +57,7 @@ public class GroupView {
 
 	@PostConstruct
 	public void init() {
+
 		if(credentials.getResearcher()==null) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -69,8 +70,6 @@ public class GroupView {
 		selectedGroupId = BigInteger.valueOf(0);
 		groups = groupDAO.findAll();
 
-		updateResearcherGroups();
-
 		researcherGroupDetails = new ArrayList<GroupDetails>();
 		newGroup = new Group();
 		chosenGroup = new Group();
@@ -78,6 +77,8 @@ public class GroupView {
 		createGroup.createGroup(credentials.getResearcher(), "Food", GroupType.PROJECT_GROUP, "aaaaaa");
 		createGroup.createGroup(credentials.getResearcher(), "Sport", GroupType.PROJECT_GROUP, "aaaaaa");
 		createGroup.createGroup(credentials.getResearcher(), "Drinks", GroupType.RESEARCH_GROUP, "aaaaaa");
+		
+		updateResearcherGroups();
 	}
 
 	public GroupDAO getGroupDAO() {
