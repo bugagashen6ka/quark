@@ -246,11 +246,13 @@ public class ScheduleView {
 		// would normally do this like:
 		//   availableParticipants.remove(credentials.getResearcher());
 		// but comparability of Researcher objects does not work, so work-around:
+		Researcher loggedInUser = null;
 		for(Researcher r : availableParticipants) {
 			if(r.getRid() == credentials.getResearcher().getRid()) {
-				availableParticipants.remove(r);
+				loggedInUser = r;
 			}
 		}
+		availableParticipants.remove(loggedInUser);
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
