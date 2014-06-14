@@ -209,7 +209,7 @@ public class ScheduleView {
 			this.availableParticipants = researcherDAO.findAll();
 		} else if (this.appointment instanceof TeachingAppointment){
 			this.type=AppointmentType.TEACHING_APPOINTMENT;
-			this.availableParticipants = new ArrayList<Researcher>();
+			this.availableParticipants = researcherDAO.findAll();
 		} else if (this.appointment instanceof ResearchGroupMeeting) {
 			this.type = AppointmentType.RESEARCH_GROUP_MEETING;
 			this.availableParticipants = new ArrayList<Researcher>();
@@ -226,7 +226,7 @@ public class ScheduleView {
 			this.type=AppointmentType.PROJECT_GROUP_MEETING;
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
 			// Use set to eliminate duplicates.
-			// One researcher can be in several project groups.
+			// (One researcher can be in several project groups.)
 			Set<Researcher> availableParticipantsTemp = new HashSet<Researcher>();
 			for (GroupDetails g : gs) {
 				if (g.getType()==GroupType.PROJECT_GROUP) {
@@ -242,7 +242,15 @@ public class ScheduleView {
 			this.availableParticipants = researcherDAO.findAll();
 		}
 		
-		availableParticipants.remove(credentials.getResearcher());
+		// remove logged in user from list of available researchers (availableParticipants).
+		// would normally do this like:
+		//   availableParticipants.remove(credentials.getResearcher());
+		// but comparability of Researcher objects does not work, so work-around:
+		for(Researcher r : availableParticipants) {
+			if(r.getRid() == credentials.getResearcher().getRid()) {
+				availableParticipants.remove(r);
+			}
+		}
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
