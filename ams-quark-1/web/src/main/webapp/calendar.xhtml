@@ -93,16 +93,10 @@
 							</p:selectOneMenu>
 
 							<h:outputLabel for="from" value="From:" />
-							<p:inputMask id="from" value="#{scheduleView.appointment.start}"
-								mask="99/99/9999">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</p:inputMask>
+							<p:calendar id="from" value="#{scheduleView.appointment.start}" pattern="MM/dd/yyyy HH:mm:ss" />
 
 							<h:outputLabel for="to" value="To:" />
-							<p:inputMask id="to" value="#{scheduleView.appointment.end}"
-								mask="99/99/9999">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</p:inputMask>
+							<p:calendar id="to" value="#{scheduleView.appointment.end}" pattern="MM/dd/yyyy HH:mm:ss" />
 
 							<h:outputLabel for="participant" value="Participant:" />
 							<p:selectCheckboxMenu id="participant"

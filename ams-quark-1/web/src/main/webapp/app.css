@@ -195,3 +195,6 @@ form.login, form.popup{
 	width: 17px;
 }
 
+.ui-timepicker-div dl dt {
+	font-size: 14;
+}
