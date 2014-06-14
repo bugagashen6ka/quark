@@ -3,8 +3,10 @@ package edu.quark.managedbeans;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -98,14 +100,23 @@ public class GroupView {
 	}
 
 	public void createGroupMethod() {
-		createGroup.createGroup(credentials.getResearcher(),
+		FacesContext context = FacesContext.getCurrentInstance();
+		BigInteger r = createGroup.createGroup(credentials.getResearcher(),
 				newGroup.getName(), groupType, newGroup.getPassword());
-		groups = groupDAO.findAll();
+		if (r == null) {
+			context.addMessage(null, new FacesMessage("Error",  "Please check group type or password (>6 symbols)"));
+		} else {
+			groups = groupDAO.findAll();
+		}
 	}
 
 	public void joinGroupMethod() {
-		joinGroup.join(credentials.getResearcher(),
+		FacesContext context = FacesContext.getCurrentInstance();
+		boolean r = joinGroup.join(credentials.getResearcher(),
 				chosenGroup.getGid(), chosenGroup.getPassword());
+		if (!r) {
+			context.addMessage(null, new FacesMessage("Error",  "Please check group and password"));
+		}
 		updateResearcherGroups();
 	}
 
