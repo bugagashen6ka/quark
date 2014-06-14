@@ -177,7 +177,7 @@
 			style="width: 400px;">
 			<h3>Create a new group</h3>
 			<h:form id="create_group" styleClass="popup">
-
+				<p:growl id="growl1" showDetail="true" sticky="true" />
 				<div class="row">
 					<div class="small-12 columns">
 						<h:outputLabel for="type" value="Type:" />
@@ -211,7 +211,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<h:commandButton value="Create"
-							action="#{groupView.createGroupMethod}" />
+							action="#{groupView.createGroupMethod}" update="growl1"/>
 					</div>
 				</div>
 
@@ -223,7 +223,7 @@
 			style="width: 400px;">
 			<h3>Choose the group</h3>
 			<h:form id="join_group" styleClass="popup">
-
+				<p:growl id="growl2" showDetail="true" sticky="true" />
 				<div class="row">
 					<div class="small-12 columns">
 						<h:outputLabel for="type" value="Chose Group:" />
@@ -249,7 +249,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<h:commandButton value="Join"
-							action="#{groupView.joinGroupMethod}" />
+							action="#{groupView.joinGroupMethod}" update="growl2"/>
 					</div>
 				</div>
 
