@@ -29,8 +29,7 @@
 
 		<!-- Select Tab -->
 		<ul class="tabs" data-tab="sfd">
-			<li class="tab-title active"><a href="#appointment">Appointment
-					Management</a></li>
+			<li class="tab-title active"><a href="#appointment">Appointment	Management</a></li>
 			<li class="tab-title"><a href="#group">Group Management</a></li>
 		</ul>
 
@@ -84,13 +83,14 @@
 									itemValue="CONFERENCE_APPOINTMENT" />
 							</p:selectOneMenu>
 
-							<h:outputLabel for="description" value="Description:" />
-							<p:inputText id="description"
-								value="#{scheduleView.appointment.description}" required="true" />
-
 							<h:outputLabel for="location" value="Location:" />
-							<p:inputText id="location"
-								value="#{scheduleView.appointment.location}" required="true" />
+							<p:selectOneMenu id="location" value="#{scheduleView.appointment.location}" panelStyle="width:250px" >
+								<f:selectItem itemLabel="Room 1" itemValue="Room 1"/>
+								<f:selectItem itemLabel="Room 2" itemValue="Room 2" />
+								<f:selectItem itemLabel="Room 3" itemValue="Room 3" />
+								<f:selectItem itemLabel="Room 4" itemValue="Room 4" />
+								<f:selectItem itemLabel="Room 5" itemValue="Room 5" />
+							</p:selectOneMenu>
 
 							<h:outputLabel for="from" value="From:" />
 							<p:inputMask id="from" value="#{scheduleView.appointment.start}"
@@ -113,6 +113,10 @@
 									itemValue="#{p.email}"
 									itemLabel="#{p.email}"/>
 							</p:selectCheckboxMenu>
+							
+							<h:outputLabel for="description" value="Description:" />
+							<p:inputTextarea id="description"
+								value="#{scheduleView.appointment.description}" required="true" />
 
 							<p:commandButton type="reset" value="Reset" />
 							<p:commandButton id="addButton" value="Save"
