@@ -275,12 +275,8 @@ public class ScheduleView {
 		Calendar c2 = Calendar.getInstance();
 		c2.setTime(this.appointment.getEnd());
 		c2.add(Calendar.DATE, event.getDayDelta());
-		System.out.println(this.appointment.getStart());
-		System.out.println(this.appointment.getEnd());
 		this.appointment.setStart(c1.getTime());
 		this.appointment.setEnd(c2.getTime());
-		System.out.println(this.appointment.getStart());
-		System.out.println(this.appointment.getEnd());
 		appointmentDAO.update(appointment);
 		
 	}
