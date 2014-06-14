@@ -29,7 +29,7 @@ import edu.quark.systemlogic.Logout;
 import edu.quark.systemlogic.Register;
 
 @Stateless
-@Path("/")
+@Path("/User")
 public class User {
 	@EJB
 	private Login login;

@@ -6,12 +6,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.persistence.ManyToMany;
-import javax.print.attribute.standard.SheetCollate;
-
-import edu.quark.managedbeans.GroupView;
 import edu.quark.managedbeans.ScheduleView;
-import edu.quark.model.Group;
 import edu.quark.model.Researcher;
 
 @ManagedBean

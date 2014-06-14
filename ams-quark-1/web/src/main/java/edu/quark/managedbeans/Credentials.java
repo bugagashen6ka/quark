@@ -1,30 +1,14 @@
 package edu.quark.managedbeans;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.Response.StatusType;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
  
 import edu.quark.dao.ResearcherDAO;
-import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.model.Researcher;
 import edu.quark.systemlogic.Login;
 import edu.quark.systemlogic.Logout;
@@ -32,7 +16,6 @@ import edu.quark.systemlogic.Register;
 
 @ManagedBean
 @SessionScoped
-@Path("/")
 public class Credentials {
 
 	@EJB
