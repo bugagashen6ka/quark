@@ -22,13 +22,14 @@
 		<div id="triangle"></div>
 		<h1>Log in</h1>
 		<h:form styleClass="login">
+			<p:growl id="growl" showDetail="true" sticky="true" />  
 			<h:inputText id="user" value="#{credentials.email}" />
 			<p:watermark for="user" value="Email" />
 
 			<h:inputSecret id="pass" value="#{credentials.password}" />
 			<p:watermark for="pass" value="Password" />
+			<h:commandButton value="Log in" action="#{credentials.login}" update="growl"/>
 
-			<h:commandButton value="Log in" action="#{credentials.login}" />
 
 			<br />
 			<br />

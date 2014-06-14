@@ -5,7 +5,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+ 
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.model.Researcher;
 import edu.quark.systemlogic.Login;
@@ -103,8 +105,10 @@ public class Credentials {
 	}
 
 	public String login() {
+		FacesContext context = FacesContext.getCurrentInstance();
 		setResearcher(login.login(email, password));
 		if (researcher == null) {
+			context.addMessage(null, new FacesMessage("Error",  "Please check email or password"));
 			return "failure";
 		}
 		navigationBean.moveToCalendar();
