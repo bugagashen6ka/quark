@@ -90,17 +90,23 @@ public class AppointmentManager implements IAppointmentManagement {
 		Appointment a = appointmentDAO.read(appointmentId);
 		Researcher r = researcherDAO.read(researcherId);
 		if(r!=null && a!=null) {
-			a.getParticipants().remove(r);
-			r.getAppointments().remove(a);
+			Set<Appointment> as = r.getAppointments();
+			Set<Researcher> ps = a.getParticipants();
+			ps.remove(r);
+			as.remove(a);
+			a.setParticipants(ps);
+			r.setAppointments(as);
+			researcherDAO.update(r);
+			appointmentDAO.update(a);
 			if(a.getCreator().getRid()==researcherId) {
 				for (Researcher s : a.getParticipants()) {
 					s.getAppointments().remove(a);
+					researcherDAO.update(s);
 				}
-				appointmentDAO.delete(a);
-			} else {
+				a.setParticipants(null);
 				appointmentDAO.update(a);
+				appointmentDAO.delete(a);
 			}
-			researcherDAO.update(r);
 			return true;
 		}
 		return false;

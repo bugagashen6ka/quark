@@ -58,6 +58,7 @@ public class ScheduleView {
 
 
 	public void setType(AppointmentType type) {
+		this.updateAvailableParticipants();
 		this.type = type;
 	}
 
@@ -156,8 +157,6 @@ public class ScheduleView {
 			Appointment at = appointmentDAO.read(a.getaId());
 			AppointmentType t = a.getType();
 			TimeInfo ti = a.getTimeInterval();
-			System.out.println("APP start"+ti.getStart().toString());
-			System.out.println("APP end"+ti.getStart().toString());
 			DefaultScheduleEvent e = new DefaultScheduleEvent(a.getDescription()+" at "+a.getLocation(),
 					ti.getStart(),ti.getEnd(), "evtype"+t.ordinal());
 			e.setData(at);
@@ -315,9 +314,13 @@ public class ScheduleView {
 	}
 	
 	public void deleteAppointment(){
-		deleteAppointment.deleteAppointment(credentials.getResearcher().getRid(), this.appointment.getAid());
-		this.appointment=null;
-		this.AppointmentDetailsToView();
+		boolean res = deleteAppointment.deleteAppointment(credentials.getResearcher().getRid(), this.appointment.getAid());
+		if (res) {
+			this.appointment=null;
+			this.AppointmentDetailsToView();
+		} else {
+			addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO,	"Error", "Could not delete appointment"));
+		}
 	}
 
 
@@ -353,6 +356,7 @@ public class ScheduleView {
 	}
 
 	public List<Researcher> getAvailableParticipants() {
+		this.updateAvailableParticipants();
 		return availableParticipants;
 	}
 
