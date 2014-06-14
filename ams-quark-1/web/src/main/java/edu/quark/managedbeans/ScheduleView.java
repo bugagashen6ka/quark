@@ -156,6 +156,8 @@ public class ScheduleView {
 			Appointment at = appointmentDAO.read(a.getaId());
 			AppointmentType t = a.getType();
 			TimeInfo ti = a.getTimeInterval();
+			System.out.println("APP start"+ti.getStart().toString());
+			System.out.println("APP end"+ti.getStart().toString());
 			DefaultScheduleEvent e = new DefaultScheduleEvent(a.getDescription()+" at "+a.getLocation(),
 					ti.getStart(),ti.getEnd(), "evtype"+t.ordinal());
 			e.setData(at);
@@ -276,9 +278,11 @@ public class ScheduleView {
 		Calendar c1 = Calendar.getInstance();
 		c1.setTime(this.appointment.getStart());
 		c1.add(Calendar.DATE, event.getDayDelta());
+		c1.add(Calendar.MINUTE, event.getMinuteDelta());
 		Calendar c2 = Calendar.getInstance();
 		c2.setTime(this.appointment.getEnd());
 		c2.add(Calendar.DATE, event.getDayDelta());
+		c2.add(Calendar.MINUTE, event.getMinuteDelta());
 		this.appointment.setStart(c1.getTime());
 		this.appointment.setEnd(c2.getTime());
 		appointmentDAO.update(appointment);
@@ -286,11 +290,18 @@ public class ScheduleView {
 	}
 
 	public void onEventResize(ScheduleEntryResizeEvent event) {
-		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Event resized", "Day delta:" + event.getDayDelta()
+		ScheduleEvent se = event.getScheduleEvent();
+		this.appointment = (Appointment) se.getData();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Appointment moved", "Day delta:" + event.getDayDelta()
 						+ ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);*/
+		addMessage(message);
+		Calendar c = Calendar.getInstance();
+		c.setTime(this.appointment.getEnd());
+		c.add(Calendar.DATE, event.getDayDelta());
+		c.add(Calendar.MINUTE, event.getMinuteDelta());
+		this.appointment.setEnd(c.getTime());
+		appointmentDAO.update(appointment);
 	}
 
 	private void addMessage(FacesMessage message) {

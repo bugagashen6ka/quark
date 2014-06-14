@@ -93,10 +93,10 @@
 							</p:selectOneMenu>
 
 							<h:outputLabel for="from" value="From:" />
-							<p:calendar id="from" value="#{scheduleView.appointment.start}" pattern="MM/dd/yyyy HH:mm:ss" />
+							<p:calendar id="from" value="#{scheduleView.appointment.start}" pattern="MM/dd/yyyy HH:mm:ss" timeZone="UTC"/>
 
 							<h:outputLabel for="to" value="To:" />
-							<p:calendar id="to" value="#{scheduleView.appointment.end}" pattern="MM/dd/yyyy HH:mm:ss" />
+							<p:calendar id="to" value="#{scheduleView.appointment.end}" pattern="MM/dd/yyyy HH:mm:ss" timeZone="UTC"/>
 
 							<h:outputLabel for="participant" value="Participant:" />
 							<p:selectCheckboxMenu id="participant"
