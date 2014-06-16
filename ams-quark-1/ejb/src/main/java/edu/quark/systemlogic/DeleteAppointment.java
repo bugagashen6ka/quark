@@ -17,8 +17,8 @@ public class DeleteAppointment implements IDeleteAppointment {
 	private AppointmentManager appointmentManager;
 
 	@Override
-	public boolean deleteAppointment(BigInteger appointmentId,
-			BigInteger researcherId) {
+	public boolean deleteAppointment(BigInteger researcherId,
+			BigInteger appointmentId) {
 		return appointmentManager.deleteAppointment(researcherId, appointmentId);
 	}
 
