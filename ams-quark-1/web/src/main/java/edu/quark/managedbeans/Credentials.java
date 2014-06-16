@@ -65,8 +65,8 @@ public class Credentials {
 		researcher2.setPassword("1");
 		researcher2.setFirstName("Alex");
 		researcher2.setLastName("Planeta");
-		researcher2.setPhoneNumber("Martin");
-		researcher2.setTitle("Trach");
+		researcher2.setPhoneNumber("2222");
+		researcher2.setTitle("Dr.");
 		researcherDAO.create(researcher2);
 		
 		researcher2 = new Researcher();
