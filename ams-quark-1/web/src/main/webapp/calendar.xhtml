@@ -142,7 +142,7 @@
 							<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">
 								<tr>
 									<td><h:outputText value="#{gd.name}" /></td>
-									<td><h:outputText value="#{gd.type}" /></td>
+									<td><h:outputText value="#{gd.type.toString()}" /></td>
 									<td><p:column headerText="Action">
 											<h:commandButton styleClass="button tiny alert" value="Leave"
 												action="#{groupView.leaveGroupMethod}">
