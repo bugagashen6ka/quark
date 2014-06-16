@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 
 import edu.quark.businesslogic.GroupManager;
 import edu.quark.businesslogic.ResearcherManager;
+import edu.quark.datatypes.ResearcherDetails;
 
 @Stateless
 @LocalBean
@@ -19,14 +20,14 @@ public class ViewGroupMembers {
 	@EJB
 	private GroupManager groupManager;
 	
-	public List<String> ViewMembers(BigInteger gid) {
-		List<String> retval = new ArrayList<String>();
+	public List<ResearcherDetails> ViewMembers(BigInteger gid) {
+		List<ResearcherDetails> retval = new ArrayList<ResearcherDetails>();
 		try {
 			for (BigInteger	rid : groupManager.getGroupDetails(gid).getMembers()) {
-				retval.add(researcherManager.getResearcherDetails(rid).toString());
+				retval.add(researcherManager.getResearcherDetails(rid));
 			};			
 		} catch (Exception e) {
-			return new ArrayList<String>();
+			return new ArrayList<ResearcherDetails>();
 		}
 		return retval;
 	}
