@@ -186,6 +186,10 @@ public class ScheduleView {
 					appointment.getDescription(),
 					new TimeInfo(appointment.getStart(),
 							appointment.getEnd()));
+			if(aid==null) {
+				addMessage(new FacesMessage(null,"Error", "Please revise the appointment details"));
+				return;
+			}
 			for (String email : selectedParticipantsNames) {
 				Researcher r = researcherManager.checkEmail(email);
 				appointmentManager.inviteResearcher(r.getRid(), aid);
@@ -315,7 +319,7 @@ public class ScheduleView {
 	
 	public void deleteAppointment(){
 		boolean res = deleteAppointment.deleteAppointment(credentials.getResearcher().getRid(), this.appointment.getAid());
-		if (res) {
+		if (res==true) {
 			this.appointment=null;
 			this.AppointmentDetailsToView();
 		} else {

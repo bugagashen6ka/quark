@@ -113,12 +113,14 @@
 								value="#{scheduleView.appointment.description}" required="true" />
 
 							<p:commandButton type="reset" value="Reset" />
+							<p:row><p:column>
 							<p:commandButton id="addButton" value="Save"
 								actionListener="#{scheduleView.addEvent}"
 								oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 							<p:commandButton id="deleteButton" value="Delete" disabled="#{scheduleView.deleteImpossible()}"
-								actionListener="#{scheduleView.deleteAppointment}"
+								actionListener="#{scheduleView.deleteAppointment}" update="messages"
 								oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+							</p:column></p:row>
 						</h:panelGrid>
 					</p:dialog>
 
