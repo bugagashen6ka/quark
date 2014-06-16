@@ -114,6 +114,7 @@ public class ScheduleView {
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
 		availableParticipants = new ArrayList<Researcher>();
+		this.onEventTypeSelect();
 
 //        if(credentials.getResearcher()!=null) {
 //        	Date t1=new Date();
@@ -210,6 +211,7 @@ public class ScheduleView {
 	public void onEventSelect(SelectEvent selectEvent) {//SelectEvent selectEvent
 		ScheduleEvent se = (ScheduleEvent) selectEvent.getObject();
 		this.appointment = (Appointment) se.getData();
+		this.onEventTypeSelect();
 	}
 	
 	public void onEventTypeSelect() {
@@ -249,6 +251,8 @@ public class ScheduleView {
 		} else if(this.appointment instanceof Appointment) {
 			this.type = AppointmentType.GENERIC_APPOINTMENT;
 			this.availableParticipants = researcherDAO.findAll();
+		} else if(this.appointment==null) {
+			this.availableParticipants = researcherDAO.findAll();
 		}
 		
 		// remove logged in user from list of available researchers (availableParticipants).
@@ -261,7 +265,15 @@ public class ScheduleView {
 				loggedInUser = r;
 			}
 		}
+		// we can not kick users out of appointments
 		availableParticipants.remove(loggedInUser);
+		if(this.appointment!=null && this.appointment.getAid()!=null) {
+			selectedParticipantsNames.clear();
+			for (Researcher r : this.appointment.getParticipants()) {
+				selectedParticipantsNames.add(r.getEmail());
+				availableParticipants.remove(r);
+			}
+		}
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
