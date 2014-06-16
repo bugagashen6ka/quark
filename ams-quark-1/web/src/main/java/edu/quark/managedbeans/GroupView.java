@@ -16,6 +16,7 @@ import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
+import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.model.Group;
 import edu.quark.systemlogic.CreateGroup;
 import edu.quark.systemlogic.JoinGroup;
@@ -23,11 +24,14 @@ import edu.quark.systemlogic.LeaveGroup;
 import edu.quark.systemlogic.SearchAppointment;
 import edu.quark.systemlogic.SearchGroup;
 import edu.quark.systemlogic.Time;
+import edu.quark.systemlogic.ViewGroupMembers;
 
 @ViewScoped
 @ManagedBean
 public class GroupView {
 
+	@EJB
+	private ViewGroupMembers viewGroupMembers;
 	@EJB
 	private GroupDAO groupDAO;
 	@EJB
@@ -50,6 +54,7 @@ public class GroupView {
 	private Group newGroup;
 	private List<Group> groups;
 	private List<GroupDetails> researcherGroupDetails;
+	private List<ResearcherDetails> currentGroupResearchers;
 	private Group selectedGroup;
 	private GroupType selectedGroupType;
 	private String password;
@@ -73,6 +78,8 @@ public class GroupView {
 		groups = groupDAO.findAll();
 
 		researcherGroupDetails = new ArrayList<GroupDetails>();
+		setCurrentGroupResearchers(new ArrayList<ResearcherDetails>());
+		
 		newGroup = new Group();
 		chosenGroup = new Group();
 		
@@ -82,7 +89,9 @@ public class GroupView {
 		
 		updateResearcherGroups();
 	}
-
+	public void listMembers() {
+		this.setCurrentGroupResearchers(this.viewGroupMembers.ViewMembers(this.selectedGroupId));
+	}
 	public GroupDAO getGroupDAO() {
 		return groupDAO;
 	}
@@ -251,6 +260,12 @@ public class GroupView {
 
 	public void setSelectedGroupId(BigInteger selectedGroupId) {
 		this.selectedGroupId = selectedGroupId;
+	}
+	public List<ResearcherDetails> getCurrentGroupResearchers() {
+		return currentGroupResearchers;
+	}
+	public void setCurrentGroupResearchers(List<ResearcherDetails> currentGroupResearchers) {
+		this.currentGroupResearchers = currentGroupResearchers;
 	}
 
 }

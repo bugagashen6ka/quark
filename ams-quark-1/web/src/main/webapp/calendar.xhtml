@@ -141,7 +141,13 @@
 						<tbody>
 							<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">
 								<tr>
-									<td><h:outputText value="#{gd.name}" /></td>
+									<td><h:commandLink value="#{gd.name}"
+										action="#{groupView.listMembers}"
+										onclick="PF('listDialog').show();window.fix();return false">
+										<f:setPropertyActionListener
+													target="#{groupView.selectedGroupId}" value="#{gd.gId}" />
+									</h:commandLink>
+									</td>
 									<td><h:outputText value="#{gd.type.toString()}" /></td>
 									<td><p:column headerText="Action">
 											<h:commandButton styleClass="button tiny alert" value="Leave"
@@ -155,9 +161,24 @@
 							</ui:repeat>
 						</tbody>
 					</table>
+					<p:dialog widgetVar="listDialog" header="Group members" width="700"
+						showEffect="clip" hideEffect="clip">
+							<p:dataTable var="r" value="#{groupView.currentGroupResearchers}">
+								<p:column headerText="Name">
+									<h:outputText value="#{r.toString()}" />
+								</p:column>
 
+								<p:column headerText="Email">
+									<h:outputText value="#{r.emailAddress}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{r.phoneNbr}" />
+								</p:column>
+							</p:dataTable>
+							<p:commandButton value="Close"
+								onclick="PF('listDialog').hide();" />
+					</p:dialog>
 				</h:form>
-
 
 				<br />
 				<div class="row">
