@@ -129,7 +129,7 @@
 			<!-- Group Tab -->
 			<div class="content" id="group">
 
-				<h:form>
+				<h:form id="groupdisplay">
 					<table class="table">
 						<thead>
 							<tr>
@@ -216,7 +216,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<h:commandButton value="Create"
-							action="#{groupView.createGroupMethod}" update="growl1"/>
+							action="#{groupView.createGroupMethod}" update="groupdisplay,growl1"/>
 					</div>
 				</div>
 
@@ -254,7 +254,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<h:commandButton value="Join"
-							action="#{groupView.joinGroupMethod}" update="growl2"/>
+							action="#{groupView.joinGroupMethod}" update="groupdisplay,growl2"/>
 					</div>
 				</div>
 

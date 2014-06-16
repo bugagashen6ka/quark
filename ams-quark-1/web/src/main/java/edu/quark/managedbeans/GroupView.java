@@ -108,6 +108,7 @@ public class GroupView {
 		} else {
 			groups = groupDAO.findAll();
 		}
+		updateResearcherGroups();
 	}
 
 	public void joinGroupMethod() {
