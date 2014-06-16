@@ -98,7 +98,7 @@ public class AppointmentManager implements IAppointmentManagement {
 			r.setAppointments(as);
 			researcherDAO.update(r);
 			appointmentDAO.update(a);
-			if(a.getCreator().getRid()==researcherId) {
+			if(a.getCreator().getRid().equals(researcherId)) {
 				for (Researcher s : a.getParticipants()) {
 					s.getAppointments().remove(a);
 					researcherDAO.update(s);

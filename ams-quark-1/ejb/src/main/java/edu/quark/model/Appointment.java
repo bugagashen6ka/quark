@@ -52,7 +52,7 @@ public class Appointment implements Serializable {
 	@JoinColumn(name = "rid")
 	private Researcher creator;
 
-	@ManyToMany(mappedBy = "appointments", cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "appointments", cascade = CascadeType.ALL)
 	private Set<Researcher> participants = new HashSet<Researcher>();
 
 	private static final long serialVersionUID = 1L;

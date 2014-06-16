@@ -111,6 +111,7 @@ public class ScheduleView {
 				
 			}
 		};
+		selectedParticipantsNames=new ArrayList<String>();
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
 		availableParticipants = new ArrayList<Researcher>();
@@ -181,7 +182,11 @@ public class ScheduleView {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		if(this.appointment == null || this.appointment.getAid()==null ) {
+		if(this.appointment==null) {
+			addMessage(new FacesMessage(null,"Error", "Appointment details are NULL"));
+			return;
+		}
+		if(this.appointment.getAid()==null ) {
 			BigInteger aid = createAppointment.createAppointment(credentials.getResearcher()
 					.getRid(), type, null, appointment.getLocation(),
 					appointment.getDescription(),
@@ -200,12 +205,6 @@ public class ScheduleView {
 		}
 
 		this.AppointmentDetailsToView();
-		/*if (appointmentDetails.getId() == null)
-			eventModel.addEvent(appointmentDetails);
-		else
-			eventModel.updateEvent(appointmentDetails);
-
-		appointmentDetails = new DefaultScheduleEvent();*/
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {//SelectEvent selectEvent
@@ -215,6 +214,7 @@ public class ScheduleView {
 	}
 	
 	public void onEventTypeSelect() {
+		this.availableParticipants.clear();
 		if (this.appointment instanceof ConferenceAppointment) {
 			this.type=AppointmentType.CONFERENCE_APPOINTMENT;
 			this.availableParticipants = researcherDAO.findAll();
@@ -261,7 +261,7 @@ public class ScheduleView {
 		// but comparability of Researcher objects does not work, so work-around:
 		Researcher loggedInUser = null;
 		for(Researcher r : availableParticipants) {
-			if(r.getRid() == credentials.getResearcher().getRid()) {
+			if(r.getRid().equals(credentials.getResearcher().getRid())) {
 				loggedInUser = r;
 			}
 		}
@@ -269,9 +269,12 @@ public class ScheduleView {
 		availableParticipants.remove(loggedInUser);
 		if(this.appointment!=null && this.appointment.getAid()!=null) {
 			selectedParticipantsNames.clear();
-			for (Researcher r : this.appointment.getParticipants()) {
-				selectedParticipantsNames.add(r.getEmail());
-				availableParticipants.remove(r);
+			if(this.appointment.getParticipants() != null) {
+				for (Researcher r : this.appointment.getParticipants()) {
+					if (r.getRid()!=credentials.getResearcher().getRid())
+						selectedParticipantsNames.add(r.getEmail());
+					availableParticipants.remove(r);
+				}
 			}
 		}
 	}
@@ -332,7 +335,7 @@ public class ScheduleView {
 	public void deleteAppointment(){
 		boolean res = deleteAppointment.deleteAppointment(credentials.getResearcher().getRid(), this.appointment.getAid());
 		if (res==true) {
-			this.appointment=null;
+			this.appointment= new Appointment();
 			this.AppointmentDetailsToView();
 		} else {
 			addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO,	"Error", "Could not delete appointment"));
@@ -372,7 +375,8 @@ public class ScheduleView {
 	}
 
 	public List<Researcher> getAvailableParticipants() {
-		this.updateAvailableParticipants();
+		//this.updateAvailableParticipants();
+		this.onEventTypeSelect();
 		return availableParticipants;
 	}
 
@@ -381,6 +385,7 @@ public class ScheduleView {
 	}
 	
 	public void updateAvailableParticipants() {
+		this.availableParticipants.clear();
 		if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
 		} else if (this.type == AppointmentType.CONFERENCE_APPOINTMENT) {
