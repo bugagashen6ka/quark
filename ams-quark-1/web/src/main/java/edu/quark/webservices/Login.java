@@ -1,6 +1,7 @@
 package edu.quark.webservices;
 
 import javax.ejb.EJB;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,7 +19,7 @@ public class Login {
 	@EJB
 	private edu.quark.systemlogic.Login login;
 
-	@POST
+	@GET
 	@Path("/login.json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(@QueryParam("email") String email,
