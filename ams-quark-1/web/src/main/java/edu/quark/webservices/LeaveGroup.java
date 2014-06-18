@@ -25,12 +25,11 @@ public class LeaveGroup {
 	@POST
 	@Path("/leave.json")
 	public Response leave(@Context HttpHeaders httpHeaders,
-			@QueryParam("rid") BigInteger researcherId,
 			@QueryParam("gid") BigInteger groupId) {
 		Researcher res = user.checkCredentials(httpHeaders);
 		if (res == null)
 			return Response.status(Status.UNAUTHORIZED).build();
-		leaveGroup.leave(researcherId, groupId);
+		leaveGroup.leave(res.getRid(), groupId);
 		return Response.ok().build();
 	}
 

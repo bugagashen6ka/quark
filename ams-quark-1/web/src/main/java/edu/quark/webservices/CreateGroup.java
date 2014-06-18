@@ -27,14 +27,13 @@ public class CreateGroup {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createGroup(@Context HttpHeaders httpHeaders,
-			Researcher researcher, @QueryParam("name") String name,
+			@QueryParam("name") String name,
 			@QueryParam("type") GroupType type,
 			@QueryParam("password") String password) {
 		Researcher res = user.checkCredentials(httpHeaders);
 		if (res == null)
 			return Response.status(Status.UNAUTHORIZED).build();
-		return Response.ok(
-				createGroup.createGroup(researcher, name, type, password))
+		return Response.ok(createGroup.createGroup(res, name, type, password))
 				.build();
 	}
 

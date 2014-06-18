@@ -28,14 +28,13 @@ public class DeleteAppointment {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteAppointment(@Context HttpHeaders httpHeaders,
-			@QueryParam("rid") BigInteger researcherId,
 			@QueryParam("aid") BigInteger appointmentId) {
 		Researcher res = user.checkCredentials(httpHeaders);
 		if (res == null)
 			return Response.status(Status.UNAUTHORIZED).build();
 		return Response.ok(
 				deleteAppointment
-						.deleteAppointment(researcherId, appointmentId))
+						.deleteAppointment(res.getRid(), appointmentId))
 				.build();
 	}
 

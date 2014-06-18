@@ -30,7 +30,6 @@ public class CreateAppointment {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createAppointment(@Context HttpHeaders httpHeaders,
-			@QueryParam("rid") BigInteger creatorId,
 			@QueryParam("type") AppointmentType type,
 			@QueryParam("gid") BigInteger groupId,
 			@QueryParam("location") String location,
@@ -39,7 +38,7 @@ public class CreateAppointment {
 		if (res == null)
 			return Response.status(Status.UNAUTHORIZED).build();
 		return Response.ok(
-				createAppointment.createAppointment(creatorId, type, groupId,
+				createAppointment.createAppointment(res.getRid(), type, groupId,
 						location, description, timeInfo)).build();
 	}
 

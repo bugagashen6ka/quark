@@ -28,12 +28,12 @@ public class JoinGroup {
 	@Path("/join.json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response join(@Context HttpHeaders httpHeaders,
-			Researcher researcher, @QueryParam("gid") BigInteger groupId,
+			@QueryParam("gid") BigInteger groupId,
 			@QueryParam("password") String password) {
 		Researcher res = user.checkCredentials(httpHeaders);
 		if (res == null)
 			return Response.status(Status.UNAUTHORIZED).build();
-		return Response.ok(joinGroup.join(researcher, groupId, password))
+		return Response.ok(joinGroup.join(res, groupId, password))
 				.build();
 	}
 
