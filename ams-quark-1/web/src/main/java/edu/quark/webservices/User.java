@@ -50,10 +50,10 @@ public class User {
 
 	private Researcher researcher;
 	
-	private boolean checkCredentials(HttpHeaders httpHeaders) {
+	public Researcher checkCredentials(HttpHeaders httpHeaders) {
 		List<String> values = httpHeaders.getRequestHeader(HttpHeaders.AUTHORIZATION);
 		if (!values.get(0).startsWith("Basic "))
-			return false;
+			return null;
 		String token = values.get(0).substring("Basic ".length());
 		byte[] decoded = DatatypeConverter.parseBase64Binary(token);
 		String email, password;
@@ -65,12 +65,9 @@ public class User {
 				email = new String(Arrays.copyOf(decoded, i));
 				password = new String(Arrays.copyOfRange(decoded, i + 1, decoded.length));
 				
-				Researcher res = login.login(email, password);
-				if (res != null)
-					return true;
-				return false;
+				return login.login(email, password);
 			}
-		return false;
+		return null;
 	}
 	
 	@POST
@@ -108,7 +105,7 @@ public class User {
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Researcher echo(@Context HttpHeaders httpHeaders, Researcher in) {
-		if (!checkCredentials(httpHeaders))
+		if (checkCredentials(httpHeaders) == null)
 			return null;
 //		if (!httpContext.getAttribute("Authorization")) {
 //			return null;

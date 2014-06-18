@@ -7,24 +7,36 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-import edu.quark.systeminterfaces.IDeleteAppointment;
+import edu.quark.model.Researcher;
 
 @Path("/DeleteAppointment")
-public class DeleteAppointment implements IDeleteAppointment {
+public class DeleteAppointment {
 
 	@EJB
 	private edu.quark.systemlogic.DeleteAppointment deleteAppointment;
 
+	@EJB
+	private edu.quark.webservices.User user;
+
 	@Path("/deleteAppointment.json")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Override
-	public boolean deleteAppointment(
+	public Response deleteAppointment(@Context HttpHeaders httpHeaders,
 			@QueryParam("rid") BigInteger researcherId,
 			@QueryParam("aid") BigInteger appointmentId) {
-		return deleteAppointment.deleteAppointment(researcherId, appointmentId);
+		Researcher res = user.checkCredentials(httpHeaders);
+		if (res == null)
+			return Response.status(Status.UNAUTHORIZED).build();
+		return Response.ok(
+				deleteAppointment
+						.deleteAppointment(researcherId, appointmentId))
+				.build();
 	}
 
 }

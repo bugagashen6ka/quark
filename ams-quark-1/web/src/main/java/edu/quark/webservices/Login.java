@@ -2,10 +2,10 @@ package edu.quark.webservices;
 
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -17,14 +17,13 @@ import edu.quark.model.Researcher;
 public class Login {
 
 	@EJB
-	private edu.quark.systemlogic.Login login;
+	private edu.quark.webservices.User user;
 
 	@GET
 	@Path("/login.json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response login(@QueryParam("email") String email,
-			@QueryParam("password") String password) {
-		Researcher r = login.login(email, password);
+	public Response login(@Context HttpHeaders httpHeaders) {
+		Researcher r = user.checkCredentials(httpHeaders);
 		if (r != null)
 			return Response.ok().entity(new ResearcherDetails(r)).build();
 		else
