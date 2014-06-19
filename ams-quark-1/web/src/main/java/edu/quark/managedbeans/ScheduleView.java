@@ -231,24 +231,20 @@ public class ScheduleView {
 				}
 			}
 			this.availableParticipants = new ArrayList<Researcher>(availableParticipantsTemp);
-		} else if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
-			this.availableParticipants = researcherDAO.findAll();
-		} else if(this.appointment==null) {
+		} else {
 			this.availableParticipants = researcherDAO.findAll();
 		}
-		
 		// remove logged in user from list of available researchers (availableParticipants).
 		// would normally do this like:
 		//   availableParticipants.remove(credentials.getResearcher());
 		// but comparability of Researcher objects does not work, so work-around:
-		Researcher loggedInUser = null;
 		for(Researcher r : availableParticipants) {
 			if(r.getRid().equals(credentials.getResearcher().getRid())) {
-				loggedInUser = r;
+				availableParticipants.remove(r);
+				break;
 			}
 		}
 		// we can not kick users out of appointments
-		availableParticipants.remove(loggedInUser);
 		if(this.appointment!=null && this.appointment.getAid()!=null) {
 			selectedParticipantsNames.clear();
 			if(this.appointment.getParticipants() != null) {
