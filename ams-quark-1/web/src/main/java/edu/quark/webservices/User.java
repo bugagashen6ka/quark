@@ -53,6 +53,10 @@ public class User {
 	public Researcher checkCredentials(HttpHeaders httpHeaders) {
 		List<String> values = httpHeaders
 				.getRequestHeader(HttpHeaders.AUTHORIZATION);
+		if (values == null)
+			return null;
+		if (values.size() < 1)
+			return null;
 		if (!values.get(0).startsWith("Basic "))
 			return null;
 		String token = values.get(0).substring("Basic ".length());
