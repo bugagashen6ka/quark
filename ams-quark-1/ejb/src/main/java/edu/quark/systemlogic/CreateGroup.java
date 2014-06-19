@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 import edu.quark.businesslogic.GroupManager;
 import edu.quark.datatypes.GroupType;

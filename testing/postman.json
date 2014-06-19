@@ -1,0 +1,26 @@
+{
+"id": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "name": "quark", "timestamp": 1402323272226, "requests":[
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "122bd0a4-8f34-e8e0-84cd-6d9ba9c23f11", "name": "test", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/User/test.json", "method": "GET", "headers": "", "data": "", "dataMode": "raw", "timestamp": 0, "version": 2, "time":1402759272950}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "1682b6c6-314c-f4c2-9940-157e417963d7", "name": "Echo JSON to XML", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/User/echo.json", "method": "POST", "headers": "Content-Type: application/json\nAuthorization: Basic ZW1haWxAYWNtLm9yZzox\n", "data": "{\n    \"rid\": 5,\n    \"email\": \"apfel\",\n    \"password\": \"1\",\n    \"firstName\": \"Apfel\",\n    \"lastName\": \"Saft\",\n    \"title\": \"Prof.\",\n    \"phoneNumber\": \"1111\",\n    \"createdGroups\": null,\n    \"createdAppointments\": null,\n    \"appointments\": null\n}", "dataMode": "raw", "timestamp": 0, "version": 2, "time":1402759280139}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "202aee71-b8c8-be43-dfe8-63f4c9e24880", "name": "Login", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/Login/login.json?email=apfel&password=1", "method": "GET", "headers": "Authorization: Basic ZW1haWxAYWNtLm9yZzox\nContent-Type: application/json\n", "data": "", "dataMode": "raw", "timestamp": 0, "responses": [], "version":2}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "2f06b5fb-9e37-6694-1631-1c2b9f7b9275", "name": "viewGroupMembers", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/ViewGroupMembers/viewMembers.json?gid=1", "method": "GET", "headers": "Authorization: Basic ZW1haWxAYWNtLm9yZzox\nContent-Type: application/json\n", "data": "", "dataMode": "raw", "timestamp": 0, "version": 2, "time":1403090915993}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "55de4b21-b672-d424-9082-0a68f1b33cb9", "name": "get researcher ids", "description": "Did not test yet", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/SearchResearcher/getResearcherIds.json", "method": "POST", "headers": "Authorization: Basic ZW1haWxAYWNtLm9yZzox\nContent-Type: application/json\n", "data": "{\n    \"rid\": null,\n    \"email\": \"apfel\",\n    \"password\": \"1\",\n    \"firstName\": \"Apfel\",\n    \"lastName\": \"Saft\",\n    \"title\": \"Prof.\",\n    \"phoneNumber\": \"1111\",\n    \"createdGroups\": null,\n    \"createdAppointments\": null,\n    \"appointments\": null\n}", "dataMode": "raw", "timestamp": 0, "version": 2, "time":1403175944319}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "7c47e6b4-78da-80ed-b67f-83119353fbfe", "name": "details", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/User/details.json", "method": "GET", "headers": "", "data": "{\n    \"rId\": 5,\n    \"emailAddress\": \"apfel\",\n    \"password\": \"1\",\n    \"firstName\": \"Apfel\",\n    \"lastName\": \"Saft\",\n    \"title\": \"Prof.\",\n    \"phoneNbr\": \"1111\",\n}", "dataMode": "raw", "timestamp": 0, "responses": [], "version":2}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "8c163614-30a3-b1d7-1106-4edcea1b4737", "name": "getTime", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/Time/createTimeInformation.json", "method": "POST", "headers": "Content-Type: application/json\n", "data": "{\n    \"start\": 1288182956000,\n    \"end\": 1288183136000\n}", "dataMode": "raw", "timestamp": 0, "responses": [], "version":2}
+    ,
+    {
+"collectionId": "c77fe555-afd4-ab45-392b-c60c6e7c7834", "id": "ad85d195-ecd6-5185-086e-ca69d322a651", "name": "createTimeInformation", "description": "", "url": "http://127.0.0.1:8080/ams-quark-1-web/ws/Time/createTimeInformation.json?start=2010/10/27 14:35:56&end=2010/10/27 14:38:56", "method": "GET", "headers": "Content-Type: application/json\n", "data": "{\n    \"rid\": 5,\n    \"email\": \"apfel\",\n    \"password\": \"1\",\n    \"firstName\": \"Apfel\",\n    \"lastName\": \"Saft\",\n    \"title\": \"Prof.\",\n    \"phoneNumber\": \"1111\",\n    \"createdGroups\": null,\n    \"createdAppointments\": null,\n    \"appointments\": null\n}", "dataMode": "raw", "timestamp": 0, "version": 2, "time":1402754149160}
+]}

@@ -4,6 +4,7 @@ package edu.quark.managedbeans;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -57,6 +58,7 @@ public class ScheduleView {
 
 
 	public void setType(AppointmentType type) {
+		this.updateAvailableParticipants();
 		this.type = type;
 	}
 
@@ -101,17 +103,11 @@ public class ScheduleView {
 			}
 			return;
 		}
-		lazyEventModel = new LazyScheduleModel() {
-			private static final long serialVersionUID = -1508233823680543048L;
-
-			@Override
-			public void loadEvents(Date start, Date end) {
-				
-			}
-		};
+		selectedParticipantsNames=new ArrayList<String>();
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
 		availableParticipants = new ArrayList<Researcher>();
+		this.onEventTypeSelect();
 
 //        if(credentials.getResearcher()!=null) {
 //        	Date t1=new Date();
@@ -146,11 +142,13 @@ public class ScheduleView {
 
 	private void AppointmentDetailsToView() {
 		eventModel.clear();
+		Calendar cal = Calendar.getInstance();
+		cal.set(1, 0, 0);
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(9999, 12, 12);
 		List<AppointmentDetails> as = researcherManager.getAppointmentDetails(
 				credentials.getResearcher().getRid(), 
-				new TimeInfo(new Date(1,0,0), new Date(9999,12,12)));
-		List<Appointment> aps = appointmentDAO.findAll();
-		System.out.println("Length "+as.size());
+				new TimeInfo(cal.getTime(), cal2.getTime()));
 		for (AppointmentDetails a : as) {
 			Appointment at = appointmentDAO.read(a.getaId());
 			AppointmentType t = a.getType();
@@ -160,13 +158,6 @@ public class ScheduleView {
 			e.setData(at);
 			eventModel.addEvent(e);
 		}
-	}
-	
-	private Calendar today() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DATE), 0, 0, 0);
-		return calendar;
 	}
 
 	public Appointment getAppointment() {
@@ -178,42 +169,44 @@ public class ScheduleView {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		BigInteger aid = createAppointment.createAppointment(credentials.getResearcher()
-				.getRid(), type, null, appointment.getLocation(),
-				appointment.getDescription(),
-				new TimeInfo(appointment.getStart(),
-						appointment.getEnd()));
-		for (String email : selectedParticipantsNames) {
-			Researcher r = researcherManager.checkEmail(email);
-			appointmentManager.inviteResearcher(r.getRid(), aid);
+		if(this.appointment==null) {
+			addMessage(new FacesMessage(null,"Error", "Appointment details are NULL"));
+			return;
+		}
+		if(this.appointment.getAid()==null ) {
+			BigInteger aid = createAppointment.createAppointment(credentials.getResearcher()
+					.getRid(), type, null, appointment.getLocation(),
+					appointment.getDescription(),
+					new TimeInfo(appointment.getStart(),
+							appointment.getEnd()));
+			if(aid==null) {
+				addMessage(new FacesMessage(null,"Error", "Please revise the appointment details"));
+				return;
+			}
+			for (String email : selectedParticipantsNames) {
+				Researcher r = researcherManager.checkEmail(email);
+				appointmentManager.inviteResearcher(r.getRid(), aid);
+			}
+		} else {
+			appointmentDAO.update(appointment);
 		}
 
 		this.AppointmentDetailsToView();
-		/*if (appointmentDetails.getId() == null)
-			eventModel.addEvent(appointmentDetails);
-		else
-			eventModel.updateEvent(appointmentDetails);
-
-		appointmentDetails = new DefaultScheduleEvent();*/
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {//SelectEvent selectEvent
 		ScheduleEvent se = (ScheduleEvent) selectEvent.getObject();
 		this.appointment = (Appointment) se.getData();
+		this.onEventTypeSelect();
 	}
 	
 	public void onEventTypeSelect() {
-		if(this.appointment instanceof Appointment) {
-			this.type = AppointmentType.GENERIC_APPOINTMENT;
+		this.availableParticipants.clear();
+		if (this.type == AppointmentType.CONFERENCE_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof ConferenceAppointment) {
-			this.type=AppointmentType.CONFERENCE_APPOINTMENT;
+		} else if (this.type == AppointmentType.TEACHING_APPOINTMENT){
 			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof TeachingAppointment){
-			this.type=AppointmentType.TEACHING_APPOINTMENT;
-			this.availableParticipants = new ArrayList<Researcher>();
-		} else if (this.appointment instanceof ResearchGroupMeeting) {
-			this.type = AppointmentType.RESEARCH_GROUP_MEETING;
+		} else if (this.type == AppointmentType.RESEARCH_GROUP_MEETING) {
 			this.availableParticipants = new ArrayList<Researcher>();
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
 			for (GroupDetails g : gs) {
@@ -224,20 +217,48 @@ public class ScheduleView {
 					}
 				}
 			}
-		} else if (this.appointment instanceof ProjectGroupMeeting) {
-			this.type=AppointmentType.PROJECT_GROUP_MEETING;
-			this.availableParticipants = new ArrayList<Researcher>();
+		} else if (this.type == AppointmentType.PROJECT_GROUP_MEETING) {
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
+			// Use set to eliminate duplicates. (not sure if it works since comparison of Researcher objects seems not to work at least sometimes.)
+			// (One researcher can be in several project groups.)
+			Set<Researcher> availableParticipantsTemp = new HashSet<Researcher>();
 			for (GroupDetails g : gs) {
 				if (g.getType()==GroupType.PROJECT_GROUP) {
 					Set<BigInteger> gmi = g.getMembers();
 					for (BigInteger gm: gmi) {
-						this.availableParticipants.add(researcherDAO.read(gm));
+						availableParticipantsTemp.add(researcherDAO.read(gm));
 					}
 				}
 			}
+			this.availableParticipants = new ArrayList<Researcher>(availableParticipantsTemp);
+		} else if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
+			this.availableParticipants = researcherDAO.findAll();
+		} else if(this.appointment==null) {
+			this.availableParticipants = researcherDAO.findAll();
 		}
 		
+		// remove logged in user from list of available researchers (availableParticipants).
+		// would normally do this like:
+		//   availableParticipants.remove(credentials.getResearcher());
+		// but comparability of Researcher objects does not work, so work-around:
+		Researcher loggedInUser = null;
+		for(Researcher r : availableParticipants) {
+			if(r.getRid().equals(credentials.getResearcher().getRid())) {
+				loggedInUser = r;
+			}
+		}
+		// we can not kick users out of appointments
+		availableParticipants.remove(loggedInUser);
+		if(this.appointment!=null && this.appointment.getAid()!=null) {
+			selectedParticipantsNames.clear();
+			if(this.appointment.getParticipants() != null) {
+				for (Researcher r : this.appointment.getParticipants()) {
+					if (r.getRid()!=credentials.getResearcher().getRid())
+						selectedParticipantsNames.add(r.getEmail());
+					availableParticipants.remove(r);
+				}
+			}
+		}
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
@@ -248,21 +269,43 @@ public class ScheduleView {
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {
-		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Event moved", "Day delta:" + event.getDayDelta()
+		ScheduleEvent se = event.getScheduleEvent();
+		this.appointment = (Appointment) se.getData();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Appointment moved", "Day delta:" + event.getDayDelta()
 						+ ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);*/
+		addMessage(message);
+		Calendar c1 = Calendar.getInstance();
+		c1.setTime(this.appointment.getStart());
+		c1.add(Calendar.DATE, event.getDayDelta());
+		c1.add(Calendar.MINUTE, event.getMinuteDelta());
+		Calendar c2 = Calendar.getInstance();
+		c2.setTime(this.appointment.getEnd());
+		c2.add(Calendar.DATE, event.getDayDelta());
+		c2.add(Calendar.MINUTE, event.getMinuteDelta());
+		this.appointment.setStart(c1.getTime());
+		this.appointment.setEnd(c2.getTime());
+		appointmentDAO.update(appointment);
+		
 	}
 
 	public void onEventResize(ScheduleEntryResizeEvent event) {
-		/*FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Event resized", "Day delta:" + event.getDayDelta()
+		ScheduleEvent se = event.getScheduleEvent();
+		this.appointment = (Appointment) se.getData();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Appointment moved", "Day delta:" + event.getDayDelta()
 						+ ", Minute delta:" + event.getMinuteDelta());
-
-		addMessage(message);*/
+		addMessage(message);
+		Calendar c = Calendar.getInstance();
+		c.setTime(this.appointment.getEnd());
+		c.add(Calendar.DATE, event.getDayDelta());
+		c.add(Calendar.MINUTE, event.getMinuteDelta());
+		this.appointment.setEnd(c.getTime());
+		appointmentDAO.update(appointment);
 	}
-
+	public boolean deleteImpossible() {
+		return (this.appointment==null || this.appointment.getAid()==null);
+	}
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
@@ -271,8 +314,14 @@ public class ScheduleView {
 		//createAppointment.createAppointment(rid, type, groupId, location, description);
 	}
 	
-	public void deleteAppiontment(){
-		//deleteAppointment.deleteAppointment(researcherId, appointmentId);
+	public void deleteAppointment(){
+		boolean res = deleteAppointment.deleteAppointment(credentials.getResearcher().getRid(), this.appointment.getAid());
+		if (res==true) {
+			this.appointment= new Appointment();
+			this.AppointmentDetailsToView();
+		} else {
+			addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO,	"Error", "Could not delete appointment"));
+		}
 	}
 
 
@@ -308,6 +357,8 @@ public class ScheduleView {
 	}
 
 	public List<Researcher> getAvailableParticipants() {
+		//this.updateAvailableParticipants();
+		this.onEventTypeSelect();
 		return availableParticipants;
 	}
 
@@ -316,6 +367,7 @@ public class ScheduleView {
 	}
 	
 	public void updateAvailableParticipants() {
+		this.availableParticipants.clear();
 		if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
 		} else if (this.type == AppointmentType.CONFERENCE_APPOINTMENT) {

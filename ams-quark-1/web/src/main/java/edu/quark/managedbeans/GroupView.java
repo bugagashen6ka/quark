@@ -3,8 +3,10 @@ package edu.quark.managedbeans;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -14,6 +16,7 @@ import edu.quark.dao.GroupDAO;
 import edu.quark.dao.ResearcherDAO;
 import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
+import edu.quark.datatypes.ResearcherDetails;
 import edu.quark.model.Group;
 import edu.quark.systemlogic.CreateGroup;
 import edu.quark.systemlogic.JoinGroup;
@@ -21,11 +24,14 @@ import edu.quark.systemlogic.LeaveGroup;
 import edu.quark.systemlogic.SearchAppointment;
 import edu.quark.systemlogic.SearchGroup;
 import edu.quark.systemlogic.Time;
+import edu.quark.systemlogic.ViewGroupMembers;
 
 @ViewScoped
 @ManagedBean
 public class GroupView {
 
+	@EJB
+	private ViewGroupMembers viewGroupMembers;
 	@EJB
 	private GroupDAO groupDAO;
 	@EJB
@@ -48,6 +54,7 @@ public class GroupView {
 	private Group newGroup;
 	private List<Group> groups;
 	private List<GroupDetails> researcherGroupDetails;
+	private List<ResearcherDetails> currentGroupResearchers;
 	private Group selectedGroup;
 	private GroupType selectedGroupType;
 	private String password;
@@ -57,6 +64,7 @@ public class GroupView {
 
 	@PostConstruct
 	public void init() {
+
 		if(credentials.getResearcher()==null) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
@@ -69,17 +77,21 @@ public class GroupView {
 		selectedGroupId = BigInteger.valueOf(0);
 		groups = groupDAO.findAll();
 
-		updateResearcherGroups();
-
 		researcherGroupDetails = new ArrayList<GroupDetails>();
+		setCurrentGroupResearchers(new ArrayList<ResearcherDetails>());
+		
 		newGroup = new Group();
 		chosenGroup = new Group();
 		
 		createGroup.createGroup(credentials.getResearcher(), "Food", GroupType.PROJECT_GROUP, "aaaaaa");
 		createGroup.createGroup(credentials.getResearcher(), "Sport", GroupType.PROJECT_GROUP, "aaaaaa");
 		createGroup.createGroup(credentials.getResearcher(), "Drinks", GroupType.RESEARCH_GROUP, "aaaaaa");
+		
+		updateResearcherGroups();
 	}
-
+	public void listMembers() {
+		this.setCurrentGroupResearchers(this.viewGroupMembers.ViewMembers(this.selectedGroupId));
+	}
 	public GroupDAO getGroupDAO() {
 		return groupDAO;
 	}
@@ -97,14 +109,24 @@ public class GroupView {
 	}
 
 	public void createGroupMethod() {
-		createGroup.createGroup(credentials.getResearcher(),
+		FacesContext context = FacesContext.getCurrentInstance();
+		BigInteger r = createGroup.createGroup(credentials.getResearcher(),
 				newGroup.getName(), groupType, newGroup.getPassword());
-		groups = groupDAO.findAll();
+		if (r == null) {
+			context.addMessage(null, new FacesMessage("Error",  "Please check group type or password (>6 symbols)"));
+		} else {
+			groups = groupDAO.findAll();
+		}
+		updateResearcherGroups();
 	}
 
 	public void joinGroupMethod() {
-		joinGroup.join(credentials.getResearcher(),
+		FacesContext context = FacesContext.getCurrentInstance();
+		boolean r = joinGroup.join(credentials.getResearcher(),
 				chosenGroup.getGid(), chosenGroup.getPassword());
+		if (!r) {
+			context.addMessage(null, new FacesMessage("Error",  "Please check group and password"));
+		}
 		updateResearcherGroups();
 	}
 
@@ -238,6 +260,12 @@ public class GroupView {
 
 	public void setSelectedGroupId(BigInteger selectedGroupId) {
 		this.selectedGroupId = selectedGroupId;
+	}
+	public List<ResearcherDetails> getCurrentGroupResearchers() {
+		return currentGroupResearchers;
+	}
+	public void setCurrentGroupResearchers(List<ResearcherDetails> currentGroupResearchers) {
+		this.currentGroupResearchers = currentGroupResearchers;
 	}
 
 }

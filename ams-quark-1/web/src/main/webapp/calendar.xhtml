@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputStylesheet name="resources/css/screen.css" />
-	<title>index</title>
+	<title>Quark AMS</title>
 
 	<script src="foundation/js/vendor/modernizr.js" />
 	<link rel="stylesheet" href="foundation/css/foundation.css" />
@@ -17,7 +17,7 @@
 
 	<div id="login">
 		<div id="triangle"></div>	
-		<h1 >Lets Quark!</h1>
+		<h1 >Let's Quark!</h1>
 	</div>
 	<div class="formcont">
 
@@ -29,8 +29,7 @@
 
 		<!-- Select Tab -->
 		<ul class="tabs" data-tab="sfd">
-			<li class="tab-title active"><a href="#appointment">Appointment
-					Management</a></li>
+			<li class="tab-title active"><a href="#appointment">Appointment	Management</a></li>
 			<li class="tab-title"><a href="#group">Group Management</a></li>
 		</ul>
 
@@ -84,25 +83,20 @@
 									itemValue="CONFERENCE_APPOINTMENT" />
 							</p:selectOneMenu>
 
-							<h:outputLabel for="description" value="Description:" />
-							<p:inputText id="description"
-								value="#{scheduleView.appointment.description}" required="true" />
-
 							<h:outputLabel for="location" value="Location:" />
-							<p:inputText id="location"
-								value="#{scheduleView.appointment.location}" required="true" />
+							<p:selectOneMenu id="location" value="#{scheduleView.appointment.location}" panelStyle="width:250px" >
+								<f:selectItem itemLabel="Room 1" itemValue="Room 1"/>
+								<f:selectItem itemLabel="Room 2" itemValue="Room 2" />
+								<f:selectItem itemLabel="Room 3" itemValue="Room 3" />
+								<f:selectItem itemLabel="Room 4" itemValue="Room 4" />
+								<f:selectItem itemLabel="Room 5" itemValue="Room 5" />
+							</p:selectOneMenu>
 
 							<h:outputLabel for="from" value="From:" />
-							<p:inputMask id="from" value="#{scheduleView.appointment.start}"
-								mask="99/99/9999">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</p:inputMask>
+							<p:calendar id="from" value="#{scheduleView.appointment.start}" pattern="MM/dd/yyyy HH:mm:ss" timeZone="UTC"/>
 
 							<h:outputLabel for="to" value="To:" />
-							<p:inputMask id="to" value="#{scheduleView.appointment.end}"
-								mask="99/99/9999">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</p:inputMask>
+							<p:calendar id="to" value="#{scheduleView.appointment.end}" pattern="MM/dd/yyyy HH:mm:ss" timeZone="UTC"/>
 
 							<h:outputLabel for="participant" value="Participant:" />
 							<p:selectCheckboxMenu id="participant"
@@ -111,13 +105,22 @@
 								<f:selectItems value="#{scheduleView.availableParticipants}" 
 									var="p"
 									itemValue="#{p.email}"
-									itemLabel="#{p.email}"/>
+									itemLabel="#{p.toString()}"/>
 							</p:selectCheckboxMenu>
+							
+							<h:outputLabel for="description" value="Description:" />
+							<p:inputTextarea id="description"
+								value="#{scheduleView.appointment.description}" required="true" />
 
 							<p:commandButton type="reset" value="Reset" />
+							<p:row><p:column>
 							<p:commandButton id="addButton" value="Save"
 								actionListener="#{scheduleView.addEvent}"
 								oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+							<p:commandButton id="deleteButton" value="Delete" disabled="#{scheduleView.deleteImpossible()}"
+								actionListener="#{scheduleView.deleteAppointment}" update="messages"
+								oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+							</p:column></p:row>
 						</h:panelGrid>
 					</p:dialog>
 
@@ -126,7 +129,7 @@
 			<!-- Group Tab -->
 			<div class="content" id="group">
 
-				<h:form>
+				<h:form id="groupdisplay">
 					<table class="table">
 						<thead>
 							<tr>
@@ -138,8 +141,14 @@
 						<tbody>
 							<ui:repeat value="#{groupView.researcherGroupDetails}" var="gd">
 								<tr>
-									<td><h:outputText value="#{gd.name}" /></td>
-									<td><h:outputText value="#{gd.type}" /></td>
+									<td><h:commandLink value="#{gd.name}"
+										action="#{groupView.listMembers}"
+										onclick="PF('listDialog').show();return false">
+										<f:setPropertyActionListener
+													target="#{groupView.selectedGroupId}" value="#{gd.gId}" />
+									</h:commandLink>
+									</td>
+									<td><h:outputText value="#{gd.type.toString()}" /></td>
 									<td><p:column headerText="Action">
 											<h:commandButton styleClass="button tiny alert" value="Leave"
 												action="#{groupView.leaveGroupMethod}">
@@ -152,9 +161,24 @@
 							</ui:repeat>
 						</tbody>
 					</table>
+					<p:dialog widgetVar="listDialog" header="Group members" width="700"
+						showEffect="clip" hideEffect="clip">
+							<p:dataTable var="r" value="#{groupView.currentGroupResearchers}">
+								<p:column headerText="Name">
+									<h:outputText value="#{r.toString()}" />
+								</p:column>
 
+								<p:column headerText="Email">
+									<h:outputText value="#{r.emailAddress}" />
+								</p:column>
+								<p:column headerText="Phone Number">
+									<h:outputText value="#{r.phoneNbr}" />
+								</p:column>
+							</p:dataTable>
+							<p:commandButton value="Close"
+								onclick="PF('listDialog').hide();" />
+					</p:dialog>
 				</h:form>
-
 
 				<br />
 				<div class="row">
@@ -179,7 +203,7 @@
 			style="width: 400px;">
 			<h3>Create a new group</h3>
 			<h:form id="create_group" styleClass="popup">
-
+				<p:growl id="growl1" showDetail="true" sticky="true" />
 				<div class="row">
 					<div class="small-12 columns">
 						<h:outputLabel for="type" value="Type:" />
@@ -213,7 +237,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<h:commandButton value="Create"
-							action="#{groupView.createGroupMethod}" />
+							action="#{groupView.createGroupMethod}" update="groupdisplay,growl1"/>
 					</div>
 				</div>
 
@@ -225,7 +249,7 @@
 			style="width: 400px;">
 			<h3>Choose the group</h3>
 			<h:form id="join_group" styleClass="popup">
-
+				<p:growl id="growl2" showDetail="true" sticky="true" />
 				<div class="row">
 					<div class="small-12 columns">
 						<h:outputLabel for="type" value="Chose Group:" />
@@ -251,7 +275,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<h:commandButton value="Join"
-							action="#{groupView.joinGroupMethod}" />
+							action="#{groupView.joinGroupMethod}" update="groupdisplay,growl2"/>
 					</div>
 				</div>
 

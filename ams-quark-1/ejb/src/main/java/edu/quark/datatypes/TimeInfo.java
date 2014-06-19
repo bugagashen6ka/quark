@@ -59,4 +59,7 @@ public class TimeInfo {
 		this.end = end;
 	}
 
+	public TimeInfo() {
+	}
+
 }
