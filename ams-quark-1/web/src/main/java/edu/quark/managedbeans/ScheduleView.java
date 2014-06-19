@@ -215,14 +215,11 @@ public class ScheduleView {
 	
 	public void onEventTypeSelect() {
 		this.availableParticipants.clear();
-		if (this.appointment instanceof ConferenceAppointment) {
-			this.type=AppointmentType.CONFERENCE_APPOINTMENT;
+		if (this.type == AppointmentType.CONFERENCE_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof TeachingAppointment){
-			this.type=AppointmentType.TEACHING_APPOINTMENT;
+		} else if (this.type == AppointmentType.TEACHING_APPOINTMENT){
 			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof ResearchGroupMeeting) {
-			this.type = AppointmentType.RESEARCH_GROUP_MEETING;
+		} else if (this.type == AppointmentType.RESEARCH_GROUP_MEETING) {
 			this.availableParticipants = new ArrayList<Researcher>();
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
 			for (GroupDetails g : gs) {
@@ -233,10 +230,9 @@ public class ScheduleView {
 					}
 				}
 			}
-		} else if (this.appointment instanceof ProjectGroupMeeting) {
-			this.type=AppointmentType.PROJECT_GROUP_MEETING;
+		} else if (this.type == AppointmentType.PROJECT_GROUP_MEETING) {
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
-			// Use set to eliminate duplicates.
+			// Use set to eliminate duplicates. (not sure if it works since comparison of Researcher objects seems not to work at least sometimes.)
 			// (One researcher can be in several project groups.)
 			Set<Researcher> availableParticipantsTemp = new HashSet<Researcher>();
 			for (GroupDetails g : gs) {
@@ -248,8 +244,7 @@ public class ScheduleView {
 				}
 			}
 			this.availableParticipants = new ArrayList<Researcher>(availableParticipantsTemp);
-		} else if(this.appointment instanceof Appointment) {
-			this.type = AppointmentType.GENERIC_APPOINTMENT;
+		} else if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
 		} else if(this.appointment==null) {
 			this.availableParticipants = researcherDAO.findAll();
