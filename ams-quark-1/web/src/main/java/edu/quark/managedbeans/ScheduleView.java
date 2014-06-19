@@ -103,14 +103,6 @@ public class ScheduleView {
 			}
 			return;
 		}
-		lazyEventModel = new LazyScheduleModel() {
-			private static final long serialVersionUID = -1508233823680543048L;
-
-			@Override
-			public void loadEvents(Date start, Date end) {
-				
-			}
-		};
 		selectedParticipantsNames=new ArrayList<String>();
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
@@ -150,11 +142,13 @@ public class ScheduleView {
 
 	private void AppointmentDetailsToView() {
 		eventModel.clear();
+		Calendar cal = Calendar.getInstance();
+		cal.set(1, 0, 0);
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(9999, 12, 12);
 		List<AppointmentDetails> as = researcherManager.getAppointmentDetails(
 				credentials.getResearcher().getRid(), 
-				new TimeInfo(new Date(1,0,0), new Date(9999,12,12)));
-		List<Appointment> aps = appointmentDAO.findAll();
-		System.out.println("Length "+as.size());
+				new TimeInfo(cal.getTime(), cal2.getTime()));
 		for (AppointmentDetails a : as) {
 			Appointment at = appointmentDAO.read(a.getaId());
 			AppointmentType t = a.getType();
@@ -164,13 +158,6 @@ public class ScheduleView {
 			e.setData(at);
 			eventModel.addEvent(e);
 		}
-	}
-	
-	private Calendar today() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DATE), 0, 0, 0);
-		return calendar;
 	}
 
 	public Appointment getAppointment() {
