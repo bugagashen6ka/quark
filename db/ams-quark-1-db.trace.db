@@ -1,0 +1,45 @@
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "APPOINTMENT" not found; SQL statement:
+alter table Appointment drop constraint FKB7F037F4CF89B0A [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "APPOINTMENT" not found; SQL statement:
+alter table Appointment drop constraint FKB7F037F66B82AC [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONFERENCEAPPOINTMENT" not found; SQL statement:
+alter table ConferenceAppointment drop constraint FK84A204C3E12D9506 [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "GROUPTABLE" not found; SQL statement:
+alter table GroupTable drop constraint FKC29F68AF4CF89B0A [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "GROUP_MEMBERS" not found; SQL statement:
+alter table Group_members drop constraint FK6B3BA7394CF89B0A [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "GROUP_MEMBERS" not found; SQL statement:
+alter table Group_members drop constraint FK6B3BA73966B82AC [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROJECTGROUP" not found; SQL statement:
+alter table ProjectGroup drop constraint FK4079170666B82AC [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROJECTGROUPMEETING" not found; SQL statement:
+alter table ProjectGroupMeeting drop constraint FK3B14F855207097DD [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROJECTGROUPMEETING" not found; SQL statement:
+alter table ProjectGroupMeeting drop constraint FK3B14F855E12D9506 [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RESEARCHGROUP" not found; SQL statement:
+alter table ResearchGroup drop constraint FK4D973D8466B82AC [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RESEARCHGROUPMEETING" not found; SQL statement:
+alter table ResearchGroupMeeting drop constraint FK5DB428176C60FED1 [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RESEARCHGROUPMEETING" not found; SQL statement:
+alter table ResearchGroupMeeting drop constraint FK5DB42817E12D9506 [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RESEARCHER_APPOINTMENT" not found; SQL statement:
+alter table Researcher_Appointment drop constraint FK9DD6D5684CF89B0A [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RESEARCHER_APPOINTMENT" not found; SQL statement:
+alter table Researcher_Appointment drop constraint FK9DD6D568E12D9506 [42102-161]
+06-04 19:27:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEACHINGAPPOINTMENT" not found; SQL statement:
+alter table TeachingAppointment drop constraint FK9A9C69F2E12D9506 [42102-161]

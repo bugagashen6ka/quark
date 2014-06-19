@@ -65,9 +65,10 @@ public class GroupView {
 	@PostConstruct
 	public void init() {
 
-		if(credentials.getResearcher()==null) {
+		if (credentials.getResearcher() == null) {
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext()
+						.redirect("index.xhtml");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -79,19 +80,18 @@ public class GroupView {
 
 		researcherGroupDetails = new ArrayList<GroupDetails>();
 		setCurrentGroupResearchers(new ArrayList<ResearcherDetails>());
-		
+
 		newGroup = new Group();
 		chosenGroup = new Group();
-		
-		createGroup.createGroup(credentials.getResearcher(), "Food", GroupType.PROJECT_GROUP, "aaaaaa");
-		createGroup.createGroup(credentials.getResearcher(), "Sport", GroupType.PROJECT_GROUP, "aaaaaa");
-		createGroup.createGroup(credentials.getResearcher(), "Drinks", GroupType.RESEARCH_GROUP, "aaaaaa");
-		
+
 		updateResearcherGroups();
 	}
+
 	public void listMembers() {
-		this.setCurrentGroupResearchers(this.viewGroupMembers.ViewMembers(this.selectedGroupId));
+		this.setCurrentGroupResearchers(this.viewGroupMembers
+				.ViewMembers(this.selectedGroupId));
 	}
+
 	public GroupDAO getGroupDAO() {
 		return groupDAO;
 	}
@@ -113,7 +113,8 @@ public class GroupView {
 		BigInteger r = createGroup.createGroup(credentials.getResearcher(),
 				newGroup.getName(), groupType, newGroup.getPassword());
 		if (r == null) {
-			context.addMessage(null, new FacesMessage("Error",  "Please check group type or password (>6 symbols)"));
+			context.addMessage(null, new FacesMessage("Error",
+					"Please check group type or password (at least 6 symbols)"));
 		} else {
 			groups = groupDAO.findAll();
 		}
@@ -125,7 +126,8 @@ public class GroupView {
 		boolean r = joinGroup.join(credentials.getResearcher(),
 				chosenGroup.getGid(), chosenGroup.getPassword());
 		if (!r) {
-			context.addMessage(null, new FacesMessage("Error",  "Please check group and password"));
+			context.addMessage(null, new FacesMessage("Error",
+					"Please check group and password"));
 		}
 		updateResearcherGroups();
 	}
@@ -240,7 +242,7 @@ public class GroupView {
 	public void setChosenGroup(Group chosenGroup) {
 		this.chosenGroup = chosenGroup;
 	}
-	
+
 	public List<GroupDetails> getResearcherGroupDetails() {
 		return researcherGroupDetails;
 	}
@@ -250,7 +252,8 @@ public class GroupView {
 	}
 
 	public List<GroupDetails> updateResearcherGroups() {
-		researcherGroupDetails = searchGroup.getGroupDetails(credentials.getResearcher());
+		researcherGroupDetails = searchGroup.getGroupDetails(credentials
+				.getResearcher());
 		return researcherGroupDetails;
 	}
 
@@ -261,10 +264,13 @@ public class GroupView {
 	public void setSelectedGroupId(BigInteger selectedGroupId) {
 		this.selectedGroupId = selectedGroupId;
 	}
+
 	public List<ResearcherDetails> getCurrentGroupResearchers() {
 		return currentGroupResearchers;
 	}
-	public void setCurrentGroupResearchers(List<ResearcherDetails> currentGroupResearchers) {
+
+	public void setCurrentGroupResearchers(
+			List<ResearcherDetails> currentGroupResearchers) {
 		this.currentGroupResearchers = currentGroupResearchers;
 	}
 
