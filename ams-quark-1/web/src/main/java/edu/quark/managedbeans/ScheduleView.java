@@ -103,14 +103,6 @@ public class ScheduleView {
 			}
 			return;
 		}
-		lazyEventModel = new LazyScheduleModel() {
-			private static final long serialVersionUID = -1508233823680543048L;
-
-			@Override
-			public void loadEvents(Date start, Date end) {
-				
-			}
-		};
 		selectedParticipantsNames=new ArrayList<String>();
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
@@ -150,11 +142,13 @@ public class ScheduleView {
 
 	private void AppointmentDetailsToView() {
 		eventModel.clear();
+		Calendar cal = Calendar.getInstance();
+		cal.set(1, 0, 0);
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(9999, 12, 12);
 		List<AppointmentDetails> as = researcherManager.getAppointmentDetails(
 				credentials.getResearcher().getRid(), 
-				new TimeInfo(new Date(1,0,0), new Date(9999,12,12)));
-		List<Appointment> aps = appointmentDAO.findAll();
-		System.out.println("Length "+as.size());
+				new TimeInfo(cal.getTime(), cal2.getTime()));
 		for (AppointmentDetails a : as) {
 			Appointment at = appointmentDAO.read(a.getaId());
 			AppointmentType t = a.getType();
@@ -164,13 +158,6 @@ public class ScheduleView {
 			e.setData(at);
 			eventModel.addEvent(e);
 		}
-	}
-	
-	private Calendar today() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DATE), 0, 0, 0);
-		return calendar;
 	}
 
 	public Appointment getAppointment() {
@@ -215,14 +202,11 @@ public class ScheduleView {
 	
 	public void onEventTypeSelect() {
 		this.availableParticipants.clear();
-		if (this.appointment instanceof ConferenceAppointment) {
-			this.type=AppointmentType.CONFERENCE_APPOINTMENT;
+		if (this.type == AppointmentType.CONFERENCE_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof TeachingAppointment){
-			this.type=AppointmentType.TEACHING_APPOINTMENT;
+		} else if (this.type == AppointmentType.TEACHING_APPOINTMENT){
 			this.availableParticipants = researcherDAO.findAll();
-		} else if (this.appointment instanceof ResearchGroupMeeting) {
-			this.type = AppointmentType.RESEARCH_GROUP_MEETING;
+		} else if (this.type == AppointmentType.RESEARCH_GROUP_MEETING) {
 			this.availableParticipants = new ArrayList<Researcher>();
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
 			for (GroupDetails g : gs) {
@@ -233,10 +217,9 @@ public class ScheduleView {
 					}
 				}
 			}
-		} else if (this.appointment instanceof ProjectGroupMeeting) {
-			this.type=AppointmentType.PROJECT_GROUP_MEETING;
+		} else if (this.type == AppointmentType.PROJECT_GROUP_MEETING) {
 			List<GroupDetails> gs = groupManager.getGroupDetails(credentials.getResearcher());
-			// Use set to eliminate duplicates.
+			// Use set to eliminate duplicates. (not sure if it works since comparison of Researcher objects seems not to work at least sometimes.)
 			// (One researcher can be in several project groups.)
 			Set<Researcher> availableParticipantsTemp = new HashSet<Researcher>();
 			for (GroupDetails g : gs) {
@@ -248,8 +231,7 @@ public class ScheduleView {
 				}
 			}
 			this.availableParticipants = new ArrayList<Researcher>(availableParticipantsTemp);
-		} else if(this.appointment instanceof Appointment) {
-			this.type = AppointmentType.GENERIC_APPOINTMENT;
+		} else if(this.type == AppointmentType.GENERIC_APPOINTMENT) {
 			this.availableParticipants = researcherDAO.findAll();
 		} else if(this.appointment==null) {
 			this.availableParticipants = researcherDAO.findAll();

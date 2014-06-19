@@ -16,9 +16,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.HeaderParam;
-import javax.xml.ws.spi.http.HttpContext;
 import javax.xml.bind.DatatypeConverter;
 
 import edu.quark.dao.ResearcherDAO;
@@ -40,13 +37,6 @@ public class User {
 
 	@EJB
 	private ResearcherDAO researcherDAO;
-
-	private String email;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private String phoneNumber;
-	private String title;
 
 	private Researcher researcher;
 

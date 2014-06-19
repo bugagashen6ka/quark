@@ -143,7 +143,7 @@
 								<tr>
 									<td><h:commandLink value="#{gd.name}"
 										action="#{groupView.listMembers}"
-										onclick="PF('listDialog').show();window.fix();return false">
+										onclick="PF('listDialog').show();return false">
 										<f:setPropertyActionListener
 													target="#{groupView.selectedGroupId}" value="#{gd.gId}" />
 									</h:commandLink>

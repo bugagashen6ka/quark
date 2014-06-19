@@ -6,7 +6,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.persistence.ManyToMany;
 
 import edu.quark.managedbeans.GroupView;
 import edu.quark.model.Group;
