@@ -77,8 +77,6 @@ public class Credentials {
 		researcher2.setPhoneNumber("1111");
 		researcher2.setTitle("Prof.");
 		researcherDAO.create(researcher2);
-
-		researcher = researcher2;
 	}
 
 	public String getPassword() {

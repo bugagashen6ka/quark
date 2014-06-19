@@ -18,7 +18,6 @@ public class LeaveGroup implements ILeaveGroup {
 
 	@Override
 	public void leave(BigInteger researcherId, BigInteger groupId) {
-		// TODO Auto-generated method stub
 		// Do nothing at the moment
 		groupManager.leaveGroup(researcherId, groupId);
 	}
