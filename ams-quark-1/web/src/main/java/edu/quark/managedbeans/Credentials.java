@@ -42,7 +42,6 @@ public class Credentials {
 
 	@PostConstruct
 	public void init() {
-
 	}
 
 	public String getPassword() {
