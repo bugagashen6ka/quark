@@ -21,7 +21,6 @@ import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
@@ -36,11 +35,7 @@ import edu.quark.datatypes.GroupDetails;
 import edu.quark.datatypes.GroupType;
 import edu.quark.datatypes.TimeInfo;
 import edu.quark.model.Appointment;
-import edu.quark.model.ConferenceAppointment;
-import edu.quark.model.ProjectGroupMeeting;
-import edu.quark.model.ResearchGroupMeeting;
 import edu.quark.model.Researcher;
-import edu.quark.model.TeachingAppointment;
 import edu.quark.systemlogic.CreateAppointment;
 import edu.quark.systemlogic.DeleteAppointment;
 
@@ -98,38 +93,20 @@ public class ScheduleView {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return;
+		} else {
+			addMessage(new FacesMessage("Welcome!",
+					"You are logged in as: "+credentials.getResearcher().toString()));
 		}
 		selectedParticipantsNames=new ArrayList<String>();
 		eventModel = new DefaultScheduleModel();
 		eventModel.clear();
 		availableParticipants = new ArrayList<Researcher>();
 		this.onEventTypeSelect();
-
-//        if(credentials.getResearcher()!=null) {
-//        	Date t1=new Date();
-//            Date t2=new Date();
-//            Date t3=new Date();
-//            Date t4=new Date();
-//            t1.setHours(18);
-//            t2.setHours(19);
-//            t3.setHours(11);
-//            t4.setHours(23);
-//            appointmentManager.createAppointment(
-//            		credentials.getResearcher().getRid(),
-//            		AppointmentType.CONFERENCE_APPOINTMENT, 
-//            		null, "3076", "JJJ", new TimeInfo(t1,t2));
-//            appointmentManager.createAppointment(
-//            		credentials.getResearcher().getRid(),
-//            		AppointmentType.GENERIC_APPOINTMENT, 
-//            		null, "3076", "XXX", new TimeInfo(t3,t4));
-           this.AppointmentDetailsToView();
-//        }
-        
-	}
+        this.AppointmentDetailsToView();
+}
     
 
 	public Date getInitialDate() {
