@@ -9,6 +9,9 @@
 </h:head>
 <h:body>
 	<p:dataTable var="group" value="#{groupView.groups}">
+		<p:column headerText="Id">
+			<h:outputText value="#{group.gid}" />
+		</p:column>
 		<p:column headerText="Name">
 			<h:outputText value="#{group.name}" />
 		</p:column>
