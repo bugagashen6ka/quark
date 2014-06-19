@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://wadl.dev.java.net/2009/02"><doc
+        jersey:generatedBy="Jersey: 1.17 01/17/2013 03:31 PM"
+        xmlns:jersey="http://jersey.java.net/"/><doc
+        title="A message in the WADL"
+            xml:lang="en"><![CDATA[This is added to the start of the generated application.wadl]]></doc><grammars><include
+        href="xsd0.xsd"/></grammars><resources
+            base="http://localhost:8080/ams-quark-1/ws"><resource
+                path="/SearchGroup"><resource
+                    path="/getGroupDetails.json"><method
+                    id="getGroupDetails"
+                            name="POST"><request><ns2:representation
+                            element="researcher" mediaType="*/*"
+                            xmlns:ns2="http://wadl.dev.java.net/2009/02"
+                            xmlns=""/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/DeleteAppointment"><resource
+                    path="/deleteAppointment.json"><method
+                    id="deleteAppointment" name="POST"><request><param
+                            name="aid" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/SearchAppointment"><resource
+                    path="/getAppointmentDetails.json"><method
+                    id="getAppointmentDetails"
+                            name="POST"><request><param name="rid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><representation
+                            mediaType="*/*"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/Conflicts"><resource
+                    path="/getAppointmentsWithConfilcts.jbos"><method
+                    id="getAppointmentsWithConflicts"
+                            name="POST"><request><param name="rid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><representation
+                            mediaType="*/*"/></request><response><representation
+                mediaType="application/json"/></response></method></resource><resource
+                    path="/getResearchersWithConflicts"><method
+                    id="getResearchersWithConflicts"
+                            name="POST"><request><param name="aid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><representation
+                            mediaType="*/*"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/Login"><resource path="/login.json"><method
+                    id="login" name="GET"><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/SearchResearcher"><resource
+                    path="/getResearcherIds.json"><method
+                    id="getResearcherIds"
+                            name="POST"><request><representation
+                            mediaType="*/*"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/ViewGroupMembers"><resource
+                    path="/viewMembers.json"><method id="ViewMembers"
+                            name="GET"><request><param name="gid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/SearchParticipant"><resource
+                    path="/getParticipantIds.json"><method
+                    id="getParticipantIds" name="GET"><request><param
+                            name="aid" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/CreateGroup"><resource
+                    path="/createGroup.json"><method id="createGroup"
+                            name="POST"><request><param name="name"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="type" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="password" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/CreateAppointment"><resource
+                    path="/createAppointment.json"><method
+                    id="createAppointment" name="POST"><request><param
+                            name="type" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="gid" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="location" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="desc" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><representation
+                            mediaType="*/*"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/Time"><resource path="/getTime.json"><method
+                    id="getTime" name="POST"><request><representation
+                            mediaType="*/*"/></request><response><representation
+                mediaType="application/json"/></response></method></resource><resource
+                    path="/createTimeInformation.json"><method
+                    id="createTimeInformation"
+                            name="GET"><request><param name="start"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="end" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/User"><resource path="/test.json"><method
+                    id="test" name="GET"><response><ns2:representation
+                            element="researcher"
+                            mediaType="application/json"
+                            xmlns:ns2="http://wadl.dev.java.net/2009/02"
+                xmlns=""/></response></method></resource><resource
+                    path="/login.json"><method id="login"
+                            name="POST"><request><param name="email"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="password" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+                mediaType="*/*"/></response></method></resource><resource
+                    path="/details.json"><method id="details"
+                            name="GET"><response><representation
+                mediaType="application/json"/></response></method></resource><resource
+                    path="/echo.json"><method id="echo"
+                            name="POST"><request><ns2:representation
+                            element="researcher"
+                            mediaType="application/json"
+                            xmlns:ns2="http://wadl.dev.java.net/2009/02"
+                            xmlns=""/></request><response><ns2:representation
+                            element="researcher"
+                            mediaType="application/xml"
+                            xmlns:ns2="http://wadl.dev.java.net/2009/02"
+            xmlns=""/></response></method></resource></resource><resource
+                path="/Invite"><resource path="/invite.json"><method
+                    id="invite" name="POST"><request><param name="rid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="aid" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/JoinGroup"><resource path="/join.json"><method
+                    id="join" name="POST"><request><param name="gid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="password" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/Register"><resource
+                    path="checkEmail.json"><method id="checkEmail"
+                            name="GET"><request><representation
+                            mediaType="*/*"/></request><response><representation
+                mediaType="application/json"/></response></method></resource><resource
+                    path="/createResearcher.json"><method
+                    id="createResearcher" name="POST"><request><param
+                            name="email" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="password" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="firstName" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="lastName" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="title" style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/><param
+                            name="phoneNumber" style="query"
+                            type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation
+            mediaType="application/json"/></response></method></resource></resource><resource
+                path="/LeaveGroup"><resource path="/leave.json"><method
+                    id="leave" name="POST"><request><param name="gid"
+                            style="query" type="xs:string"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"/></request><response><representation mediaType="*/*"/></response></method></resource></resource></resources></application>
