@@ -126,7 +126,7 @@ public class ResearcherManager implements IResearcherManagement {
 	public Researcher checkCredentials(String email, String password) {
 		List<Researcher> rs = researcherDAO.findAll();
 		for (Researcher r : rs) {
-			if (r.getEmail().equals(email) && r.getPassword().equals(password))
+			if (r.getEmail().equals(email) && r.checkPassword(password))
 				return r;
 		}
 		return null;

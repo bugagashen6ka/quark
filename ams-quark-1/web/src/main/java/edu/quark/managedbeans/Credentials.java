@@ -42,41 +42,41 @@ public class Credentials {
 
 	@PostConstruct
 	public void init() {
-		Researcher researcher2 = new Researcher();
-		researcher2.setEmail("email@acm.org");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Vasilii");
-		researcher2.setLastName("Pupkin");
-		researcher2.setPhoneNumber("1111");
-		researcher2.setTitle("Dr.");
-		researcherDAO.create(researcher2);
-		
-		researcher2 = new Researcher();
-		researcher2.setEmail("quark@at.net");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Speise");
-		researcher2.setLastName("Quarkstein");
-		researcher2.setPhoneNumber("1111");
-		researcher2.setTitle("Prof.");
-		researcherDAO.create(researcher2);
-		
-		researcher2 = new Researcher();
-		researcher2.setEmail("dima");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Alex");
-		researcher2.setLastName("Planeta");
-		researcher2.setPhoneNumber("2222");
-		researcher2.setTitle("Dr.");
-		researcherDAO.create(researcher2);
-		
-		researcher2 = new Researcher();
-		researcher2.setEmail("apfel");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Apfel");
-		researcher2.setLastName("Saft");
-		researcher2.setPhoneNumber("1111");
-		researcher2.setTitle("Prof.");
-		researcherDAO.create(researcher2);
+//		Researcher researcher2 = new Researcher();
+//		researcher2.setEmail("email@acm.org");
+//		researcher2.setPassword("1");
+//		researcher2.setFirstName("Vasilii");
+//		researcher2.setLastName("Pupkin");
+//		researcher2.setPhoneNumber("1111");
+//		researcher2.setTitle("Dr.");
+//		researcherDAO.create(researcher2);
+//		
+//		researcher2 = new Researcher();
+//		researcher2.setEmail("quark@at.net");
+//		researcher2.setPassword("1");
+//		researcher2.setFirstName("Speise");
+//		researcher2.setLastName("Quarkstein");
+//		researcher2.setPhoneNumber("1111");
+//		researcher2.setTitle("Prof.");
+//		researcherDAO.create(researcher2);
+//		
+//		researcher2 = new Researcher();
+//		researcher2.setEmail("dima");
+//		researcher2.setPassword("1");
+//		researcher2.setFirstName("Alex");
+//		researcher2.setLastName("Planeta");
+//		researcher2.setPhoneNumber("2222");
+//		researcher2.setTitle("Dr.");
+//		researcherDAO.create(researcher2);
+//		
+//		researcher2 = new Researcher();
+//		researcher2.setEmail("apfel");
+//		researcher2.setPassword("1");
+//		researcher2.setFirstName("Apfel");
+//		researcher2.setLastName("Saft");
+//		researcher2.setPhoneNumber("1111");
+//		researcher2.setTitle("Prof.");
+//		researcherDAO.create(researcher2);
 	}
 
 	public String getPassword() {

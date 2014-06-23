@@ -68,62 +68,62 @@ public class User {
 		return null;
 	}
 
-	@POST
-	@Path("/login.json")
-	public Response login(@QueryParam("email") String email,
-			@QueryParam("password") String password) {
-		if (researcher == null) {
-			return Response.serverError().status(Status.UNAUTHORIZED).build();
-		}
-		return Response.ok().build();
-	}
-
-	@GET
-	@Path("/details.json")
-	@Produces(MediaType.APPLICATION_JSON)
-	public ResearcherDetails details() {
-		Researcher researcher2 = new Researcher();
-		researcher2.setEmail("apfel");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Apfel");
-		researcher2.setLastName("Saft");
-		researcher2.setPhoneNumber("1111");
-		researcher2.setTitle("Prof.");
-
-		return new ResearcherDetails(researcher2);
-	}
-
-	@GET
-	@Path("/test.json")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Researcher test() {
-		Researcher researcher2 = new Researcher();
-		researcher2.setEmail("apfel");
-		researcher2.setPassword("1");
-		researcher2.setFirstName("Apfel");
-		researcher2.setLastName("Saft");
-		researcher2.setPhoneNumber("1111");
-		researcher2.setTitle("Prof.");
-		researcherDAO.create(researcher2);
-
-		researcher = researcher2;
-
-		return researcher;
-	}
-
-	@POST
-	@Path("/echo.json")
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Researcher echo(@Context HttpHeaders httpHeaders, Researcher in) {
-		if (checkCredentials(httpHeaders) == null)
-			return null;
-		// if (!httpContext.getAttribute("Authorization")) {
-		// return null;
-		// }
-		//
-		// String email = securityContext.getUserPrincipal().getName();
-		// String password = sec
-		return in;
-	}
+//	@POST
+//	@Path("/login.json")
+//	public Response login(@QueryParam("email") String email,
+//			@QueryParam("password") String password) {
+//		if (researcher == null) {
+//			return Response.serverError().status(Status.UNAUTHORIZED).build();
+//		}
+//		return Response.ok().build();
+//	}
+//
+//	@GET
+//	@Path("/details.json")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public ResearcherDetails details() {
+//		Researcher researcher2 = new Researcher();
+//		researcher2.setEmail("apfel");
+//		researcher2.setPassword("1");
+//		researcher2.setFirstName("Apfel");
+//		researcher2.setLastName("Saft");
+//		researcher2.setPhoneNumber("1111");
+//		researcher2.setTitle("Prof.");
+//
+//		return new ResearcherDetails(researcher2);
+//	}
+//
+//	@GET
+//	@Path("/test.json")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Researcher test() {
+//		Researcher researcher2 = new Researcher();
+//		researcher2.setEmail("apfel");
+//		researcher2.setPassword("1");
+//		researcher2.setFirstName("Apfel");
+//		researcher2.setLastName("Saft");
+//		researcher2.setPhoneNumber("1111");
+//		researcher2.setTitle("Prof.");
+//		researcherDAO.create(researcher2);
+//
+//		researcher = researcher2;
+//
+//		return researcher;
+//	}
+//
+//	@POST
+//	@Path("/echo.json")
+//	@Produces(MediaType.APPLICATION_XML)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public Researcher echo(@Context HttpHeaders httpHeaders, Researcher in) {
+//		if (checkCredentials(httpHeaders) == null)
+//			return null;
+//		// if (!httpContext.getAttribute("Authorization")) {
+//		// return null;
+//		// }
+//		//
+//		// String email = securityContext.getUserPrincipal().getName();
+//		// String password = sec
+//		return in;
+//	}
 }
