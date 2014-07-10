@@ -5,21 +5,44 @@ import javassist.*;
 
 public class Main {
 
-	static public String makeFieldString(CtClass cc, String methodName) {
+	static public String makeEndString(CtClass cc, String methodName) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{Object[] _Args23 = $args; System.out.println(\"==>");
+		sb.append("{");
+		sb.append("System.out.println(\"==> return ");
 		sb.append(methodName);
-		sb.append(": \"");
+		sb.append(" state : \"");
 		for (CtField cf : cc.getDeclaredFields()) {
-			sb.append(" + " + cf.getName() + " + \" \"");
+			String fname = cf.getName();
+			if (!fname.equals("groups")) {
+				sb.append(" + " + cf.getName() + " + \" | \"");
+			}
 		}
 		sb.append(");");
-		sb.append("for (int i = 0; i<_Args23.length; i++) System.out.println(\"> \"+_Args23[i]);");
 		sb.append("System.out.println(\"<== \"+$_);");
 		sb.append("};");
 		return sb.toString();
 	}
-
+	static public String makeStartString(CtClass cc, String methodName) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		sb.append("System.out.println(\"==> call ");
+		sb.append(methodName);
+		sb.append("\");");
+		sb.append("Object[] _Args23 = $args;");
+		sb.append("for (int i = 0; i<_Args23.length; i++) System.out.println(\"> \"+_Args23[i]);");
+		sb.append("};");
+		return sb.toString();
+	}
+	public static boolean isSafe(CtBehavior cb) {
+		try {
+			for (CtClass ccp : cb.getParameterTypes()) {
+				if (ccp.getName().equals("java.util.Set")) return false;
+			}
+		} catch (NotFoundException e) {
+			return false;
+		}
+		return true;
+	}
 	public static void main(String[] args) {
 		try {
 		ClassPool pool = ClassPool.getDefault();
@@ -27,20 +50,28 @@ public class Main {
 		for (String cname : args) {
 			cc = pool.get(cname);
 			System.out.println("==== Patching " + cname + " ====");
-			System.out.println("Added code:"
-					+ Main.makeFieldString(cc, "<methodname>"));
+			System.out.println("Added start code: "
+					+ Main.makeStartString(cc, "<methodname>"));
+			System.out.println("Added end code: "
+					+ Main.makeEndString(cc, "<methodname>"));
 			CtBehavior[] ctb = cc.getDeclaredBehaviors();
-			for (CtBehavior ctMethod : ctb) {
-				String name = ctMethod.getLongName();
-				System.out.println("Patching " + name + " "
-						+ ctMethod.getSignature());
+			for (CtBehavior b : ctb) {
+				String name = b.getLongName();
 				try {
-					ctMethod.insertAfter(Main.makeFieldString(cc, name));
+					if(Main.isSafe(b)) {
+						System.out.println("Patching " + name + " "
+								+ b.getSignature());
+						b.insertBefore(Main.makeStartString(cc, name));
+						b.insertAfter(Main.makeEndString(cc, name));						
+					} else {
+						System.out.println("Not patching " + name + " "
+								+ b.getSignature());
+					}
+
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 			}
-			CtConstructor[] ccs = cc.getDeclaredConstructors();
 			cc.writeFile("tmp");
 			cc.defrost();
 			cc.detach();
