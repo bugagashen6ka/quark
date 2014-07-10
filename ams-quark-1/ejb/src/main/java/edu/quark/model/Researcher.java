@@ -63,6 +63,7 @@ public class Researcher implements Serializable {
 
 	public Researcher() {
 		super();
+		this.password = "";
 	}
 
 	public BigInteger getRid() {
@@ -81,11 +82,13 @@ public class Researcher implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public boolean checkPassword(String password) {
+		return this.password.equals(password);
 	}
 
 	public void setPassword(String password) {
+		if (!this.password.equals(""))
+			return;
 		this.password = password;
 	}
 
