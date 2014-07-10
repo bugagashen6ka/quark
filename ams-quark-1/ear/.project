@@ -3,6 +3,7 @@
 	<name>ams-quark-1-ear</name>
 	<comment></comment>
 	<projects>
+		<project>AMS-5musketeers-1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

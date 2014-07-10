@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="/home/local/Downloads/javassist.jar"/>
+	<classpathentry kind="lib" path="/home/local/Downloads/AMS-5musketeers-1.war-copy2/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="/home/local/Downloads/jboss-as-7.1.1.Final/jboss-modules.jar"/>
+	<classpathentry kind="lib" path="/home/local/Downloads/jboss-as-7.1.1.Final/modules"/>
+	<classpathentry kind="lib" path="/home/local/Documents/study/2014 SS/cbse/quark/ams-quark-1/web/src/main/webapp/WEB-INF/lib/javaee-api-6.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
